@@ -577,8 +577,8 @@ function setEventos() {
 			Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES').apply();
 
 
-		});			
-		
+		});		
+
 		// Linha da grid atualização
 		Form.grids("G_CAD_ADD").subscribe("GRID_EDIT", function (itemId, data, response) {
 
@@ -1123,7 +1123,21 @@ function setEventos() {
 				Form.grids("G_EXTERNAS_ADD").fields('IMPORTAR_EXT_TITULAR').visible(false).apply();
 
 
-			});				
+			});			
+
+			// Cancelar edição
+			Form.grids("G_EXTERNAS_ADD").subscribe("GRID_RESET", function (itemId, data, response) {
+
+				Form.grids("G_EXTERNAS_ADD").fields('PONTUACAO_SCORE_ADD').visible(false).apply();
+				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_ADD').visible(false).apply();
+				Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(false).apply();
+				Form.grids("G_EXTERNAS_ADD").fields('SCORE_CONJUGE_ADD').visible(false).apply();
+				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_CONJUGE_ADD').visible(false).apply();
+				Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').visible(false).apply();
+				Form.grids("G_EXTERNAS_ADD").fields('IMPORTAR_EXT_TITULAR').visible(false).apply();
+
+
+			});					
 			
 			// Estado civil cadastro adicional
 			Form.grids("G_EXTERNAS_ADD").fields("AUX_CIVIL_ADD").subscribe("SET_FIELD_VALUE", function (itemId, data, response) {
@@ -2377,6 +2391,7 @@ function setValidators() {
 
 	} 
 
+	// Validar se as consultas externas foram preenchidas
 	if(codigoEtapa == REALIZAR_CADASTRO_SISBR){
 
 		Form.actions("aprovar").subscribe("SUBMIT", function (itemId, action, reject) {
