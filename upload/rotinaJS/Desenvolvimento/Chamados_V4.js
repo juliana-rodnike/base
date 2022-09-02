@@ -78,6 +78,7 @@ var r1Nome 		 = "";
 var r2Nome 		 = "";
 var a1Nome 		 = "";
 var a2Nome 		 = "";
+var substituto   = "";
 var auxCiclo     = 0;
 
 function initLayout(){
@@ -3116,15 +3117,16 @@ function setValidators(){
 		
 		Form.actions("aprovar").subscribe("SUBMIT", function (itemId, action, reject) {
 			
-			loginInic = Form.fields("AUX_INICIADOR").value();
-			addResp1  = Form.fields("ADD_RESPONSAVEL1").get();
-			addResp2  = Form.fields("ADD_RESPONSAVEL2").get();
-			addAtend1 = Form.fields("ADD_ATENDENTE1").get();
-			addAtend2 = Form.fields("ADD_ATENDENTE2").get();
-			r1Nome    = Form.fields("ADD_RESPONSAVEL1").rawValue();
-			r2Nome    = Form.fields("ADD_RESPONSAVEL2").rawValue();
-			a1Nome    = Form.fields("ADD_ATENDENTE1").rawValue();
-			a2Nome    = Form.fields("ADD_ATENDENTE2").rawValue();	
+			loginInic  = Form.fields("AUX_INICIADOR").value();
+			substituto = Form.fields("NOME_SUBSTITUTO").value();
+			addResp1   = Form.fields("ADD_RESPONSAVEL1").get();
+			addResp2   = Form.fields("ADD_RESPONSAVEL2").get();
+			addAtend1  = Form.fields("ADD_ATENDENTE1").get();
+			addAtend2  = Form.fields("ADD_ATENDENTE2").get();
+			r1Nome     = Form.fields("ADD_RESPONSAVEL1").rawValue();
+			r2Nome     = Form.fields("ADD_RESPONSAVEL2").rawValue();
+			a1Nome     = Form.fields("ADD_ATENDENTE1").rawValue();
+			a2Nome     = Form.fields("ADD_ATENDENTE2").rawValue();	
 
 			console.log("r1Nome: " + r1Nome);
 			console.log("r2Nome: " + r2Nome);
@@ -3140,6 +3142,15 @@ function setValidators(){
 					reject();
 					Form.apply();				
 	
+				}
+				else
+				if(substituto == addResp1.value[0]){
+
+					console.log("Substituto incluído como adicional 1");
+					Form.fields('ADD_RESPONSAVEL1').errors(['O substituto do solicitante não pode ser incluído como responsável.']).apply();
+					reject();
+					Form.apply();					
+
 				}
 				else{
 
@@ -3159,6 +3170,15 @@ function setValidators(){
 					Form.apply();				
 	
 				}
+				else
+				if(substituto == addResp2.value[0]){
+
+					console.log("Substituto incluído como adicional 1");
+					Form.fields('ADD_RESPONSAVEL2').errors(['O substituto do solicitante não pode ser incluído como responsável.']).apply();
+					reject();
+					Form.apply();					
+
+				}				
 				else{
 
 					console.log("Validação responsável adicional 2 ok");
