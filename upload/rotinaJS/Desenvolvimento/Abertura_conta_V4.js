@@ -403,7 +403,7 @@ function setForm() {
 
 	if(codigoEtapa == SOLICITAR_ABERTURA_CONTA){
 
-		Form.groups('AUX').visible(true).apply();
+		//Form.groups('AUX').visible(true).apply();
 		
 		Form.groups('GR_OUTROS_TITULARES').visible(false).apply();
 		Form.groups('DADOS_PROPNETE_TITULAR').visible(false).apply();
@@ -627,7 +627,6 @@ function setForm() {
 				Form.fields('OBS_REFERENCIAS').visible(false).apply();
 
 			}
-
 			// Possui restrição
 			else if(auxRoteamento == "Preencher Parecer e Referências"){
 
@@ -636,7 +635,6 @@ function setForm() {
 				Form.fields("PARECER").setRequired('aprovar', true).apply();
 				
 			}
-
 			// Dentro da área sem restrição
 			else if(auxRoteamento == "Aprovar Abertura de Conta - Gerente"){
 
