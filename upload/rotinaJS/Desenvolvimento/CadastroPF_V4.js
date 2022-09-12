@@ -78,110 +78,115 @@ function setEventos() {
 		// Limpar campo do objetivo, ocultar grupos e desmarcar checkbox quando alterar o tipo de cadastro
 		Form.fields("TIPO_CADASTRO").subscribe("CHANGE", function(itemId, data, response) {
 
+			// Campos update
+			Form.fields('UPDATE_RENDA').visible(false);
+			Form.fields('UPDATE_RESIDENCIA').visible(false);
+			Form.fields('UPDATE_CLIENTE').visible(false);
 			Form.fields('UPDATE_RENDA').checked(false).apply();
 			Form.fields('UPDATE_RESIDENCIA').checked(false).apply();
 			Form.fields('UPDATE_CLIENTE').checked(false).apply();
-		
-		});			
 
-		// Carregar campos atualização pessoa física
-		Form.fields("TIPO_CADASTRO").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
+			// Grupos e documentos
+			Form.groups('IDENTIFICACAO').visible(false);
+			Form.groups('ENDERECO').visible(false);
+			Form.groups('RENDA').visible(false);
+			Form.grids("GRD_DOCUMENTOS").fields('ANEXO_DOCUMENTOS_IDENT').setRequired('aprovar', false);
+			Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', false);
+
+			// Dados do cliente
+			Form.fields('ESCOLARIDADE').visible(false);
+			Form.fields('ESTADO_CIVIL').visible(false);
+			Form.fields('PROCURADOR_REPRE_LEGAL').visible(false);
+			Form.fields('ESTADO_CIVIL').setRequired('aprovar', false);
+			Form.fields('ESCOLARIDADE').setRequired('aprovar', false);
+			Form.fields('PROCURADOR_REPRE_LEGAL').setRequired('aprovar', false);				
+
+			// Ocultar contatos e referência
+			Form.fields('CEL').visible(false);
+			Form.fields('CEL_AD').visible(false);
+			Form.fields('TEL').visible(false);
+			Form.fields('EMAIL').visible(false);
+			Form.fields('REFERENCIA_UM').visible(false);
+			Form.fields('CEL_TEL_REF_UM').visible(false);
+			Form.fields('REFERENCIA_DOIS').visible(false);
+			Form.fields('CEL_TEL_REF_DOIS').visible(false);
 			
-			tipoCad = Form.fields("TIPO_CADASTRO").value();
+			// Campos obrigatórios para cadastro novo contatos e referências
+			Form.fields('CEL').setRequired('aprovar', false);
+			Form.fields('REFERENCIA_UM').setRequired('aprovar', false);
+			Form.fields('CEL_TEL_REF_UM').setRequired('aprovar', false);
+			Form.fields('REFERENCIA_DOIS').setRequired('aprovar', false);
+			Form.fields('CEL_TEL_REF_DOIS').setRequired('aprovar', false);
+			Form.fields('RENDA').setRequired('aprovar', false);				
 
 			// Atualização Cadastral
-			if(tipoCad == "Atualização Cadastral"){
+			if(response == "Atualização Cadastral"){
 
-				Form.fields('UPDATE_RENDA').visible(true).apply();
-				Form.fields('UPDATE_RESIDENCIA').visible(true).apply();
-				Form.fields('UPDATE_CLIENTE').visible(true).apply();
+				// Campos update
+				Form.fields('UPDATE_RENDA').visible(true);
+				Form.fields('UPDATE_RESIDENCIA').visible(true);
+				Form.fields('UPDATE_CLIENTE').visible(true);
 
-				// Dados do cliente obrigatório para abertura de conta
-				Form.fields('ESCOLARIDADE').visible(false).apply();
-				Form.fields('ESCOLARIDADE').setRequired('aprovar', false).apply();
-				Form.fields('ESTADO_CIVIL').visible(false).apply();
-				Form.fields('ESTADO_CIVIL').setRequired('aprovar', false).apply();
-				Form.fields('PROCURADOR_REPRE_LEGAL').visible(false).apply();
-				Form.fields('PROCURADOR_REPRE_LEGAL').setRequired('aprovar', false).apply();					
+				// Dados do cliente
+				Form.fields('ESCOLARIDADE').visible(true);
+				Form.fields('ESTADO_CIVIL').visible(true);
+				Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);
 
-				// Ocultar contatos e referência
-				Form.fields('CEL').visible(false).apply();
-				Form.fields('CEL_AD').visible(false).apply();
-				Form.fields('TEL').visible(false).apply();
-				Form.fields('EMAIL').visible(false).apply();
-				Form.fields('REFERENCIA_UM').visible(false).apply();
-				Form.fields('CEL_TEL_REF_UM').visible(false).apply();
-				Form.fields('REFERENCIA_DOIS').visible(false).apply();
-				Form.fields('CEL_TEL_REF_DOIS').visible(false).apply();
-				
-				// Campos obrigatórios para cadastro novo contatos e referências
-				Form.fields('CEL').setRequired('aprovar', false).apply();
-				Form.fields('REFERENCIA_UM').setRequired('aprovar', false).apply();
-				Form.fields('CEL_TEL_REF_UM').setRequired('aprovar', false).apply();
-				Form.fields('REFERENCIA_DOIS').setRequired('aprovar', false).apply();
-				Form.fields('CEL_TEL_REF_DOIS').setRequired('aprovar', false).apply();
-				Form.fields('RENDA').setRequired('aprovar', false).apply();				
-
-				Form.groups('IDENTIFICACAO').visible(false).apply();
-				Form.groups('ENDERECO').visible(false).apply();
-				Form.groups('RENDA').visible(false).apply();
+				// Dados obrigatórios para o processo de cadastro
+				Form.fields('ESTADO_CIVIL').setRequired('aprovar', true);
+				Form.fields('PROCURADOR_REPRE_LEGAL').setRequired('aprovar', true);								
 				
 			}
 
 			// Novo Cadastro
 			else{
 
-				// Ocultar campos para atualização cadastral
-				Form.fields('UPDATE_RENDA').visible(false).apply();
-				Form.fields('UPDATE_RESIDENCIA').visible(false).apply();
-				Form.fields('UPDATE_CLIENTE').visible(false).apply();
-
 				// Mostrar grupos para cadastro novo
-				Form.groups('IDENTIFICACAO').visible(true).apply();
-				Form.groups('ENDERECO').visible(true).apply();
-				Form.groups('RENDA').visible(true).apply();
+				Form.groups('IDENTIFICACAO').visible(true);
+				Form.groups('ENDERECO').visible(true);
+				Form.groups('RENDA').visible(true);
 
 				// Dados do cliente obrigatórios para cadastro novo
-				Form.fields('ESCOLARIDADE').visible(true).apply();
-				Form.fields('ESCOLARIDADE').setRequired('aprovar', true).apply();
-				Form.fields('ESTADO_CIVIL').visible(true).apply();
-				Form.fields('ESTADO_CIVIL').setRequired('aprovar', true).apply();
-				Form.fields('PROCURADOR_REPRE_LEGAL').visible(true).apply();
-				Form.fields('PROCURADOR_REPRE_LEGAL').setRequired('aprovar', true).apply();	
+				Form.fields('ESCOLARIDADE').visible(true);
+				Form.fields('ESTADO_CIVIL').visible(true);
+				Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);
+				Form.fields('ESTADO_CIVIL').setRequired('aprovar', true);
+				Form.fields('ESCOLARIDADE').setRequired('aprovar', true);
+				Form.fields('PROCURADOR_REPRE_LEGAL').setRequired('aprovar', true);	
 
 				// Mostrar contatos e referência
-				Form.fields('CEL').visible(true).apply();
-				Form.fields('CEL_AD').visible(true).apply();
-				Form.fields('TEL').visible(true).apply();
-				Form.fields('EMAIL').visible(true).apply();
-				Form.fields('REFERENCIA_UM').visible(true).apply();
-				Form.fields('CEL_TEL_REF_UM').visible(true).apply();
-				Form.fields('REFERENCIA_DOIS').visible(true).apply();
-				Form.fields('CEL_TEL_REF_DOIS').visible(true).apply();
-				
-				// Campos obrigatórios para cadastro novo contatos e referências
-				Form.fields('RENDA').setRequired('aprovar', true).apply();
-				Form.fields('CEL').setRequired('aprovar', true).apply();
-				Form.fields('REFERENCIA_UM').setRequired('aprovar', true).apply();
-				Form.fields('CEL_TEL_REF_UM').setRequired('aprovar', true).apply();
-				Form.fields('REFERENCIA_DOIS').setRequired('aprovar', true).apply();
-				Form.fields('CEL_TEL_REF_DOIS').setRequired('aprovar', true).apply();
+				Form.fields('CEL').visible(true);
+				Form.fields('CEL_AD').visible(true);
+				Form.fields('TEL').visible(true);
+				Form.fields('EMAIL').visible(true);
+				Form.fields('REFERENCIA_UM').visible(true);
+				Form.fields('CEL_TEL_REF_UM').visible(true);
+				Form.fields('REFERENCIA_DOIS').visible(true);
+				Form.fields('CEL_TEL_REF_DOIS').visible(true);
+				Form.fields('RENDA').setRequired('aprovar', true);
+				Form.fields('CEL').setRequired('aprovar', true);
+				Form.fields('REFERENCIA_UM').setRequired('aprovar', true);
+				Form.fields('CEL_TEL_REF_UM').setRequired('aprovar', true);
+				Form.fields('REFERENCIA_DOIS').setRequired('aprovar', true);
+				Form.fields('CEL_TEL_REF_DOIS').setRequired('aprovar', true);
 
 				// Campos de grid obrigatórios
-				Form.grids("GRD_DOCUMENTOS").fields('ANEXO_DOCUMENTOS_IDENT').setRequired('aprovar', true).apply();
-				Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', true).apply();
+				Form.grids("GRD_DOCUMENTOS").fields('ANEXO_DOCUMENTOS_IDENT').setRequired('aprovar', true);
+				Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', true);
 
 				// Bloquear campos de nome e data
-				Form.grids("GRD_DOCUMENTOS").fields('ID_NOME_ADD').disabled(true).apply();
-				Form.grids("GRD_DOCUMENTOS").fields('ID_HORA_ADD').disabled(true).apply();
-				Form.grids("GRD_RESIDENCIA").fields('RESID_NOME_ADD').disabled(true).apply();
-				Form.grids("GRD_RESIDENCIA").fields('RESID_HORA_ADD').disabled(true).apply();
-				Form.grids("GRD_COMP_RENDA").fields('RENDA_NOME_ADD').disabled(true).apply();
-				Form.grids("GRD_COMP_RENDA").fields('RENDA_HORA_ADD').disabled(true).apply();
+				Form.grids("GRD_DOCUMENTOS").fields('ID_NOME_ADD').disabled(true);
+				Form.grids("GRD_DOCUMENTOS").fields('ID_HORA_ADD').disabled(true);
+				Form.grids("GRD_RESIDENCIA").fields('RESID_NOME_ADD').disabled(true);
+				Form.grids("GRD_RESIDENCIA").fields('RESID_HORA_ADD').disabled(true);
+				Form.grids("GRD_COMP_RENDA").fields('RENDA_NOME_ADD').disabled(true);
+				Form.grids("GRD_COMP_RENDA").fields('RENDA_HORA_ADD').disabled(true);
 
-			}
+			}		
 
-		});	
+			Form.apply();	
+		
+		});			
 		
 		// Formuário atualização de renda
 		Form.fields("OBJETIVO").subscribe("CHANGE", function(itemId, data, response) {
@@ -189,102 +194,106 @@ function setEventos() {
 			if(response == "Inclusão de Titular"){
 
 				// Dados da conta
-				Form.groups("DADOS_CONTA").visible(true).apply();
-				Form.fields("CPF_CONTA").visible(false).apply();
-				Form.fields("NOME_CONTA").visible(false).apply();				
+				Form.groups("DADOS_CONTA").visible(true);
+				Form.fields("CPF_CONTA").visible(false);
+				Form.fields("NOME_CONTA").visible(false);				
 				
-				Form.grids("G_CONTA").readOnly(true).apply();
+				Form.grids("G_CONTA").readOnly(true);
 
-				Form.fields('CONTA').setRequired('aprovar', true).apply();
-				Form.fields('ABERTURA').setRequired('aprovar', true).apply();
-				Form.fields('CATEGORIA').setRequired('aprovar', true).apply();
+				Form.fields('CONTA').setRequired('aprovar', true);
+				Form.fields('ABERTURA').setRequired('aprovar', true);
+				Form.fields('CATEGORIA').setRequired('aprovar', true);
 
 				// Dados do capital do titular
-				Form.fields("CAPITAL").visible(true).apply();
-				Form.fields('CAPITAL').setRequired('aprovar', true).apply();
+				Form.fields("CAPITAL").visible(true);
+				Form.fields('CAPITAL').setRequired('aprovar', true);
 
 			}
 			else{
 
 				// Dados da conta
-				Form.groups("DADOS_CONTA").visible(false).apply();
+				Form.groups("DADOS_CONTA").visible(false);
 
-				Form.fields('CONTA').setRequired('aprovar', false).apply();
-				Form.fields('ABERTURA').setRequired('aprovar', false).apply();
-				Form.fields('CATEGORIA').setRequired('aprovar', false).apply();		
+				Form.fields('CONTA').setRequired('aprovar', false);
+				Form.fields('ABERTURA').setRequired('aprovar', false);
+				Form.fields('CATEGORIA').setRequired('aprovar', false);		
 				
 				// Dados do capital do titular
-				Form.fields("CAPITAL").visible(false).apply();
-				Form.fields('CAPITAL').setRequired('aprovar', false).apply();
+				Form.fields("CAPITAL").visible(false);
+				Form.fields('CAPITAL').setRequired('aprovar', false);
 
 			}
+
+			Form.apply();
 
 		});			
 		
 		// Mostrar campos para cadastro múltiplo
 		Form.fields("MODALIDADE").subscribe("CHANGE", function(itemId, data, response) {
-			
-			modal = response;
-			updtClint = Form.fields("UPDATE_CLIENTE").value();
 
 			// Cadastro Múltiplo
-			if(modal == "Múltiplo"){
+			if(response == "Múltiplo"){
 
 				// Campos grid cadastro adicional
-				Form.groups("CADASTRO_ADICIONAL").visible(true).apply();
-				Form.grids("G_CAD_ADD").visible(true).apply();
+				Form.groups("CADASTRO_ADICIONAL").visible(true);
+				Form.grids("G_CAD_ADD").visible(true);
 
 				// Campos titular
-				Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("CEL_ADD").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("CEL_ADD2").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("TEL_ADD").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("EMAIL_ADD").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("REFERENCIAS_TITULAR").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(false).apply();
+				Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").visible(false);
+				Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").visible(false);
+				Form.grids("G_CAD_ADD").fields("CEL_ADD").visible(false);
+				Form.grids("G_CAD_ADD").fields("CEL_ADD2").visible(false);
+				Form.grids("G_CAD_ADD").fields("TEL_ADD").visible(false);
+				Form.grids("G_CAD_ADD").fields("EMAIL_ADD").visible(false);
+				Form.grids("G_CAD_ADD").fields("REFERENCIAS_TITULAR").visible(false);
+				Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").visible(false);
+				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").visible(false);
+				Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").visible(false);
+				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(false);
 
 				// Campos conjuge
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(false).apply();
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(false);
+				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(false);
+				Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(false);
+				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(false);
 
 				// Campos complementares
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false).apply();
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").visible(false);
+				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false);
+				Form.grids("G_CAD_ADD").fields("CAPITAL_AD").visible(false);
 
 				// Ajuste de linhas
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES').apply();
+				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');
 
 				// Campos obrigatórios
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").setRequired('aprovar', true).apply();
-				Form.grids("G_CAD_ADD").fields("CPF_ADD").setRequired('aprovar', true).apply();
-				Form.grids("G_CAD_ADD").fields("NOME_ADD").setRequired('aprovar', true).apply();
+				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").setRequired('aprovar', true);
+				Form.grids("G_CAD_ADD").fields("CPF_ADD").setRequired('aprovar', true);
+				Form.grids("G_CAD_ADD").fields("NOME_ADD").setRequired('aprovar', true);
 
 				// Campos de grid
-				Form.grids("GRD_DOCUMENTOS").fields("REFERENCIA_ID").visible(true).apply();
-				Form.grids("GRD_RESIDENCIA").fields("REFERENCIA_RESID").visible(true).apply();
-				Form.grids("GRD_COMP_RENDA").fields("REFERENCIA_RENDA").visible(true).apply();	
+				Form.grids("GRD_DOCUMENTOS").fields("REFERENCIA_ID").visible(true);
+				Form.grids("GRD_RESIDENCIA").fields("REFERENCIA_RESID").visible(true);
+				Form.grids("GRD_COMP_RENDA").fields("REFERENCIA_RENDA").visible(true);	
+
+				Form.apply();
 
 			}
 
 			// Cadastro Individual
 			else{
 
-				Form.groups("CADASTRO_ADICIONAL").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").setRequired('aprovar', false).apply();
-				Form.grids("G_CAD_ADD").fields("CPF_ADD").setRequired('aprovar', false).apply();
-				Form.grids("G_CAD_ADD").fields("NOME_ADD").setRequired('aprovar', false).apply();
-				Form.grids("GRD_DOCUMENTOS").fields("REFERENCIA_ID").visible(false).apply();
-				Form.grids("GRD_RESIDENCIA").fields("REFERENCIA_RESID").visible(false).apply();
-				Form.grids("GRD_COMP_RENDA").fields("REFERENCIA_RENDA").visible(false).apply();
-				Form.grids("GRD_DOCUMENTOS").columns("REFERENCIA_ID").visible(false).apply();
-				Form.grids("GRD_RESIDENCIA").columns("REFERENCIA_RESID").visible(false).apply();
-				Form.grids("GRD_COMP_RENDA").columns("REFERENCIA_RENDA").visible(false).apply();
+				Form.groups("CADASTRO_ADICIONAL").visible(false);
+				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").setRequired('aprovar', false);
+				Form.grids("G_CAD_ADD").fields("CPF_ADD").setRequired('aprovar', false);
+				Form.grids("G_CAD_ADD").fields("NOME_ADD").setRequired('aprovar', false);
+				Form.grids("GRD_DOCUMENTOS").fields("REFERENCIA_ID").visible(false);
+				Form.grids("GRD_RESIDENCIA").fields("REFERENCIA_RESID").visible(false);
+				Form.grids("GRD_COMP_RENDA").fields("REFERENCIA_RENDA").visible(false);
+				Form.grids("GRD_DOCUMENTOS").columns("REFERENCIA_ID").visible(false);
+				Form.grids("GRD_RESIDENCIA").columns("REFERENCIA_RESID").visible(false);
+				Form.grids("GRD_COMP_RENDA").columns("REFERENCIA_RENDA").visible(false);
+
+				Form.apply();
 
 			}
 
@@ -297,17 +306,17 @@ function setEventos() {
 
 			if(response == "Sim"){
 
-				Form.groups('RENDA').visible(true).apply();
-				Form.fields('RENDA').visible(false).apply();
-				Form.grids("GRD_COMP_RENDA").fields('RENDA_NOME_ADD').disabled(true).apply();
-				Form.grids("GRD_COMP_RENDA").fields('RENDA_HORA_ADD').disabled(true).apply();
-				Form.grids("GRD_COMP_RENDA").fields('COMPROVANTE_RENDA').setRequired('aprovar', true).apply();
+				Form.groups('RENDA').visible(true);
+				Form.fields('RENDA').visible(false);
+				Form.grids("GRD_COMP_RENDA").fields('RENDA_NOME_ADD').disabled(true);
+				Form.grids("GRD_COMP_RENDA").fields('RENDA_HORA_ADD').disabled(true);
+				Form.grids("GRD_COMP_RENDA").fields('COMPROVANTE_RENDA').setRequired('aprovar', true);
 
 			}
 			else{
 
-				Form.grids("GRD_COMP_RENDA").fields('COMPROVANTE_RENDA').setRequired('aprovar', false).apply();
-				Form.groups('RENDA').visible(false).apply();
+				Form.grids("GRD_COMP_RENDA").fields('COMPROVANTE_RENDA').setRequired('aprovar', false);
+				Form.groups('RENDA').visible(false);
 
 			}
 
@@ -320,16 +329,16 @@ function setEventos() {
 
 			if(response == "Sim"){
 
-				Form.groups('ENDERECO').visible(true).apply();
-				Form.grids("GRD_RESIDENCIA").fields('RESID_NOME_ADD').disabled(true).apply();
-				Form.grids("GRD_RESIDENCIA").fields('RESID_HORA_ADD').disabled(true).apply();
-				Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', true).apply();
+				Form.groups('ENDERECO').visible(true);
+				Form.grids("GRD_RESIDENCIA").fields('RESID_NOME_ADD').disabled(true);
+				Form.grids("GRD_RESIDENCIA").fields('RESID_HORA_ADD').disabled(true);
+				Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', true);
 
 			}
 			else{
 
-				Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', true).apply();
-				Form.groups('ENDERECO').visible(false).apply();
+				Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', true);
+				Form.groups('ENDERECO').visible(false);
 
 			}
 
@@ -342,31 +351,31 @@ function setEventos() {
 
 			if(response == "Sim"){
 
-				Form.groups('IDENTIFICACAO').visible(true).apply();
-				Form.grids("GRD_DOCUMENTOS").fields('ID_NOME_ADD').disabled(true).apply();
-				Form.grids("GRD_DOCUMENTOS").fields('ID_HORA_ADD').disabled(true).apply();
+				Form.groups('IDENTIFICACAO').visible(true);
+				Form.grids("GRD_DOCUMENTOS").fields('ID_NOME_ADD').disabled(true);
+				Form.grids("GRD_DOCUMENTOS").fields('ID_HORA_ADD').disabled(true);
 
-				Form.fields('REFERENCIA_UM').visible(true).apply();
-				Form.fields('CEL_TEL_REF_UM').visible(true).apply();
-				Form.fields('REFERENCIA_DOIS').visible(true).apply();
-				Form.fields('CEL_TEL_REF_DOIS').visible(true).apply();
-				Form.fields('CEL').visible(true).apply();
-				Form.fields('CEL_AD').visible(true).apply();
-				Form.fields('TEL').visible(true).apply();
-				Form.fields('EMAIL').visible(true).apply();				
+				Form.fields('REFERENCIA_UM').visible(true);
+				Form.fields('CEL_TEL_REF_UM').visible(true);
+				Form.fields('REFERENCIA_DOIS').visible(true);
+				Form.fields('CEL_TEL_REF_DOIS').visible(true);
+				Form.fields('CEL').visible(true);
+				Form.fields('CEL_AD').visible(true);
+				Form.fields('TEL').visible(true);
+				Form.fields('EMAIL').visible(true);				
 
 			}
 			else{
 
-				Form.groups('IDENTIFICACAO').visible(false).apply();
-				Form.fields('REFERENCIA_UM').visible(false).apply();
-				Form.fields('CEL_TEL_REF_UM').visible(false).apply();
-				Form.fields('REFERENCIA_DOIS').visible(false).apply();
-				Form.fields('CEL_TEL_REF_DOIS').visible(false).apply();	
-				Form.fields('CEL').visible(false).apply();
-				Form.fields('CEL_AD').visible(false).apply();
-				Form.fields('TEL').visible(false).apply();
-				Form.fields('EMAIL').visible(false).apply();			
+				Form.groups('IDENTIFICACAO').visible(false);
+				Form.fields('REFERENCIA_UM').visible(false);
+				Form.fields('CEL_TEL_REF_UM').visible(false);
+				Form.fields('REFERENCIA_DOIS').visible(false);
+				Form.fields('CEL_TEL_REF_DOIS').visible(false);	
+				Form.fields('CEL').visible(false);
+				Form.fields('CEL_AD').visible(false);
+				Form.fields('TEL').visible(false);
+				Form.fields('EMAIL').visible(false);			
 
 			}
 
@@ -469,30 +478,31 @@ function setEventos() {
 		Form.grids("G_CAD_ADD").subscribe("GRID_SUBMIT", function (itemId, data, response) {
 			
 			// Campos titular
-			Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("CEL_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("CEL_ADD2").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("TEL_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("EMAIL_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("REFERENCIAS_TITULAR").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(false).apply();
+			Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("CEL_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("CEL_ADD2").visible(false);
+			Form.grids("G_CAD_ADD").fields("TEL_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("EMAIL_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("REFERENCIAS_TITULAR").visible(false);
+			Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(false);
 
 			// Campos conjuge
-			Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(false).apply();
+			Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(false);
 
 			// Campos complementares
-			Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(false).apply();	
-			Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false).apply();
+			Form.grids("G_CAD_ADD").fields("SERA_TITULAR").visible(false);	
+			Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false);
+			Form.grids("G_CAD_ADD").fields("CAPITAL_AD").visible(false);
 
 			// Ajuste de linhas
-			Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES').apply();
+			Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');
 
 
 		});		
@@ -501,17 +511,17 @@ function setEventos() {
 		Form.grids("G_CAD_ADD").subscribe("GRID_EDIT", function (itemId, data, response) {
 
 			// Campos titular
-			Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("CEL_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("CEL_ADD2").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("TEL_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("EMAIL_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("REFERENCIAS_TITULAR").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(true).apply();			
+			Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("CEL_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("CEL_ADD2").visible(true);
+			Form.grids("G_CAD_ADD").fields("TEL_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("EMAIL_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("REFERENCIAS_TITULAR").visible(true);
+			Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(true);			
 
 		});		
 		
@@ -519,41 +529,51 @@ function setEventos() {
 		Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").subscribe("CHANGE", function(itemId, data, response) {
 			
 			tipoCad = Form.fields("TIPO_CADASTRO").value();
+			objtCad = Form.fields("OBJETIVO").value();
 
 			// Campos titular
-			Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("CEL_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("CEL_ADD2").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("TEL_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("EMAIL_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("REFERENCIAS_TITULAR").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").visible(true).apply();
-			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(true).apply();
+			Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("CEL_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("CEL_ADD2").visible(true);
+			Form.grids("G_CAD_ADD").fields("TEL_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("EMAIL_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("REFERENCIAS_TITULAR").visible(true);
+			Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").visible(true);
+			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(true);
 
 			// Campos conjuge
-			Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(false).apply();	
-			Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(false).apply();
+			Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(false);	
+			Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(false);
 
 			// Campos complementares
-			Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("DESC_RELAC").setRequired('aprovar', false).apply();
+			Form.grids("G_CAD_ADD").fields("SERA_TITULAR").visible(false);
+			Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false);
+			Form.grids("G_CAD_ADD").fields("DESC_RELAC").setRequired('aprovar', false);
+			Form.grids("G_CAD_ADD").fields("SERA_TITULAR").setRequired('aprovar', false);
 
+			// Inclusão de titular, habilitar campo do capital
+			if(objtCad == "Inclusão de Titular"){
+
+				Form.grids("G_CAD_ADD").fields("CAPITAL_AD").visible(true);
+				Form.grids("G_CAD_ADD").fields("CAPITAL_AD").setRequired('aprovar', true);
+
+			}			
+			
 			// Campos obrigatórios cadastro novo
 			if(tipoCad == "Novo Cadastro"){
 
-				Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").setRequired('aprovar', true).apply();
-				Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").setRequired('aprovar', true).apply();
-				Form.grids("G_CAD_ADD").fields("CEL_ADD").setRequired('aprovar', true).apply();
-				Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").setRequired('aprovar', true).apply();
-				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").setRequired('aprovar', true).apply();
-				Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").setRequired('aprovar', true).apply();
-				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").setRequired('aprovar', true).apply();
+				Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").setRequired('aprovar', true);
+				Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").setRequired('aprovar', true);
+				Form.grids("G_CAD_ADD").fields("CEL_ADD").setRequired('aprovar', true);
+				Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").setRequired('aprovar', true);
+				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").setRequired('aprovar', true);
+				Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").setRequired('aprovar', true);
+				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").setRequired('aprovar', true);
 
 			}
 
@@ -568,11 +588,12 @@ function setEventos() {
 				nomConjT = Form.fields("NOME_CONJUGE").value();				
 
 				// Campos complementares
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(true).apply();
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").visible(true);
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").setRequired('aprovar', true);
 
 				// Ajuste de linhas
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES').apply();
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").lineBreak('SIMPLES').apply();				
+				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").lineBreak('SIMPLES');				
 				
 				// Carregar valores
 				Form.grids("G_CAD_ADD").fields("CPF_ADD").value(cpfConjT).apply();
@@ -597,7 +618,7 @@ function setEventos() {
 				nomeRepT = Form.fields("NOME_PROCURADOR_REP").value();
 				
 				// Ajuste de linhas
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES').apply();		
+				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');		
 
 				// Carregar valores
 				Form.grids("G_CAD_ADD").fields("CPF_ADD").value(cpfRepT).apply();
@@ -608,125 +629,143 @@ function setEventos() {
 			if(response == "Outros"){
 
 				// Campos complementares
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").setRequired('aprovar', true).apply();
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").visible(true);
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").setRequired('aprovar', true);
+				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(true);
+				Form.grids("G_CAD_ADD").fields("DESC_RELAC").setRequired('aprovar', true);
 
 				// Ajuste de linhas
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('NENHUM').apply();
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").lineBreak('SIMPLES').apply();
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").lineBreak('SIMPLES').apply();
+				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('NENHUM');
+				Form.grids("G_CAD_ADD").fields("DESC_RELAC").lineBreak('SIMPLES');
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").lineBreak('SIMPLES');
 
 			}
 			else{
 
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES').apply();
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").setRequired('aprovar', false).apply();				
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").visible(false);
+				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false);
+				Form.grids("G_CAD_ADD").fields("DESC_RELAC").setRequired('aprovar', false);
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").setRequired('aprovar', false);		
+				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');			
 
 			}
 			
+			Form.apply();
 
 		});	
 
 		// Relacionar informações de cônjuge e representante para cadastro múltiplo
 		Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
 
+			objtCad = Form.fields("OBJETIVO").value();
+
+			// Inclusão de titular, habilitar campo do capital
+			if(objtCad == "Inclusão de Titular"){
+
+				Form.grids("G_CAD_ADD").fields("CAPITAL_AD").visible(true);
+				Form.grids("G_CAD_ADD").fields("CAPITAL_AD").setRequired('aprovar', true);
+
+			}			
+
 			// Campos adicional conjuge
 			if(response == "Cônjuge"){		
 
 				// Campos complementares
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(true).apply();
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").visible(true);
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").setRequired('aprovar', true);
 
 				// Ajuste de linhas
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES').apply();
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").lineBreak('SIMPLES').apply();				
+				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").lineBreak('SIMPLES');				
 
 			}
 			else
 			if(response == "Procurador/Rep. Legal"){
 				
 				// Ajuste de linhas
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES').apply();		
+				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');		
 
 			}
 			else
 			if(response == "Outros"){
 
 				// Campos complementares
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").setRequired('aprovar', true).apply();
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").visible(true);
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").setRequired('aprovar', true);
+				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(true);
+				Form.grids("G_CAD_ADD").fields("DESC_RELAC").setRequired('aprovar', true);
 
 				// Ajuste de linhas
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('NENHUM').apply();
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").lineBreak('SIMPLES').apply();
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").lineBreak('SIMPLES').apply();
+				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('NENHUM');
+				Form.grids("G_CAD_ADD").fields("DESC_RELAC").lineBreak('SIMPLES');
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").lineBreak('SIMPLES');
 
 			}
 			else{
 
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false).apply();
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES').apply();
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").setRequired('aprovar', false).apply();				
-
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").visible(false);
+				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false);
+				Form.grids("G_CAD_ADD").fields("DESC_RELAC").setRequired('aprovar', false);
+				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").setRequired('aprovar', false);	
+				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');
 			}
-			
+
+			Form.apply();
 
 		});			
 		
 		// Estado civil cadastro adicional
 		Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").subscribe("CHANGE", function(itemId, data, response) {
 
-			Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(false).apply();
-			Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(false).apply();
+			Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(false);
 			
-			Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").setRequired('aprovar', false).apply();	
-			Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").setRequired('aprovar', false).apply();	
-			Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").setRequired('aprovar', false).apply();
-			Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").setRequired('aprovar', false).apply();
+			Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").setRequired('aprovar', false);	
+			Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").setRequired('aprovar', false);	
+			Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").setRequired('aprovar', false);
+			Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").setRequired('aprovar', false);
 
 			if(response == "Casado"){
 				
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(true).apply();
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(true);
+				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(true);
+				Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(true);
+				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(true);
 
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").setRequired('aprovar', true).apply();	
-				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").setRequired('aprovar', true).apply();	
-				Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").setRequired('aprovar', true).apply();					
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").setRequired('aprovar', true);	
+				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").setRequired('aprovar', true);	
+				Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").setRequired('aprovar', true);					
 
 			}	
 			else
 			if(response == "União Estável"){
 
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(true).apply();
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(true);
+				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(true);
+				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(true);
 
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").setRequired('aprovar', true).apply();	
-				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").setRequired('aprovar', true).apply();					
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").setRequired('aprovar', true);	
+				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").setRequired('aprovar', true);					
 
 			}
 			else
 			if(response == "Viúvo" || response == "Divorciado"){
 
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").removeMask().apply();
-				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").setRequired('aprovar', true).apply();	
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").removeMask();
+				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(true);
+				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").setRequired('aprovar', true);	
 
 
 			}
 			else{
 
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").removeMask().apply();
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").removeMask();
 
 			}	
+
+			Form.apply();
 
 		});		
 
@@ -735,41 +774,43 @@ function setEventos() {
 
 			if(response == "Casado"){
 				
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(true).apply();
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(true);
+				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(true);
+				Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(true);
+				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(true);
 
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").setRequired('aprovar', true).apply();	
-				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").setRequired('aprovar', true).apply();	
-				Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").setRequired('aprovar', true).apply();					
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").setRequired('aprovar', true);	
+				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").setRequired('aprovar', true);	
+				Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").setRequired('aprovar', true);					
 
 			}	
 			else
 			if(response == "União Estável"){
 
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(true).apply();
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(true);
+				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(true);
+				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(true);
 
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").setRequired('aprovar', true).apply();	
-				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").setRequired('aprovar', true).apply();					
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").setRequired('aprovar', true);	
+				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").setRequired('aprovar', true);					
 
 			}
 			else
 			if(response == "Viúvo" || response == "Divorciado"){
 
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").removeMask().apply();
-				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(true).apply();
-				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").setRequired('aprovar', true).apply();	
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").removeMask();
+				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(true);
+				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").setRequired('aprovar', true);	
 
 
 			}
 			else{
 
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").removeMask().apply();
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").removeMask();
 
 			}	
+
+			Form.apply();
 
 		});			
 		
@@ -1204,165 +1245,126 @@ function setForm() {
 		console.log("perfil: "     + perfil);
 		console.log("modalidade: " + modal);
 
-		// Ocultar grupos de consultas externas
+		// Ocultar grupos
 		Form.groups('EXTERNAS_ADICIONAL').visible(false);
 		Form.groups('EXTERNAS_TITULAR').visible(false);
 		Form.groups('DADOS_CONTA').visible(false);
+		Form.groups('IDENTIFICACAO').visible(false);
+		Form.groups('ENDERECO').visible(false);
+		Form.groups('RENDA').visible(false);
+		Form.groups('CADASTRO_ADICIONAL').visible(false);
+		Form.groups('ACOES').visible(false);		
+
+		// Inclusão de titular
+		if(objtCad == "Inclusão de Titular"){
+
+			Form.groups("DADOS_CONTA").visible(true);
+			Form.fields("CPF_CONTA").visible(false);
+			Form.fields("NOME_CONTA").visible(false);				
+			
+			Form.grids("G_CONTA").readOnly(true);
+
+			Form.fields('CONTA').setRequired('aprovar', true);
+			Form.fields('ABERTURA').setRequired('aprovar', true);
+			Form.fields('CATEGORIA').setRequired('aprovar', true);
+			
+			Form.fields("CAPITAL").visible(true).apply();
+			Form.fields("CAPITAL").setRequired('aprovar', true).apply();
+
+		}		
 		
-		// Chamado novo
-		if(ciclo == 1){
-
-			Form.groups('IDENTIFICACAO').visible(false);
-			Form.groups('ENDERECO').visible(false);
-			Form.groups('RENDA').visible(false);
-			Form.groups('CADASTRO_ADICIONAL').visible(false);
-			Form.groups('ACOES').visible(false);
-
-			// Inclusão de titular
-			if(objtCad == "Inclusão de Titular"){
-
-				Form.groups("DADOS_CONTA").visible(true);
-				Form.fields("CPF_CONTA").visible(false);
-				Form.fields("NOME_CONTA").visible(false);				
-				
-				Form.grids("G_CONTA").readOnly(true);
-
-				Form.fields('CONTA').setRequired('aprovar', true);
-				Form.fields('ABERTURA').setRequired('aprovar', true);
-				Form.fields('CATEGORIA').setRequired('aprovar', true);
-				
-				Form.fields("CAPITAL").visible(true).apply();
-				Form.fields("CAPITAL").setRequired('aprovar', true).apply();
-
-			}				
-
-			// Modalidade de cadastro
-			if(modal == "Múltiplo"){ 
-				
-				// Grid cadastros adicionais
-				Form.groups('CADASTRO_ADICIONAL').visible(true); 
-				Form.grids("G_CAD_ADD").visible(true); 
-
-				// Campos titular
-				Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("CEL_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("CEL_ADD2").visible(false);
-				Form.grids("G_CAD_ADD").fields("TEL_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("EMAIL_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("REFERENCIAS_TITULAR").visible(false);
-				Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(false);
-
-				// Campos conjuge
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(false);
-
-				// Campos complementares
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(false);
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false);
-
-				// Ajuste de linhas
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');
-
-				// Campos obrigatórios
-				Form.grids("G_CAD_ADD").fields("CPF_ADD").setRequired('aprovar', true);
-				Form.grids("G_CAD_ADD").fields("NOME_ADD").setRequired('aprovar', true);				
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").setRequired('aprovar', true);
+		// Modalidade de cadastro
+		if(modal == "Múltiplo"){ 
 			
-			}
+			// Grid cadastros adicionais
+			Form.groups('CADASTRO_ADICIONAL').visible(true); 
+			Form.grids("G_CAD_ADD").visible(true); 
 
-			// Perfil de cadastro
-			if(perfil == "Perfil de Exceção"){ 
-				
-				Form.fields('JUSTIFICATIVA_PERFIL').visible(true); 
+			// Campos titular
+			Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("CEL_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("CEL_ADD2").visible(false);
+			Form.grids("G_CAD_ADD").fields("TEL_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("EMAIL_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("REFERENCIAS_TITULAR").visible(false);
+			Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(false);
+
+			// Campos conjuge
+			Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(false);
+			Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(false);
+
+			// Campos complementares
+			Form.grids("G_CAD_ADD").fields("SERA_TITULAR").visible(false);
+			Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false);
+
+			// Ajuste de linhas
+			Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');
+
+			// Campos obrigatórios
+			Form.grids("G_CAD_ADD").fields("CPF_ADD").setRequired('aprovar', true);
+			Form.grids("G_CAD_ADD").fields("NOME_ADD").setRequired('aprovar', true);				
+			Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").setRequired('aprovar', true);
+		
+		}	
+		
+		// Perfil de cadastro
+		if(perfil == "Perfil de Exceção"){ 
 			
-			}	
+			Form.fields('JUSTIFICATIVA_PERFIL').visible(true); 
+			Form.fields('JUSTIFICATIVA_PERFIL').setRequired('aprovar', true);			
+		
+		}		
+
+		// Atualização Cadastral
+		if(tipoCad == "Atualização Cadastral"){
+
+			// Mostrar checkbox atualização
+			Form.fields('UPDATE_RENDA').visible(true);
+			Form.fields('UPDATE_RESIDENCIA').visible(true);
+			Form.fields('UPDATE_CLIENTE').visible(true);		
+
+			// Dados do cliente
+			Form.fields('ESCOLARIDADE').visible(true);
+			Form.fields('ESTADO_CIVIL').visible(true);
+			Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);	
+			Form.fields('ESTADO_CIVIL').setRequired('aprovar', true);
+			Form.fields('PROCURADOR_REPRE_LEGAL').setRequired('aprovar', true);		
 			
-			// Atualização Cadastral
-			if(tipoCad == "Atualização Cadastral"){
+			updtRenda = Form.fields('UPDATE_RENDA');
+			updtResid = Form.fields('UPDATE_RESIDENCIA');
+			updtClint = Form.fields('UPDATE_CLIENTE');					
 
-				// Ocultar grupos de anexos
-				Form.groups('IDENTIFICACAO').visible(false);
-				Form.groups('ENDERECO').visible(false);
-				Form.groups('RENDA').visible(false);
-	
-				// Mostrar checkbox atualização
-				Form.fields('UPDATE_RENDA').visible(true);
-				Form.fields('UPDATE_RESIDENCIA').visible(true);
-				Form.fields('UPDATE_CLIENTE').visible(true);		
-				
-				updtRenda = Form.fields('UPDATE_RENDA');
-				updtResid = Form.fields('UPDATE_RESIDENCIA');
-				updtClint = Form.fields('UPDATE_CLIENTE');	
+			if(updtRenda == "Sim"){
 
-				Form.fields('ESCOLARIDADE').visible(true);
-				Form.fields('ESTADO_CIVIL').visible(true);
-				Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);				
-
-				if(updtRenda == "Sim"){
-	
-					Form.groups('RENDA').visible(true);
-					Form.fields('RENDA').visible(false);
-					Form.grids("GRD_COMP_RENDA").fields('RENDA_NOME_ADD').disabled(true);
-					Form.grids("GRD_COMP_RENDA").fields('RENDA_HORA_ADD').disabled(true);
-					Form.grids("GRD_COMP_RENDA").fields('COMPROVANTE_RENDA').setRequired('aprovar', true);
-	
-				}	
-				if(updtResid == "Sim"){
-	
-					Form.groups('ENDERECO').visible(true);
-					Form.grids("GRD_RESIDENCIA").fields('RESID_NOME_ADD').disabled(true);
-					Form.grids("GRD_RESIDENCIA").fields('RESID_HORA_ADD').disabled(true);
-					Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', true);
-	
-					Form.fields('CIDADE').visible(false);
-					Form.fields('AREA_ATUACAO').visible(false);
-	
-				}		
-				if(updtClint == "Sim"){
-	
-					Form.groups('IDENTIFICACAO').visible(true);
-					Form.grids("GRD_DOCUMENTOS").fields('ID_NOME_ADD').disabled(true);
-					Form.grids("GRD_DOCUMENTOS").fields('ID_HORA_ADD').disabled(true);
-
-					Form.fields('ESCOLARIDADE').visible(true);
-					Form.fields('ESTADO_CIVIL').visible(true);
-					Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);
-
-					// Mostrar contatos e referência
-					Form.fields('CEL').visible(true);
-					Form.fields('CEL_AD').visible(true);
-					Form.fields('TEL').visible(true);
-					Form.fields('EMAIL').visible(true);
-					Form.fields('REFERENCIA_UM').visible(true);
-					Form.fields('CEL_TEL_REF_UM').visible(true);
-					Form.fields('REFERENCIA_DOIS').visible(true);
-					Form.fields('CEL_TEL_REF_DOIS').visible(true);					
-	
-				}						
-				
-			}
-
-			// Cadastro Novo
-			else if (tipoCad == "Novo Cadastro"){
-
-				// Mostrar grupos para cadastro novo
-				Form.groups('IDENTIFICACAO').visible(true);
-				Form.groups('ENDERECO').visible(true);
 				Form.groups('RENDA').visible(true);
+				Form.fields('RENDA').visible(false);
+				Form.grids("GRD_COMP_RENDA").fields('RENDA_NOME_ADD').disabled(true);
+				Form.grids("GRD_COMP_RENDA").fields('RENDA_HORA_ADD').disabled(true);
+				Form.grids("GRD_COMP_RENDA").fields('COMPROVANTE_RENDA').setRequired('aprovar', true);
 
-				// Dados do cliente obrigatórios para cadastro novo
-				Form.fields('ESCOLARIDADE').visible(true);
-				Form.fields('ESCOLARIDADE').setRequired('aprovar', true);
-				Form.fields('ESTADO_CIVIL').visible(true);
-				Form.fields('ESTADO_CIVIL').setRequired('aprovar', true);
-				Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);
-				Form.fields('PROCURADOR_REPRE_LEGAL').setRequired('aprovar', true);	
+			}	
+			if(updtResid == "Sim"){
+
+				Form.groups('ENDERECO').visible(true);
+				Form.grids("GRD_RESIDENCIA").fields('RESID_NOME_ADD').disabled(true);
+				Form.grids("GRD_RESIDENCIA").fields('RESID_HORA_ADD').disabled(true);
+				Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', true);
+
+				Form.fields('CIDADE').visible(false);
+				Form.fields('AREA_ATUACAO').visible(false);
+
+			}		
+			if(updtClint == "Sim"){
+
+				Form.groups('IDENTIFICACAO').visible(true);
+				Form.grids("GRD_DOCUMENTOS").fields('ID_NOME_ADD').disabled(true);
+				Form.grids("GRD_DOCUMENTOS").fields('ID_HORA_ADD').disabled(true);
 
 				// Mostrar contatos e referência
 				Form.fields('CEL').visible(true);
@@ -1372,31 +1374,57 @@ function setForm() {
 				Form.fields('REFERENCIA_UM').visible(true);
 				Form.fields('CEL_TEL_REF_UM').visible(true);
 				Form.fields('REFERENCIA_DOIS').visible(true);
-				Form.fields('CEL_TEL_REF_DOIS').visible(true);
-				
-				// Campos obrigatórios para cadastro novo contatos e referências
-				Form.fields('RENDA').setRequired('aprovar', true);
-				Form.fields('CEL').setRequired('aprovar', true);
-				Form.fields('REFERENCIA_UM').setRequired('aprovar', true);
-				Form.fields('CEL_TEL_REF_UM').setRequired('aprovar', true);
-				Form.fields('REFERENCIA_DOIS').setRequired('aprovar', true);
-				Form.fields('CEL_TEL_REF_DOIS').setRequired('aprovar', true);	
+				Form.fields('CEL_TEL_REF_DOIS').visible(true);					
 
-				// Campos de grid obrigatórios
-				Form.grids("GRD_DOCUMENTOS").fields('ANEXO_DOCUMENTOS_IDENT').setRequired('aprovar', true);
-				Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', true);
+			}						
+			
+		}	
 
-				// Bloquear campos de nome e data
-				Form.grids("GRD_DOCUMENTOS").fields('ID_NOME_ADD').disabled(true);
-				Form.grids("GRD_DOCUMENTOS").fields('ID_HORA_ADD').disabled(true);
-				Form.grids("GRD_RESIDENCIA").fields('RESID_NOME_ADD').disabled(true);
-				Form.grids("GRD_RESIDENCIA").fields('RESID_HORA_ADD').disabled(true);
-				Form.grids("GRD_COMP_RENDA").fields('RENDA_NOME_ADD').disabled(true);
-				Form.grids("GRD_COMP_RENDA").fields('RENDA_HORA_ADD').disabled(true);										
-	
-			}			
+		// Cadastro Novo
+		if (tipoCad == "Novo Cadastro"){
 
-		}
+			// Mostrar grupos para cadastro novo
+			Form.groups('IDENTIFICACAO').visible(true);
+			Form.groups('ENDERECO').visible(true);
+			Form.groups('RENDA').visible(true);
+
+			// Dados do cliente obrigatórios para cadastro novo
+			Form.fields('ESCOLARIDADE').visible(true);
+			Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);
+			Form.fields('ESTADO_CIVIL').visible(true);
+			Form.fields('ESCOLARIDADE').setRequired('aprovar', true);
+			Form.fields('ESTADO_CIVIL').setRequired('aprovar', true);
+			Form.fields('PROCURADOR_REPRE_LEGAL').setRequired('aprovar', true);	
+
+			// Mostrar contatos e referência
+			Form.fields('CEL').visible(true);
+			Form.fields('CEL_AD').visible(true);
+			Form.fields('TEL').visible(true);
+			Form.fields('EMAIL').visible(true);
+			Form.fields('REFERENCIA_UM').visible(true);
+			Form.fields('CEL_TEL_REF_UM').visible(true);
+			Form.fields('REFERENCIA_DOIS').visible(true);
+			Form.fields('CEL_TEL_REF_DOIS').visible(true);
+			Form.fields('RENDA').setRequired('aprovar', true);
+			Form.fields('CEL').setRequired('aprovar', true);
+			Form.fields('REFERENCIA_UM').setRequired('aprovar', true);
+			Form.fields('CEL_TEL_REF_UM').setRequired('aprovar', true);
+			Form.fields('REFERENCIA_DOIS').setRequired('aprovar', true);
+			Form.fields('CEL_TEL_REF_DOIS').setRequired('aprovar', true);	
+
+			// Campos de grid obrigatórios
+			Form.grids("GRD_DOCUMENTOS").fields('ANEXO_DOCUMENTOS_IDENT').setRequired('aprovar', true);
+			Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', true);
+
+			// Bloquear campos de nome e data
+			Form.grids("GRD_DOCUMENTOS").fields('ID_NOME_ADD').disabled(true);
+			Form.grids("GRD_DOCUMENTOS").fields('ID_HORA_ADD').disabled(true);
+			Form.grids("GRD_RESIDENCIA").fields('RESID_NOME_ADD').disabled(true);
+			Form.grids("GRD_RESIDENCIA").fields('RESID_HORA_ADD').disabled(true);
+			Form.grids("GRD_COMP_RENDA").fields('RENDA_NOME_ADD').disabled(true);
+			Form.grids("GRD_COMP_RENDA").fields('RENDA_HORA_ADD').disabled(true);										
+
+		}			
 
 		// Chamado devolvido
 		if(ciclo > 1){
@@ -1420,187 +1448,7 @@ function setForm() {
 			Form.fields('INFO_SISBR').readOnly(true);		
 			
 			// Comentário obrigatório caso o chamado tenha sido devolvido
-			Form.fields('OBSERVACOES').setRequired('aprovar', true);		
-			
-			// Inclusão de titular
-			if(objtCad == "Inclusão de Titular"){
-
-				Form.groups("DADOS_CONTA").visible(true);
-				Form.fields("CPF_CONTA").visible(false);
-				Form.fields("NOME_CONTA").visible(false);				
-				
-				Form.grids("G_CONTA").readOnly(true);
-
-				Form.fields('CONTA').setRequired('aprovar', true);
-				Form.fields('ABERTURA').setRequired('aprovar', true);
-				Form.fields('CATEGORIA').setRequired('aprovar', true);
-
-				Form.fields("CAPITAL").visible(true).apply();
-				Form.fields("CAPITAL").setRequired('aprovar', true).apply();
-
-			}			
-
-			// Cadastro múltiplo
-			if(modal == "Múltiplo"){ 
-				
-				// Grid cadastros adicionais
-				Form.groups('CADASTRO_ADICIONAL').visible(true); 
-				Form.grids("G_CAD_ADD").visible(true); 
-
-				// Campos titular
-				Form.grids("G_CAD_ADD").fields("ESCOLARIDADE_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("CEL_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("CEL_ADD2").visible(false);
-				Form.grids("G_CAD_ADD").fields("TEL_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("EMAIL_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("REFERENCIAS_TITULAR").visible(false);
-				Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(false);
-
-				// Campos conjuge
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").visible(false);
-				Form.grids("G_CAD_ADD").fields("COMP_CIVIL_ADD").visible(false);
-
-				// Campos complementares
-				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(false);
-				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false);
-
-				// Ajuste de linhas
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');
-
-				// Campos obrigatórios
-				Form.grids("G_CAD_ADD").fields("CPF_ADD").setRequired('aprovar', true);
-				Form.grids("G_CAD_ADD").fields("NOME_ADD").setRequired('aprovar', true);				
-				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").setRequired('aprovar', true);		
-
-			}
-			// Cadastro individual
-			else if(modal == "Individual"){ Form.groups('CADASTRO_ADICIONAL').visible(false); }
-
-			// Perfil de cadastro
-			if(perfil == "Perfil de Exceção"){ 
-				
-				Form.fields('JUSTIFICATIVA_PERFIL').visible(true); 
-			
-			}
-
-			// Atualização Cadastral
-			if(tipoCad == "Atualização Cadastral"){
-
-				// Ocultar grupos de anexos
-				Form.groups('IDENTIFICACAO').visible(false);
-				Form.groups('ENDERECO').visible(false);
-				Form.groups('RENDA').visible(false);
-	
-				// Mostrar checkbox atualização
-				Form.fields('UPDATE_RENDA').visible(true);
-				Form.fields('UPDATE_RESIDENCIA').visible(true);
-				Form.fields('UPDATE_CLIENTE').visible(true);		
-				
-				updtRenda = Form.fields('UPDATE_RENDA');
-				updtResid = Form.fields('UPDATE_RESIDENCIA');
-				updtClint = Form.fields('UPDATE_CLIENTE');	
-
-				Form.fields('ESCOLARIDADE').visible(true);
-				Form.fields('ESTADO_CIVIL').visible(true);
-				Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);				
-
-				if(updtRenda == "Sim"){
-	
-					Form.groups('RENDA').visible(true);
-					Form.fields('RENDA').visible(false);
-					Form.grids("GRD_COMP_RENDA").fields('RENDA_NOME_ADD').disabled(true);
-					Form.grids("GRD_COMP_RENDA").fields('RENDA_HORA_ADD').disabled(true);
-					Form.grids("GRD_COMP_RENDA").fields('COMPROVANTE_RENDA').setRequired('aprovar', true);
-	
-				}	
-				if(updtResid == "Sim"){
-	
-					Form.groups('ENDERECO').visible(true);
-					Form.grids("GRD_RESIDENCIA").fields('RESID_NOME_ADD').disabled(true);
-					Form.grids("GRD_RESIDENCIA").fields('RESID_HORA_ADD').disabled(true);
-					Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', true);
-	
-					Form.fields('CIDADE').visible(false);
-					Form.fields('AREA_ATUACAO').visible(false);
-	
-				}		
-				if(updtClint == "Sim"){
-	
-					Form.groups('IDENTIFICACAO').visible(true);
-					Form.grids("GRD_DOCUMENTOS").fields('ID_NOME_ADD').disabled(true);
-					Form.grids("GRD_DOCUMENTOS").fields('ID_HORA_ADD').disabled(true);
-
-					Form.fields('ESCOLARIDADE').visible(true);
-					Form.fields('ESTADO_CIVIL').visible(true);
-					Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);
-
-					// Mostrar contatos e referência
-					Form.fields('CEL').visible(true);
-					Form.fields('CEL_AD').visible(true);
-					Form.fields('TEL').visible(true);
-					Form.fields('EMAIL').visible(true);
-					Form.fields('REFERENCIA_UM').visible(true);
-					Form.fields('CEL_TEL_REF_UM').visible(true);
-					Form.fields('REFERENCIA_DOIS').visible(true);
-					Form.fields('CEL_TEL_REF_DOIS').visible(true);					
-	
-				}						
-				
-			}
-
-			// Cadastro Novo
-			else if (tipoCad == "Novo Cadastro"){
-
-				// Mostrar grupos para cadastro novo
-				Form.groups('IDENTIFICACAO').visible(true);
-				Form.groups('ENDERECO').visible(true);
-				Form.groups('RENDA').visible(true);
-
-				// Dados do cliente obrigatórios para cadastro novo
-				Form.fields('ESCOLARIDADE').visible(true);
-				Form.fields('ESCOLARIDADE').setRequired('aprovar', true);
-				Form.fields('ESTADO_CIVIL').visible(true);
-				Form.fields('ESTADO_CIVIL').setRequired('aprovar', true);
-				Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);
-				Form.fields('PROCURADOR_REPRE_LEGAL').setRequired('aprovar', true);	
-
-				// Mostrar contatos e referência
-				Form.fields('CEL').visible(true);
-				Form.fields('CEL_AD').visible(true);
-				Form.fields('TEL').visible(true);
-				Form.fields('EMAIL').visible(true);
-				Form.fields('REFERENCIA_UM').visible(true);
-				Form.fields('CEL_TEL_REF_UM').visible(true);
-				Form.fields('REFERENCIA_DOIS').visible(true);
-				Form.fields('CEL_TEL_REF_DOIS').visible(true);
-				
-				// Campos obrigatórios para cadastro novo contatos e referências
-				Form.fields('RENDA').setRequired('aprovar', true);
-				Form.fields('CEL').setRequired('aprovar', true);
-				Form.fields('REFERENCIA_UM').setRequired('aprovar', true);
-				Form.fields('CEL_TEL_REF_UM').setRequired('aprovar', true);
-				Form.fields('REFERENCIA_DOIS').setRequired('aprovar', true);
-				Form.fields('CEL_TEL_REF_DOIS').setRequired('aprovar', true);	
-
-				// Campos de grid obrigatórios
-				Form.grids("GRD_DOCUMENTOS").fields('ANEXO_DOCUMENTOS_IDENT').setRequired('aprovar', true);
-				Form.grids("GRD_RESIDENCIA").fields('COMPROVANTE').setRequired('aprovar', true);
-
-				// Bloquear campos de nome e data
-				Form.grids("GRD_DOCUMENTOS").fields('ID_NOME_ADD').disabled(true);
-				Form.grids("GRD_DOCUMENTOS").fields('ID_HORA_ADD').disabled(true);
-				Form.grids("GRD_RESIDENCIA").fields('RESID_NOME_ADD').disabled(true);
-				Form.grids("GRD_RESIDENCIA").fields('RESID_HORA_ADD').disabled(true);
-				Form.grids("GRD_COMP_RENDA").fields('RENDA_NOME_ADD').disabled(true);
-				Form.grids("GRD_COMP_RENDA").fields('RENDA_HORA_ADD').disabled(true);										
-	
-			}				
+			Form.fields('OBSERVACOES').setRequired('aprovar', true);					
 
 		}
 
@@ -1626,6 +1474,23 @@ function setForm() {
 		 Form.groups('DECLARACOES').visible(false);
 		 Form.groups('EXTERNAS_TITULAR').visible(false);
 		 Form.groups('EXTERNAS_ADICIONAL').visible(false);
+
+		// Inclusão de titular
+		if(objtCad == "Inclusão de Titular"){
+
+			Form.groups("DADOS_CONTA").visible(true);
+			Form.fields("CPF_CONTA").visible(false);
+			Form.fields("NOME_CONTA").visible(false);				
+			
+			Form.grids("G_CONTA").readOnly(true);
+
+		}		 
+
+		else{
+
+			Form.groups("DADOS_CONTA").visible(false);			
+
+		}
 		 
 		 // Cadastro Múltiplo
 		 if(modal == "Múltiplo"){
@@ -1727,35 +1592,55 @@ function setForm() {
 		updtResid = Form.fields('UPDATE_RESIDENCIA').value();
 		updtClint = Form.fields('UPDATE_CLIENTE').value();
 		procRep   = Form.fields("PROCURADOR_REPRE_LEGAL").value();
-		objtCad   = Form.fields("OBJETIVO").value();
 		updtExt   = Form.fields("UPD_EXT_ADD").value();
 		area      = Form.fields("AREA_ATUACAO").value();
+		objtCad   = Form.fields("OBJETIVO").value();
 		ciclo     = Form.fields("CICLO").value();
 
 		Form.groups('IDENTIFICACAO').visible(false);
-		Form.groups('ENDERECO').visible(false);
 		Form.groups('RENDA').visible(false);
 		Form.groups("EXTERNAS_ADICIONAL").visible(false);
 
-		// Consultas externas para Abertura de Conta
-		if(objtCad == "Abertura de Conta"){
+		// Consultas externas titular
+		Form.fields('PONTUACAO_SCORE_TITULAR').visible(true);
+		Form.fields('PONTUACAO_SCORE_TITULAR').setRequired('aprovar', true);
+		Form.fields('RESTRICOES').visible(true);
+		Form.fields('RESTRICOES').setRequired('aprovar', true);
 
-			Form.fields('PONTUACAO_SCORE_TITULAR').visible(true);
-			Form.fields('PONTUACAO_SCORE_TITULAR').setRequired('aprovar', true);
-			Form.fields('RESTRICOES').visible(true);
-			Form.fields('RESTRICOES').setRequired('aprovar', true);
+		// Area de atuação, sempre preencher
+		Form.groups('ENDERECO').visible(true);
+		Form.fields('AREA_ATUACAO').visible(true);
+		Form.fields('AREA_ATUACAO').setRequired('aprovar', true);
+		Form.fields('CIDADE').visible(false);
+		Form.grids('GRD_RESIDENCIA').visible(false);		
 
-			// Consultas externas procurador/rep
-			if(procRep == "Sim"){
+		// Inclusão de titular
+		if(objtCad == "Inclusão de Titular"){
 
-				Form.fields('SCORE_PROC_REP').visible(true);
-				Form.fields('RESTRICOES_PROC_REP').visible(true);
-				Form.fields('SCORE_PROC_REP').setRequired('aprovar', true);
-				Form.fields('RESTRICOES_PROC_REP').setRequired('aprovar', true);
+			Form.groups("DADOS_CONTA").visible(true);
+			Form.fields("CPF_CONTA").visible(false);
+			Form.fields("NOME_CONTA").visible(false);				
+			
+			Form.grids("G_CONTA").readOnly(true);
 
-			}
+		}		 
 
-		}
+		// Abertura de conta/inclusao de relac.
+		else{
+
+			Form.groups("DADOS_CONTA").visible(false);			
+
+		}		
+
+		// Consultas externas procurador/rep
+		if(procRep == "Sim"){
+
+			Form.fields('SCORE_PROC_REP').visible(true);
+			Form.fields('RESTRICOES_PROC_REP').visible(true);
+			Form.fields('SCORE_PROC_REP').setRequired('aprovar', true);
+			Form.fields('RESTRICOES_PROC_REP').setRequired('aprovar', true);
+
+		}		
 
 		// Cadastro Múltiplo
 		if(modal == "Múltiplo"){
@@ -1781,7 +1666,7 @@ function setForm() {
 				nomeAdd = gridAdd[i].NOME_ADD;
 				rlcAdd  = gridAdd[i].RELACIONAMENTO;
 				civAdd  = gridAdd[i].ESTADO_CIVIL_ADD;
-				addTit  = gridAdd[i].ADD_TITULAR;
+				addTit  = gridAdd[i].SERA_TITULAR;
 
 				// Caso o cônjuge seja titular da conta exigir as consultas externas
 				if(addTit == "Sim"){
@@ -1851,27 +1736,18 @@ function setForm() {
 			Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);
 			Form.fields('ESCOLARIDADE').readOnly(true);	
 			Form.fields('ESTADO_CIVIL').readOnly(true);	
-			Form.fields('PROCURADOR_REPRE_LEGAL').readOnly(true);	
-
-			// Area de atuação obrigatório para abertura de conta
-			Form.groups('ENDERECO').visible(true);
-			Form.fields('AREA_ATUACAO').visible(true);
-			Form.fields('CIDADE').visible(false);
-			Form.grids('GRD_RESIDENCIA').visible(false);			
+			Form.fields('PROCURADOR_REPRE_LEGAL').readOnly(true);		
 		
 			if(updtRenda == "Sim"){
 
 				Form.groups('RENDA').visible(true);
 				Form.fields('RENDA').visible(false);
-				Form.groups('RENDA').grids('GRD_COMP_RENDA').disabled(true);
+				Form.groups('RENDA').grids('GRD_COMP_RENDA').readOnly(true);
 
 			}	
 			if(updtResid == "Sim"){
 
-				Form.groups('ENDERECO').visible(true);
-				Form.fields('CIDADE').visible(false);
-				Form.fields('AREA_ATUACAO').visible(true);
-				Form.groups('ENDERECO').grids('GRD_RESIDENCIA').disabled(true);
+				Form.groups('ENDERECO').grids('GRD_RESIDENCIA').readOnly(true);
 
 			}		
 			if(updtClint == "Sim"){
@@ -1909,7 +1785,6 @@ function setForm() {
 
 			// Mostrar grupos para cadastro novo
 			Form.groups('IDENTIFICACAO').visible(true);
-			Form.groups('ENDERECO').visible(true);
 			Form.groups('RENDA').visible(true);
 
 			// Bloquear alterações nas GRIDS
@@ -1951,7 +1826,7 @@ function setForm() {
 		if(area == "Não"){
 			
 			Form.fields('CIDADE').visible(true);			
-			Form.fields('CIDADE').readOnly(true);
+			Form.fields('CIDADE').setRequired('aprovar', true);
 
 		}		
 
@@ -1985,23 +1860,37 @@ function setForm() {
 		Form.groups('ENDERECO').visible(false);
 		Form.groups('RENDA').visible(false);
 
-		// Consultas externas para Abertura de Conta
-		if(objtCad == "Abertura de Conta"){
+		// Consultas externas titular
+		Form.fields('PONTUACAO_SCORE_TITULAR').visible(true);
+		Form.fields('PONTUACAO_SCORE_TITULAR').readOnly(true);
+		Form.fields('RESTRICOES').visible(true);
+		Form.fields('RESTRICOES').readOnly(true);
 
-			Form.fields('PONTUACAO_SCORE_TITULAR').visible(true);
-			Form.fields('PONTUACAO_SCORE_TITULAR').readOnly(true);
-			Form.fields('RESTRICOES').visible(true);
-			Form.fields('RESTRICOES').readOnly(true);
+		// Inclusão de titular
+		if(objtCad == "Inclusão de Titular"){
 
-			// Consultas externas procurador/rep
-			if(procRep == "Sim"){
+			Form.groups("DADOS_CONTA").visible(true);
+			Form.fields("CPF_CONTA").visible(false);
+			Form.fields("NOME_CONTA").visible(false);				
+			
+			Form.grids("G_CONTA").readOnly(true);
 
-				Form.fields('SCORE_PROC_REP').visible(true);
-				Form.fields('RESTRICOES_PROC_REP').visible(true);
-				Form.fields('SCORE_PROC_REP').readOnly(true);
-				Form.fields('RESTRICOES_PROC_REP').readOnly(true);
+		}		 
 
-			}
+		// Abertura de conta/inclusao de relac.
+		else{
+
+			Form.groups("DADOS_CONTA").visible(false);			
+
+		}			
+
+		// Consultas externas procurador/rep
+		if(procRep == "Sim"){
+
+			Form.fields('SCORE_PROC_REP').visible(true);
+			Form.fields('RESTRICOES_PROC_REP').visible(true);
+			Form.fields('SCORE_PROC_REP').readOnly(true);
+			Form.fields('RESTRICOES_PROC_REP').readOnly(true);
 
 		}		
 		
@@ -2061,6 +1950,21 @@ function setForm() {
 			Form.fields('UPDATE_RESIDENCIA').readOnly(true);
 			Form.fields('UPDATE_CLIENTE').readOnly(true);
 
+			// Dados do cliente obrigatório para abertura de conta
+			Form.fields('ESCOLARIDADE').visible(true);
+			Form.fields('ESTADO_CIVIL').visible(true);
+			Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);
+			Form.fields('ESCOLARIDADE').readOnly(true);	
+			Form.fields('ESTADO_CIVIL').readOnly(true);	
+			Form.fields('PROCURADOR_REPRE_LEGAL').readOnly(true);	
+
+			// Area de atuação obrigatório para abertura de conta
+			Form.groups('ENDERECO').visible(true);
+			Form.fields('AREA_ATUACAO').visible(true);
+			Form.fields('AREA_ATUACAO').readOnly(true);
+			Form.fields('CIDADE').visible(false);
+			Form.grids('GRD_RESIDENCIA').visible(false);
+
 			if(updtRenda == "Sim"){
 
 				Form.groups('RENDA').visible(true);
@@ -2078,17 +1982,24 @@ function setForm() {
 			}		
 			if(updtClint == "Sim"){
 
+				Form.fields('CEL').visible(true);
+				Form.fields('CEL_AD').visible(true);
+				Form.fields('TEL').visible(true);
+				Form.fields('EMAIL').visible(true);	
+				Form.fields('CEL').readOnly(true);
+				Form.fields('CEL_AD').readOnly(true);
+				Form.fields('TEL').readOnly(true);
+				Form.fields('EMAIL').readOnly(true);	
+				Form.fields('REFERENCIA_UM').visible(true);
+				Form.fields('CEL_TEL_REF_UM').visible(true);
+				Form.fields('REFERENCIA_DOIS').visible(true);
+				Form.fields('CEL_TEL_REF_DOIS').visible(true);
+				Form.fields('REFERENCIA_UM').readOnly(true);
+				Form.fields('CEL_TEL_REF_UM').readOnly(true);
+				Form.fields('REFERENCIA_DOIS').readOnly(true);
+				Form.fields('CEL_TEL_REF_DOIS').readOnly(true);
 				Form.groups('IDENTIFICACAO').visible(true);
-				Form.groups('IDENTIFICACAO').grids('GRD_DOCUMENTOS').disabled(true);
-
-				Form.fields('ESCOLARIDADE').visible(true);
-				Form.fields('ESCOLARIDADE').readOnly(true);
-
-				Form.fields('ESTADO_CIVIL').visible(true);
-				Form.fields('ESTADO_CIVIL').readOnly(true);
-
-				Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);
-				Form.fields('PROCURADOR_REPRE_LEGAL').readOnly(true);
+				Form.groups('IDENTIFICACAO').grids('GRD_DOCUMENTOS').readOnly(true);
 
 			}						
 			
