@@ -63,7 +63,7 @@ var area      = "";
 function initLayout() {
 }
 
-function defineLabels() {
+function defineLabels(){
 }
 
 /*
@@ -896,6 +896,7 @@ function setEventos() {
 				Form.fields('DOC_INSUFICIENTE').visible(false).apply();
 				Form.fields('FALTA_INFORMACOES').visible(false).apply();
 				Form.fields('INFO_SISBR').visible(false).apply();
+				Form.fields('PEDIDO_PA').visible(false).apply();
 
 				// Não atualizar a variável quando o cadastro for de outra cooperativa para não perder a rota
 				if(codigoEtapa == REALIZAR_CADASTRO_SISBR || codigoEtapa == COMPLEMENTAR_CADASTRO_SISBR) Form.fields("AUX_GRUPO_CRL").value("Não").apply();
@@ -911,7 +912,8 @@ function setEventos() {
 				Form.fields('DOC_NAO_ENVIADO').visible(false).apply();
 				Form.fields('DOC_INSUFICIENTE').visible(false).apply();
 				Form.fields('FALTA_INFORMACOES').visible(false).apply();				
-				Form.fields('INFO_SISBR').visible(false).apply();				
+				Form.fields('INFO_SISBR').visible(false).apply();	
+				Form.fields('PEDIDO_PA').visible(false).apply();			
 
 				Form.fields("AUX_GRUPO_CRL").value("Sim").apply();
 
@@ -927,6 +929,7 @@ function setEventos() {
 				Form.fields('DOC_INSUFICIENTE').visible(true).apply();
 				Form.fields('FALTA_INFORMACOES').visible(true).apply();
 				Form.fields('INFO_SISBR').visible(true).apply();
+				Form.fields('PEDIDO_PA').visible(true).apply();
 
 				Form.fields("AUX_GRUPO_CRL").value("").apply();
 
@@ -1429,6 +1432,10 @@ function setForm() {
 		// Chamado devolvido
 		if(ciclo > 1){
 
+			// Mostrar grupo
+			Form.groups('ACOES').visible(true);
+			Form.fields('ROTA').visible(false);
+
 			// Bloquear campos principais
 			Form.fields("MODALIDADE").disabled(true);
 			Form.fields("TIPO_CADASTRO").disabled(true);
@@ -1441,11 +1448,13 @@ function setForm() {
 			Form.fields('DOC_INSUFICIENTE').visible(true);
 			Form.fields('FALTA_INFORMACOES').visible(true);	
 			Form.fields('INFO_SISBR').visible(true);	
+			Form.fields('PEDIDO_PA').visible(true);	
 			Form.fields('DOC_INVALIDO').readOnly(true);
 			Form.fields('DOC_NAO_ENVIADO').readOnly(true);
 			Form.fields('DOC_INSUFICIENTE').readOnly(true);
 			Form.fields('FALTA_INFORMACOES').readOnly(true);		
 			Form.fields('INFO_SISBR').readOnly(true);		
+			Form.fields('PEDIDO_PA').readOnly(true);		
 			
 			// Comentário obrigatório caso o chamado tenha sido devolvido
 			Form.fields('OBSERVACOES').setRequired('aprovar', true);					
@@ -2034,7 +2043,6 @@ function setForm() {
 			Form.fields('ESTADO_CIVIL').readOnly(true);
 			Form.fields('PROCURADOR_REPRE_LEGAL').visible(true);
 			Form.fields('PROCURADOR_REPRE_LEGAL').readOnly(true);	
-			Form.fields('CIDADE').visible(false);
 
 			// Mostrar contatos e referência
 			Form.fields('CEL').visible(true);
@@ -2066,6 +2074,7 @@ function setForm() {
 
 		if(codigoEtapa == CADASTRO_SISBR_OUTRA_COOP || codigoEtapa == COMPLEM_SISBR_OUTRA_COOP){
 
+			Form.fields("ROTA").value("").apply();
 			Form.actions('aprovar').disabled(true);
 			Form.actions('rejeitar').disabled(true);
 
