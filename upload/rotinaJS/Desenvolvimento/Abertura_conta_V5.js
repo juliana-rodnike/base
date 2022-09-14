@@ -799,12 +799,16 @@ function setForm() {
 
 		// Informações talão
 		if(auxTalao == "Sim" && codigoEtapa != APROVAR_GERENTE){
+
 			Form.fields('QTD_FOLHAS').visible(true).apply();
 			Form.fields('TALAO_APROVADO').visible(true).apply();
+
 		}
 		else if(auxTalao == "Não" && codigoEtapa != APROVAR_GERENTE){
+
 			Form.fields('QTD_FOLHAS').visible(false).apply();
 			Form.fields('TALAO_APROVADO').visible(false).apply();
+			
 		}		
 
 	}

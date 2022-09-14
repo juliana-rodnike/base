@@ -948,13 +948,14 @@ function setEventos() {
 			atendNomes   = Form.fields("ATENDENTES_NOMES").value();
 			grupoAtend   = Form.fields("AUX_GRUPO").value();
 
-			Form.fields('DOC_INVALIDO').visible(false).apply();
-			Form.fields('DOC_NAO_ENVIADO').visible(false).apply();
-			Form.fields('DOC_INSUFICIENTE').visible(false).apply();
-			Form.fields('FALTA_INFORMACOES').visible(false).apply();
-			Form.fields('INFO_SISBR').visible(false).apply();
-			Form.fields('AUTORIZACAO').visible(false).apply();					
-			Form.fields('APROVACAO').visible(false).apply();				
+			Form.fields('DOC_INVALIDO').visible(false);
+			Form.fields('DOC_NAO_ENVIADO').visible(false);
+			Form.fields('DOC_INSUFICIENTE').visible(false);
+			Form.fields('FALTA_INFORMACOES').visible(false);
+			Form.fields('INFO_SISBR').visible(false);
+			Form.fields('AUTORIZACAO').visible(false);					
+			Form.fields('APROVACAO').visible(false);				
+			Form.fields('PEDIDO_PA').visible(false);				
 			
 			if(auxRota == "Finalizar Atendimento"){
 
@@ -964,21 +965,23 @@ function setEventos() {
 				Form.fields("PROX_ETAPA").value("Avaliar Atendimento").apply();
 				Form.fields("PROX_RESP").value(respNomes).apply();
 				Form.fields("AUX_USER_DEV").value("Aprovado").apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}
 			if(auxRota == "Devolver ao Solicitante"){	
 				
 				if(grupoAtend == "99_cadastro"){
 
-					Form.fields('DOC_INVALIDO').visible(true).apply();
-					Form.fields('DOC_NAO_ENVIADO').visible(true).apply();
-					Form.fields('DOC_INSUFICIENTE').visible(true).apply();
-					Form.fields('FALTA_INFORMACOES').visible(true).apply();
-					Form.fields('INFO_SISBR').visible(true).apply();
-					Form.fields('AUTORIZACAO').visible(true).apply();					
-					Form.fields('APROVACAO').visible(true).apply();					
+					Form.fields('DOC_INVALIDO').visible(true);
+					Form.fields('DOC_NAO_ENVIADO').visible(true);
+					Form.fields('DOC_INSUFICIENTE').visible(true);
+					Form.fields('FALTA_INFORMACOES').visible(true);
+					Form.fields('INFO_SISBR').visible(true);
+					Form.fields('AUTORIZACAO').visible(true);					
+					Form.fields('APROVACAO').visible(true);		
+					Form.fields('PEDIDO_PA').visible(true);			
 
 				}				
 
@@ -986,29 +989,32 @@ function setEventos() {
 				Form.fields("AUX_USER_DEV").value("Devolvido").apply();
 				Form.fields("PROX_ETAPA").value("Registrar Solciitação de Atendimento").apply();
 				Form.fields("PROX_RESP").value(respNomes).apply();
-				Form.actions('aprovar').disabled(true).apply();
-				Form.actions('rejeitar').disabled(false).apply();
+
+				Form.actions('aprovar').disabled(true);
+				Form.actions('rejeitar').disabled(false);
 
 			}
 			if(auxRota == "Aguardando Terceiros"){
 
 				if(grupoAtend == "99_cadastro"){
 
-					Form.fields('DOC_INVALIDO').visible(true).apply();
-					Form.fields('DOC_NAO_ENVIADO').visible(true).apply();
-					Form.fields('DOC_INSUFICIENTE').visible(true).apply();
-					Form.fields('FALTA_INFORMACOES').visible(true).apply();
-					Form.fields('INFO_SISBR').visible(true).apply();
-					Form.fields('AUTORIZACAO').visible(true).apply();					
-					Form.fields('APROVACAO').visible(true).apply();					
+					Form.fields('DOC_INVALIDO').visible(true);
+					Form.fields('DOC_NAO_ENVIADO').visible(true);
+					Form.fields('DOC_INSUFICIENTE').visible(true);
+					Form.fields('FALTA_INFORMACOES').visible(true);
+					Form.fields('INFO_SISBR').visible(true);
+					Form.fields('AUTORIZACAO').visible(true);					
+					Form.fields('APROVACAO').visible(true);		
+					Form.fields('PEDIDO_PA').visible(true);				
 
 				}
 
 				Form.fields("PROX_ETAPA").value("Aguardando Terceiros").apply();
 				Form.fields("PROX_RESP").value(atendNomes).apply();
 				Form.fields("AUX_USER_DEV").value("Aguardando").apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}	
 			if(auxRota == "Submeter Alçada Nível 2"){
@@ -1016,8 +1022,9 @@ function setEventos() {
 				alcadaNivel2(modelo, auxRota);
 				Form.fields("PROX_ETAPA").value("Aprovar Solicitação Alçada Nível 2").apply();
 				Form.fields("AUX_USER_DEV").value("Submetido").apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}
 			if(auxRota == "Encaminhar Chamado"){
@@ -1032,14 +1039,14 @@ function setEventos() {
 				listaSub = Form.fields("SUBCATEGORIA_NOVO");
 
 				// Tornar visíveis campos para direcionamento
-				Form.fields('DESTINO_NOVO').visible(true).apply();
-				Form.fields('CATEGORIA_NOVO').visible(true).apply();
-				Form.fields('SUBCATEGORIA_NOVO').visible(true).apply();
-				Form.fields('SETOR_NOVO').visible(true).apply();
-				Form.fields('DESTINO_NOVO').setRequired('aprovar', true).apply();
-				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', true).apply();
-				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', true).apply();
-				Form.fields('SETOR_NOVO').setRequired('aprovar', true).apply();
+				Form.fields('DESTINO_NOVO').visible(true);
+				Form.fields('CATEGORIA_NOVO').visible(true);
+				Form.fields('SUBCATEGORIA_NOVO').visible(true);
+				Form.fields('SETOR_NOVO').visible(true);
+				Form.fields('DESTINO_NOVO').setRequired('aprovar', true);
+				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', true);
+				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', true);
+				Form.fields('SETOR_NOVO').setRequired('aprovar', true);
 
 				// Atualizar destino e unidade, limpar categoria e subcategoria
 				Form.fields("DESTINO_NOVO").subscribe("CHANGE", function(itemId, data, response) {
@@ -1335,22 +1342,25 @@ function setEventos() {
 
 				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
 				Form.fields("AUX_USER_DEV").value("Encaminhado").apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}
 			if(auxRota != "Encaminhar Chamado"){
 
-				Form.fields('DESTINO_NOVO').visible(false).apply();
-				Form.fields('CATEGORIA_NOVO').visible(false).apply();
-				Form.fields('SUBCATEGORIA_NOVO').visible(false).apply();
-				Form.fields('SETOR_NOVO').visible(false).apply();
-				Form.fields('DESTINO_NOVO').setRequired('aprovar', false).apply();
-				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', false).apply();
-				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', false).apply();
-				Form.fields('SETOR_NOVO').setRequired('aprovar', false).apply();
+				Form.fields('DESTINO_NOVO').visible(false);
+				Form.fields('CATEGORIA_NOVO').visible(false);
+				Form.fields('SUBCATEGORIA_NOVO').visible(false);
+				Form.fields('SETOR_NOVO').visible(false);
+				Form.fields('DESTINO_NOVO').setRequired('aprovar', false);
+				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', false);
+				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', false);
+				Form.fields('SETOR_NOVO').setRequired('aprovar', false);
 
-			}									
+			}	
+			
+			Form.apply();
 
 		});
 
@@ -1418,21 +1428,23 @@ function setEventos() {
 			respNomes    = Form.fields("RESPONSAVEIS_NOMES").value();
 			atendNomes   = Form.fields("ATENDENTES_NOMES").value();		
 
-			Form.fields('DOC_INVALIDO').visible(false).apply();
-			Form.fields('DOC_NAO_ENVIADO').visible(false).apply();
-			Form.fields('DOC_INSUFICIENTE').visible(false).apply();
-			Form.fields('FALTA_INFORMACOES').visible(false).apply();
-			Form.fields('INFO_SISBR').visible(false).apply();
-			Form.fields('AUTORIZACAO').visible(false).apply();					
-			Form.fields('APROVACAO').visible(false).apply();			
+			Form.fields('DOC_INVALIDO').visible(false);
+			Form.fields('DOC_NAO_ENVIADO').visible(false);
+			Form.fields('DOC_INSUFICIENTE').visible(false);
+			Form.fields('FALTA_INFORMACOES').visible(false);
+			Form.fields('INFO_SISBR').visible(false);
+			Form.fields('AUTORIZACAO').visible(false);					
+			Form.fields('APROVACAO').visible(false);	
+			Form.fields('PEDIDO_PA').visible(false);		
 			
 			if(auxRota == "Finalizar Atendimento" ){
 
 				Form.fields("PROX_ETAPA").value("Avaliar Atendimento").apply();
 				Form.fields("PROX_RESP").value(respNomes).apply();
 				Form.fields("AUX_USER_DEV").value("Aprovado").apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}
 			if(auxRota == "Devolver ao Solicitante"){
@@ -1440,13 +1452,14 @@ function setEventos() {
 				// Chamados cadastro aguardando terceiros
 				if(modelo == "99_cadastro"){
 
-					Form.fields('DOC_INVALIDO').visible(true).apply();
-					Form.fields('DOC_NAO_ENVIADO').visible(true).apply();
-					Form.fields('DOC_INSUFICIENTE').visible(true).apply();
-					Form.fields('FALTA_INFORMACOES').visible(true).apply();
-					Form.fields('INFO_SISBR').visible(true).apply();
-					Form.fields('AUTORIZACAO').visible(true).apply();					
-					Form.fields('APROVACAO').visible(true).apply();	
+					Form.fields('DOC_INVALIDO').visible(true);
+					Form.fields('DOC_NAO_ENVIADO').visible(true);
+					Form.fields('DOC_INSUFICIENTE').visible(true);
+					Form.fields('FALTA_INFORMACOES').visible(true);
+					Form.fields('INFO_SISBR').visible(true);
+					Form.fields('AUTORIZACAO').visible(true);					
+					Form.fields('APROVACAO').visible(true);	
+					Form.fields('PEDIDO_PA').visible(true);	
 
 				}				
 
@@ -1454,8 +1467,9 @@ function setEventos() {
 				Form.fields("AUX_USER_DEV").value("Devolvido").apply();
 				Form.fields("PROX_ETAPA").value("Registrar Solciitação de Atendimento").apply();
 				Form.fields("PROX_RESP").value(respNomes).apply();
-				Form.actions('aprovar').disabled(true).apply();
-				Form.actions('rejeitar').disabled(false).apply();
+
+				Form.actions('aprovar').disabled(true);
+				Form.actions('rejeitar').disabled(false);
 
 			}
 			if(auxRota == "Encaminhar Chamado"){
@@ -1470,14 +1484,14 @@ function setEventos() {
 				listaSub = Form.fields("SUBCATEGORIA_NOVO");
 
 				// Tornar visíveis campos para direcionamento
-				Form.fields('DESTINO_NOVO').visible(true).apply();
-				Form.fields('CATEGORIA_NOVO').visible(true).apply();
-				Form.fields('SUBCATEGORIA_NOVO').visible(true).apply();
-				Form.fields('SETOR_NOVO').visible(true).apply();
-				Form.fields('DESTINO_NOVO').setRequired('aprovar', true).apply();
-				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', true).apply();
-				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', true).apply();
-				Form.fields('SETOR_NOVO').setRequired('aprovar', true).apply();
+				Form.fields('DESTINO_NOVO').visible(true);
+				Form.fields('CATEGORIA_NOVO').visible(true);
+				Form.fields('SUBCATEGORIA_NOVO').visible(true);
+				Form.fields('SETOR_NOVO').visible(true);
+				Form.fields('DESTINO_NOVO').setRequired('aprovar', true);
+				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', true);
+				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', true);
+				Form.fields('SETOR_NOVO').setRequired('aprovar', true);
 
 				// Atualizar destino e unidade, limpar categoria e subcategoria
 				Form.fields("DESTINO_NOVO").subscribe("CHANGE", function(itemId, data, response) {
@@ -1773,22 +1787,25 @@ function setEventos() {
 
 				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
 				Form.fields("AUX_USER_DEV").value("Encaminhado").apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}
 			if(auxRota != "Encaminhar Chamado"){
 
-				Form.fields('DESTINO_NOVO').visible(false).apply();
-				Form.fields('CATEGORIA_NOVO').visible(false).apply();
-				Form.fields('SUBCATEGORIA_NOVO').visible(false).apply();
-				Form.fields('SETOR_NOVO').visible(false).apply();
-				Form.fields('DESTINO_NOVO').setRequired('aprovar', false).apply();
-				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', false).apply();
-				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', false).apply();
-				Form.fields('SETOR_NOVO').setRequired('aprovar', false).apply();
+				Form.fields('DESTINO_NOVO').visible(false);
+				Form.fields('CATEGORIA_NOVO').visible(false);
+				Form.fields('SUBCATEGORIA_NOVO').visible(false);
+				Form.fields('SETOR_NOVO').visible(false);
+				Form.fields('DESTINO_NOVO').setRequired('aprovar', false);
+				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', false);
+				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', false);
+				Form.fields('SETOR_NOVO').setRequired('aprovar', false);
 
-			}									
+			}	
+			
+			Form.apply();
 
 		});
 
@@ -1854,8 +1871,9 @@ function setEventos() {
 				Form.fields("PROX_ETAPA").value("Avaliar Atendimento").apply();
 				Form.fields("PROX_RESP").value(respNomes).apply();
 				Form.fields("AUX_USER_DEV").value("Rejeitado").apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}
 			if(auxRota == "Devolver ao Solicitante"){
@@ -1864,8 +1882,9 @@ function setEventos() {
 				Form.fields("AUX_USER_DEV").value("Devolvido").apply();
 				Form.fields("PROX_ETAPA").value("Registrar Solciitação de Atendimento").apply();
 				Form.fields("PROX_RESP").value(respNomes).apply();
-				Form.actions('aprovar').disabled(true).apply();
-				Form.actions('rejeitar').disabled(false).apply();
+
+				Form.actions('aprovar').disabled(true);
+				Form.actions('rejeitar').disabled(false);
 
 			}
 			if(auxRota == "Aprovar e Prosseguir"){
@@ -1874,8 +1893,9 @@ function setEventos() {
 				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
 				Form.fields("AUX_USER_DEV").value("Aprovado").apply();
 				Form.fields("PROX_RESP").value(atendNomes).apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}			
 			if(auxRota == "Submeter Alçada Nível 3"){
@@ -1883,8 +1903,9 @@ function setEventos() {
 				alcadaNivel3(modelo, auxRota);
 				Form.fields("PROX_ETAPA").value("Aprovar Solicitação Alçada Nível 3").apply();
 				Form.fields("AUX_USER_DEV").value("Submetido").apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}			
 			if(auxRota == "Aprovar e Encaminhar"){
@@ -1899,14 +1920,14 @@ function setEventos() {
 				listaSub   = Form.fields("SUBCATEGORIA_NOVO");
 
 				// Tornar visíveis campos para direcionamento
-				Form.fields('DESTINO_NOVO').visible(true).apply();
-				Form.fields('CATEGORIA_NOVO').visible(true).apply();
-				Form.fields('SUBCATEGORIA_NOVO').visible(true).apply();
-				Form.fields('SETOR_NOVO').visible(true).apply();
-				Form.fields('DESTINO_NOVO').setRequired('aprovar', true).apply();
-				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', true).apply();
-				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', true).apply();
-				Form.fields('SETOR_NOVO').setRequired('aprovar', true).apply();
+				Form.fields('DESTINO_NOVO').visible(true);
+				Form.fields('CATEGORIA_NOVO').visible(true);
+				Form.fields('SUBCATEGORIA_NOVO').visible(true);
+				Form.fields('SETOR_NOVO').visible(true);
+				Form.fields('DESTINO_NOVO').setRequired('aprovar', true);
+				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', true);
+				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', true);
+				Form.fields('SETOR_NOVO').setRequired('aprovar', true);
 
 				// Atualizar destino e unidade, limpar categoria e subcategoria
 				Form.fields("DESTINO_NOVO").subscribe("CHANGE", function(itemId, data, response) {
@@ -2201,22 +2222,25 @@ function setEventos() {
 
 				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
 				Form.fields("AUX_USER_DEV").value("Encaminhado").apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}
 			if(auxRota != "Aprovar e Encaminhar"){
 
-				Form.fields('DESTINO_NOVO').visible(false).apply();
-				Form.fields('CATEGORIA_NOVO').visible(false).apply();
-				Form.fields('SUBCATEGORIA_NOVO').visible(false).apply();
-				Form.fields('SETOR_NOVO').visible(false).apply();
-				Form.fields('DESTINO_NOVO').setRequired('aprovar', false).apply();
-				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', false).apply();
-				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', false).apply();
-				Form.fields('SETOR_NOVO').setRequired('aprovar', false).apply();
+				Form.fields('DESTINO_NOVO').visible(false);
+				Form.fields('CATEGORIA_NOVO').visible(false);
+				Form.fields('SUBCATEGORIA_NOVO').visible(false);
+				Form.fields('SETOR_NOVO').visible(false);
+				Form.fields('DESTINO_NOVO').setRequired('aprovar', false);
+				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', false);
+				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', false);
+				Form.fields('SETOR_NOVO').setRequired('aprovar', false);
 
-			}												
+			}	
+			
+			Form.apply();
 
 		});
 
@@ -2289,8 +2313,9 @@ function setEventos() {
 				Form.fields("PROX_ETAPA").value("Avaliar Atendimento").apply();
 				Form.fields("PROX_RESP").value(respNomes).apply();
 				Form.fields("AUX_USER_DEV").value("Rejeitado").apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}
 			if(auxRota == "Devolver ao Solicitante"){
@@ -2299,8 +2324,9 @@ function setEventos() {
 				Form.fields("AUX_USER_DEV").value("Devolvido").apply();
 				Form.fields("PROX_ETAPA").value("Registrar Solciitação de Atendimento").apply();
 				Form.fields("PROX_RESP").value(respNomes).apply();
-				Form.actions('aprovar').disabled(true).apply();
-				Form.actions('rejeitar').disabled(false).apply();
+
+				Form.actions('aprovar').disabled(true);
+				Form.actions('rejeitar').disabled(false);
 
 			}
 			if(auxRota == "Aprovar e Prosseguir"){
@@ -2309,8 +2335,9 @@ function setEventos() {
 				Form.fields("AUX_USER_DEV").value("Aprovado").apply();
 				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
 				Form.fields("PROX_RESP").value(atendNomes).apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}							
 			if(auxRota == "Aprovar e Encaminhar"){
@@ -2325,14 +2352,14 @@ function setEventos() {
 				listaSub = Form.fields("SUBCATEGORIA_NOVO");
 
 				// Tornar visíveis campos para direcionamento
-				Form.fields('DESTINO_NOVO').visible(true).apply();
-				Form.fields('CATEGORIA_NOVO').visible(true).apply();
-				Form.fields('SUBCATEGORIA_NOVO').visible(true).apply();
-				Form.fields('SETOR_NOVO').visible(true).apply();
-				Form.fields('DESTINO_NOVO').setRequired('aprovar', true).apply();
-				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', true).apply();
-				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', true).apply();
-				Form.fields('SETOR_NOVO').setRequired('aprovar', true).apply();
+				Form.fields('DESTINO_NOVO').visible(true);
+				Form.fields('CATEGORIA_NOVO').visible(true);
+				Form.fields('SUBCATEGORIA_NOVO').visible(true);
+				Form.fields('SETOR_NOVO').visible(true);
+				Form.fields('DESTINO_NOVO').setRequired('aprovar', true);
+				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', true);
+				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', true);
+				Form.fields('SETOR_NOVO').setRequired('aprovar', true);
 
 				// Atualizar destino e unidade, limpar categoria e subcategoria
 				Form.fields("DESTINO_NOVO").subscribe("CHANGE", function(itemId, data, response) {
@@ -2627,22 +2654,25 @@ function setEventos() {
 
 				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
 				Form.fields("AUX_USER_DEV").value("Encaminhado").apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}
 			if(auxRota != "Aprovar e Encaminhar"){
 
-				Form.fields('DESTINO_NOVO').visible(false).apply();
-				Form.fields('CATEGORIA_NOVO').visible(false).apply();
-				Form.fields('SUBCATEGORIA_NOVO').visible(false).apply();
-				Form.fields('SETOR_NOVO').visible(false).apply();
-				Form.fields('DESTINO_NOVO').setRequired('aprovar', false).apply();
-				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', false).apply();
-				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', false).apply();
-				Form.fields('SETOR_NOVO').setRequired('aprovar', false).apply();
+				Form.fields('DESTINO_NOVO').visible(false);
+				Form.fields('CATEGORIA_NOVO').visible(false);
+				Form.fields('SUBCATEGORIA_NOVO').visible(false);
+				Form.fields('SETOR_NOVO').visible(false);
+				Form.fields('DESTINO_NOVO').setRequired('aprovar', false);
+				Form.fields('CATEGORIA_NOVO').setRequired('aprovar', false);
+				Form.fields('SUBCATEGORIA_NOVO').setRequired('aprovar', false);
+				Form.fields('SETOR_NOVO').setRequired('aprovar', false);
 
 			}	
+
+			Form.apply();
 
 		});	
 		
@@ -2703,36 +2733,40 @@ function setEventos() {
 			
 			if(auxRota == "Arquivar Chamado" ){
 
-				Form.fields("AVALIACAO").visible(true).apply();
-				Form.fields("AV_ADICIONAL").visible(true).apply();
-				Form.fields('AVALIACAO').setRequired('aprovar', true).apply();
+				Form.fields("AVALIACAO").visible(true);
+				Form.fields("AV_ADICIONAL").visible(true);
+				Form.fields('AVALIACAO').setRequired('aprovar', true);
 
 				listaAvaliacao();
 
 				Form.fields("PROX_ETAPA").value("Arquivar Chamado").apply();
 				Form.fields("PROX_RESP").value(nomeUser).apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}		
 			
 			if(auxRota == "Reabrir Chamado" ){
 
-				Form.fields("AVALIACAO").visible(false).apply();
-				Form.fields("AV_ADICIONAL").visible(false).apply();
-				Form.fields('AVALIACAO').setRequired('aprovar', false).apply();				
+			
 				Form.fields("AUX_NOME_SER").value("").apply();
 				Form.fields("AUX_USER_DEV").value("Devolvido").apply();
 				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
 				Form.fields("PROX_RESP").value(atendNomes).apply();
-				Form.actions('aprovar').disabled(true).apply();
-				Form.actions('rejeitar').disabled(false).apply();
 
-			}				
+				Form.fields("AVALIACAO").visible(false);
+				Form.fields('AVALIACAO').setRequired('aprovar', false);	
+				Form.fields("AV_ADICIONAL").visible(false);
+				Form.actions('aprovar').disabled(true);
+				Form.actions('rejeitar').disabled(false);
+
+			}	
+			
+			Form.apply();
 
 		});	
 
-		// Atualizar nome e hora na grid
 		Form.grids("G_ANEXOS").fields("ANEXOS_SUP_INT").subscribe("CHANGE", function (itemId, data, response) {
 
 			auxData = timeHasCome();
@@ -2744,7 +2778,6 @@ function setEventos() {
 
 		});			
 		
-		// Console linha adicionada
 		Form.grids("G_ANEXOS").subscribe("GRID_SUBMIT", function (itemId, data, response) {
 					
 			console.log(response);
@@ -2825,7 +2858,7 @@ function setForm(){
 
 			if(modelo == "99_cadastro" && auxCat == "Inclusão/Exclusão de Bens"){
 
-				Form.fields('BEM_AQUISICAO').visible(true).apply();
+				Form.fields('BEM_AQUISICAO').visible(true);
 
 			}
 				
@@ -2834,8 +2867,8 @@ function setForm(){
 		// Chamado novo
 		if(auxCiclo == 1){
 
-			Form.actions('aprovar').disabled(true).apply();
-			Form.actions('cancel').disabled(true).apply();
+			Form.actions('aprovar').disabled(true);
+			Form.actions('cancel').disabled(true);
 
 		}
 		
@@ -2843,19 +2876,19 @@ function setForm(){
 		else if(auxCiclo > 1){
 
 			// Bloquear informações do chamado
-			Form.fields("DESTINO").disabled(true).apply();
-			Form.fields("SETOR").disabled(true).apply();
-			Form.fields("CATEGORIA").disabled(true).apply();
-			Form.fields("SUBCATEGORIA").disabled(true).apply();
-			Form.fields("ASSUNTO").disabled(true).apply();
-			Form.fields("DESCRICAO").disabled(true).apply();
+			Form.fields("DESTINO").disabled(true);
+			Form.fields("SETOR").disabled(true);
+			Form.fields("CATEGORIA").disabled(true);
+			Form.fields("SUBCATEGORIA").disabled(true);
+			Form.fields("ASSUNTO").disabled(true);
+			Form.fields("DESCRICAO").disabled(true);
 
 			// Bloquear opções de privacidade
-			Form.fields("ADD_RESPONSAVEL1").disabled(true).apply();
-			Form.fields("ADD_RESPONSAVEL2").disabled(true).apply();
-			Form.fields("ADD_ATENDENTE1").disabled(true).apply();
-			Form.fields("ADD_ATENDENTE2").disabled(true).apply();
-			Form.fields("PRIVADO").disabled(true).apply();
+			Form.fields("ADD_RESPONSAVEL1").disabled(true);
+			Form.fields("ADD_RESPONSAVEL2").disabled(true);
+			Form.fields("ADD_ATENDENTE1").disabled(true);
+			Form.fields("ADD_ATENDENTE2").disabled(true);
+			Form.fields("PRIVADO").disabled(true);
 
 			if(modelo == "99_adquirencia" || modelo == "99_cadastro"       || modelo == "99_cambio"         || modelo == "99_cartoes"     ||
 			   modelo == "99_cob_adm"     || modelo == "99_cobranca"       || modelo == "99_compensascao"   || modelo == "99_cons_consig" || 
@@ -2863,41 +2896,44 @@ function setForm(){
 			   modelo == "99_seguros"     || modelo == "99_conectividade"  || modelo == "99_agenciavirtual" ||(modelo == "99_tecnologia" && auxCat == "Suporte Canais de Atendimento")){
  
 				// Campos referentes aos dados do cliente disponíveis para edição em caso de chamado devolvido a pedido do setor de Cadastro da UAD. Atualizado em 31/08/2022
-				Form.fields("CPF_CNPJ").visible(true).apply();
-				Form.fields("NOME_RAZAO").visible(true).apply();
-				Form.fields("PESSOA_CONTA").visible(true).apply();
+				Form.fields("CPF_CNPJ").visible(true);
+				Form.fields("NOME_RAZAO").visible(true);
+				Form.fields("PESSOA_CONTA").visible(true);
 	
 				if(modelo == "99_cadastro" && auxCat == "Inclusão/Exclusão de Bens"){
-					Form.fields("BEM_AQUISICAO").disabled(true).apply();
+					
+					Form.fields("BEM_AQUISICAO").disabled(true);
 	
 				}
 
 				if(modelo == "99_cadastro"){
 
-					Form.fields('DOC_INVALIDO').visible(true).apply();
-					Form.fields('DOC_NAO_ENVIADO').visible(true).apply();
-					Form.fields('DOC_INSUFICIENTE').visible(true).apply();
-					Form.fields('FALTA_INFORMACOES').visible(true).apply();
-					Form.fields('INFO_SISBR').visible(true).apply();
-					Form.fields('AUTORIZACAO').visible(true).apply();					
-					Form.fields('APROVACAO').visible(true).apply();		
+					Form.fields('DOC_INVALIDO').visible(true);
+					Form.fields('DOC_NAO_ENVIADO').visible(true);
+					Form.fields('DOC_INSUFICIENTE').visible(true);
+					Form.fields('FALTA_INFORMACOES').visible(true);
+					Form.fields('INFO_SISBR').visible(true);
+					Form.fields('AUTORIZACAO').visible(true);					
+					Form.fields('APROVACAO').visible(true);		
+					Form.fields('PEDIDO_PA').visible(true);		
 					
-					Form.fields('DOC_INVALIDO').disabled(true).apply();
-					Form.fields('DOC_NAO_ENVIADO').disabled(true).apply();
-					Form.fields('DOC_INSUFICIENTE').disabled(true).apply();
-					Form.fields('FALTA_INFORMACOES').disabled(true).apply();
-					Form.fields('INFO_SISBR').disabled(true).apply();
-					Form.fields('AUTORIZACAO').disabled(true).apply();					
-					Form.fields('APROVACAO').disabled(true).apply();						
+					Form.fields('DOC_INVALIDO').disabled(true);
+					Form.fields('DOC_NAO_ENVIADO').disabled(true);
+					Form.fields('DOC_INSUFICIENTE').disabled(true);
+					Form.fields('FALTA_INFORMACOES').disabled(true);
+					Form.fields('INFO_SISBR').disabled(true);
+					Form.fields('AUTORIZACAO').disabled(true);					
+					Form.fields('APROVACAO').disabled(true);						
+					Form.fields('PEDIDO_PA').disabled(true);						
 
 				}				
 				 
 		 	}			
 
-			Form.fields('HISTORICO').setRequired('aprovar', true).apply();
+			Form.fields('HISTORICO').setRequired('aprovar', true);
 
-			Form.actions('aprovar').disabled(true).apply();
-			Form.actions('rejeitar').disabled(true).apply();
+			Form.actions('aprovar').disabled(true);
+			Form.actions('rejeitar').disabled(true);
 
 		}
 			
@@ -2936,13 +2972,13 @@ function setForm(){
 		   modelo == "99_contas_pagar"|| modelo == "99_correspondente" || modelo == "99_credito"      || modelo == "99_rural"       || 
 		   modelo == "99_seguros"     || modelo == "99_agenciavirtual" ||(modelo == "99_tecnologia" && auxCat == "Suporte Canais de Atendimento")){
 
-			Form.fields('CPF_CNPJ').visible(true).apply();
-			Form.fields('NOME_RAZAO').visible(true).apply();
-			Form.fields('PESSOA_CONTA').visible(true).apply();
+			Form.fields('CPF_CNPJ').visible(true);
+			Form.fields('NOME_RAZAO').visible(true);
+			Form.fields('PESSOA_CONTA').visible(true);
 		
-			Form.fields('CPF_CNPJ').readOnly(true).apply();
-			Form.fields('NOME_RAZAO').readOnly(true).apply();
-			Form.fields('PESSOA_CONTA').readOnly(true).apply();
+			Form.fields('CPF_CNPJ').readOnly(true);
+			Form.fields('NOME_RAZAO').readOnly(true);
+			Form.fields('PESSOA_CONTA').readOnly(true);
 			 
 	 	}		
 
@@ -2969,12 +3005,12 @@ function setForm(){
 		//Form.groups("FORM_AUX").visible(true).apply();
 
 		// Ocutlar checkbox cadastro
-		Form.fields('DOC_INVALIDO').visible(false).apply();
-		Form.fields('DOC_NAO_ENVIADO').visible(false).apply();
-		Form.fields('DOC_INSUFICIENTE').visible(false).apply();
-		Form.fields('FALTA_INFORMACOES').visible(false).apply();
-		Form.fields('AUTORIZACAO').visible(false).apply();					
-		Form.fields('APROVACAO').visible(false).apply();			
+		Form.fields('DOC_INVALIDO').visible(false);
+		Form.fields('DOC_NAO_ENVIADO').visible(false);
+		Form.fields('DOC_INSUFICIENTE').visible(false);
+		Form.fields('FALTA_INFORMACOES').visible(false);
+		Form.fields('AUTORIZACAO').visible(false);					
+		Form.fields('APROVACAO').visible(false);			
 		
 		// Carregar variáveis iniciais
 		auxDestino = Form.fields("DESTINO").value();
@@ -3005,10 +3041,10 @@ function setForm(){
 
 			console.log("Chamado Encaminhado");
 
-			Form.fields('DESTINO_NOVO').visible(true).apply();
-			Form.fields('SETOR_NOVO').visible(true).apply();
-			Form.fields('CATEGORIA_NOVO').visible(true).apply();
-			Form.fields('SUBCATEGORIA_NOVO').visible(true).apply();			
+			Form.fields('DESTINO_NOVO').visible(true);
+			Form.fields('SETOR_NOVO').visible(true);
+			Form.fields('CATEGORIA_NOVO').visible(true);
+			Form.fields('SUBCATEGORIA_NOVO').visible(true);			
 
 		}
 
@@ -3017,23 +3053,42 @@ function setForm(){
 
 			console.log("Chamado Avaliado");
 
-			Form.fields("AVALIACAO").visible(true).apply();
-			Form.fields("AV_ADICIONAL").visible(true).apply();
+			Form.fields("AVALIACAO").visible(true);
+			Form.fields("AV_ADICIONAL").visible(true);
 
 		}
 
 		// Chamados cadastro aguardando terceiros
 		if(codigoEtapa == AGUARDANDO_TERCEIROS && grupoAtend == "99_cadastro"){
 
-			Form.fields('DOC_INVALIDO').visible(true).apply();
-			Form.fields('DOC_NAO_ENVIADO').visible(true).apply();
-			Form.fields('DOC_INSUFICIENTE').visible(true).apply();
-			Form.fields('FALTA_INFORMACOES').visible(true).apply();
-			Form.fields('INFO_SISBR').visible(true).apply();
-			Form.fields('AUTORIZACAO').visible(true).apply();					
-			Form.fields('APROVACAO').visible(true).apply();	
+			Form.fields('DOC_INVALIDO').visible(true);
+			Form.fields('DOC_NAO_ENVIADO').visible(true);
+			Form.fields('DOC_INSUFICIENTE').visible(true);
+			Form.fields('FALTA_INFORMACOES').visible(true);
+			Form.fields('INFO_SISBR').visible(true);
+			Form.fields('AUTORIZACAO').visible(true);					
+			Form.fields('APROVACAO').visible(true);	
+			Form.fields('PEDIDO_PA').visible(true);	
 
 		}
+
+		// Chamados cadastro devolvidos
+		if(codigoEtapa == REALIZAR_ATENDIMENTO && grupoAtend == "99_cadastro"){
+
+			if(auxRota == "Devolver ao Solicitante" || auxRota == "Aguardando Terceiros"){
+
+				Form.fields('DOC_INVALIDO').visible(true);
+				Form.fields('DOC_NAO_ENVIADO').visible(true);
+				Form.fields('DOC_INSUFICIENTE').visible(true);
+				Form.fields('FALTA_INFORMACOES').visible(true);
+				Form.fields('INFO_SISBR').visible(true);
+				Form.fields('AUTORIZACAO').visible(true);					
+				Form.fields('APROVACAO').visible(true);	
+				Form.fields('PEDIDO_PA').visible(true);	
+
+			}
+
+		}		
 
 		// Mostrar campo pessoa
 		if(modelo == "99_adquirencia" || modelo == "99_cadastro"       || modelo == "99_cambio"       || modelo == "99_cartoes"     ||
@@ -3041,13 +3096,13 @@ function setForm(){
 		   modelo == "99_contas_pagar"|| modelo == "99_correspondente" || modelo == "99_credito"      || modelo == "99_rural"       || 
 		   modelo == "99_seguros"     || modelo == "99_agenciavirtual" ||(modelo == "99_tecnologia" && auxCat == "Suporte Canais de Atendimento")){
 
-			Form.fields('CPF_CNPJ').visible(true).apply();
-			Form.fields('NOME_RAZAO').visible(true).apply();
-			Form.fields('PESSOA_CONTA').visible(true).apply();
+			Form.fields('CPF_CNPJ').visible(true);
+			Form.fields('NOME_RAZAO').visible(true);
+			Form.fields('PESSOA_CONTA').visible(true);
 		
-			Form.fields('CPF_CNPJ').readOnly(true).apply();
-			Form.fields('NOME_RAZAO').readOnly(true).apply();
-			Form.fields('PESSOA_CONTA').readOnly(true).apply();
+			Form.fields('CPF_CNPJ').readOnly(true);
+			Form.fields('NOME_RAZAO').readOnly(true);
+			Form.fields('PESSOA_CONTA').readOnly(true);
 			 
 	 	}			
 
@@ -3061,8 +3116,8 @@ function setForm(){
 			listaRotasPA();
 		}		
 
-		Form.actions('aprovar').disabled(true).apply();
-		Form.actions('rejeitar').disabled(true).apply();
+		Form.actions('aprovar').disabled(true);
+		Form.actions('rejeitar').disabled(true);
 
 	}		
 
@@ -3092,13 +3147,13 @@ function setForm(){
 		   modelo == "99_contas_pagar"|| modelo == "99_correspondente" || modelo == "99_credito"      || modelo == "99_rural"       || 
 		   modelo == "99_seguros"     || modelo == "99_agenciavirtual" ||(modelo == "99_tecnologia" && auxCat == "Suporte Canais de Atendimento")){
 
-			Form.fields('CPF_CNPJ').visible(true).apply();
-			Form.fields('NOME_RAZAO').visible(true).apply();
-			Form.fields('PESSOA_CONTA').visible(true).apply();
+			Form.fields('CPF_CNPJ').visible(true);
+			Form.fields('NOME_RAZAO').visible(true);
+			Form.fields('PESSOA_CONTA').visible(true);
 		
-			Form.fields('CPF_CNPJ').readOnly(true).apply();
-			Form.fields('NOME_RAZAO').readOnly(true).apply();
-			Form.fields('PESSOA_CONTA').readOnly(true).apply();
+			Form.fields('CPF_CNPJ').readOnly(true);
+			Form.fields('NOME_RAZAO').readOnly(true);
+			Form.fields('PESSOA_CONTA').readOnly(true);
 			 
 	 	}		
 
@@ -3519,17 +3574,17 @@ function atualizarGrupoOrigem(origemPrincipal, origemGrupo, origemUnidade){
 	}
 	else{
 
-		if(origemPrincipal == "01 - Papanduva")			   { Form.fields("AUX_GRUPO_ORIGEM").value("01_papanduva").apply(); 	   }
-		if(origemPrincipal == "02 - Mafra")				   { Form.fields("AUX_GRUPO_ORIGEM").value("02_mafra").apply(); 		   }
+		if(origemPrincipal == "01 - Papanduva")			   { Form.fields("AUX_GRUPO_ORIGEM").value("01_papanduva").apply(); 	  }
+		if(origemPrincipal == "02 - Mafra")				   { Form.fields("AUX_GRUPO_ORIGEM").value("02_mafra").apply(); 		  }
 		if(origemPrincipal == "03 - Santa Terezinha")	   { Form.fields("AUX_GRUPO_ORIGEM").value("03_santa_terezinha").apply(); }
-		if(origemPrincipal == "04 - Rio da Anta")		   { Form.fields("AUX_GRUPO_ORIGEM").value("04_rio_anta").apply(); 	   }
+		if(origemPrincipal == "04 - Rio da Anta")		   { Form.fields("AUX_GRUPO_ORIGEM").value("04_rio_anta").apply(); 	      }
 		if(origemPrincipal == "05 - Santa Cecília")		   { Form.fields("AUX_GRUPO_ORIGEM").value("05_santa_cecilia").apply();   }
 		if(origemPrincipal == "06 - Major Vieira")		   { Form.fields("AUX_GRUPO_ORIGEM").value("06_major_vieira").apply();    }
-		if(origemPrincipal == "07 - Ijuí")				   { Form.fields("AUX_GRUPO_ORIGEM").value("07_ijui").apply(); 		   }
+		if(origemPrincipal == "07 - Ijuí")				   { Form.fields("AUX_GRUPO_ORIGEM").value("07_ijui").apply(); 		      }
 		if(origemPrincipal == "08 - Santo Ângelo")		   { Form.fields("AUX_GRUPO_ORIGEM").value("08_santo_angelo").apply();    }
 		if(origemPrincipal == "09 - Vitor Meireles")	   { Form.fields("AUX_GRUPO_ORIGEM").value("09_vitor_meireles").apply();  }
 		if(origemPrincipal == "10 - Monte Castelo")		   { Form.fields("AUX_GRUPO_ORIGEM").value("10_monte_castelo").apply();   }
-		if(origemPrincipal == "11 - Craveiro")			   { Form.fields("AUX_GRUPO_ORIGEM").value("11_craveiro").apply(); 	   }
+		if(origemPrincipal == "11 - Craveiro")			   { Form.fields("AUX_GRUPO_ORIGEM").value("11_craveiro").apply(); 	      }
 		if(origemPrincipal == "12 - Witmarsum")			   { Form.fields("AUX_GRUPO_ORIGEM").value("12_witmarsum").apply();       }
 		if(origemPrincipal == "13 - Navegantes")		   { Form.fields("AUX_GRUPO_ORIGEM").value("13_navegantes").apply();      }
 		if(origemPrincipal == "14 - São João do Itaperiú") { Form.fields("AUX_GRUPO_ORIGEM").value("14_sao_joao").apply();        }

@@ -126,6 +126,35 @@ function setEventos() {
 
 			}
 
+		});		
+		
+		Form.grids("GRD_SOCIOS").fields("CPF_CONJUGE_SOCIO").subscribe("SET_FIELD_VALUE", function (itemId, data, response) {
+			
+			Form.grids("GRD_SOCIOS").errors("").apply();
+
+			var socio = Form.grids("GRD_SOCIOS").fields("CPF_SOCIOS").value();
+			var conj = Form.grids("GRD_SOCIOS").fields("CPF_CONJUGE_SOCIO").value();
+
+			console.log("socio: " + socio);
+			console.log("conjuge: " + conj);
+
+			if((socio && conj != "") && (socio && conj != undefined)){
+
+				if(socio == conj){
+
+					console.log("CPFs iguais");
+					Form.grids("GRD_SOCIOS").errors("CPFs iguais.").apply();
+									
+				}
+				else{
+	
+					Form.grids("GRD_SOCIOS").errors("").apply();
+					console.log("validação de cpfs ok");
+	
+				}
+
+			}
+
 		});			
 		
 	}
@@ -143,6 +172,7 @@ function setEventos() {
 				Form.fields('DOC_INSUFICIENTE').visible(false).apply();
 				Form.fields('FALTA_INFORMACOES').visible(false).apply();
 				Form.fields('INFO_SISBR').visible(false).apply();
+				Form.fields('PEDIDO_PA').visible(false).apply();
 
 				// Não atualizar a variável quando o cadastro for de outra cooperativa para não perder a rota
 				if(codigoEtapa == REALIZAR_CADASTRO_SISBR || codigoEtapa == COMPLEMENTAR_CADASTRO_SISBR) Form.fields("AUX_GRUPO_CRL").value("Não").apply();
@@ -158,7 +188,8 @@ function setEventos() {
 				 Form.fields('DOC_NAO_ENVIADO').visible(false).apply();
 				 Form.fields('DOC_INSUFICIENTE').visible(false).apply();
 				 Form.fields('FALTA_INFORMACOES').visible(false).apply();
-				 Form.fields('INFO_SISBR').visible(false).apply();			
+				 Form.fields('INFO_SISBR').visible(false).apply();		
+				 Form.fields('PEDIDO_PA').visible(false).apply();	
  
 				 Form.fields("AUX_GRUPO_CRL").value("Sim").apply();
  
@@ -174,6 +205,7 @@ function setEventos() {
 				 Form.fields('DOC_INSUFICIENTE').visible(true).apply();
 				 Form.fields('FALTA_INFORMACOES').visible(true).apply();
 				 Form.fields('INFO_SISBR').visible(true).apply();
+				 Form.fields('PEDIDO_PA').visible(true).apply();
  
 				 Form.fields("AUX_GRUPO_CRL").value("").apply();
  
@@ -196,35 +228,39 @@ function setForm() {
 
 	if(codigoEtapa == SOLICITAR_CADASTRO){
 
+		//Form.groups("AUX").visible(true);
+
 		var ciclo = Form.fields("CICLO").value();
 
 		if(ciclo == 1){
 
-			Form.groups("ACOES").visible(false).apply();
+			Form.groups("ACOES").visible(false);
 
 		}
 
 		if(ciclo > 1){
 
 			// Bloquear campos principais
-			Form.fields("TIPO_CADASTRO").disabled(true).apply();
-			Form.fields("OBJETIVO").disabled(true).apply();
-			Form.fields('DECLARACAO_PA').checked(false).apply();
+			Form.fields("TIPO_CADASTRO").disabled(true);
+			Form.fields("OBJETIVO").disabled(true);
+			Form.fields('DECLARACAO_PA').checked(false);
 
 			// Mostrar checkbox motivo chamado devolvido
-			Form.fields('DOC_INVALIDO').visible(true).apply();
-			Form.fields('DOC_NAO_ENVIADO').visible(true).apply();
-			Form.fields('DOC_INSUFICIENTE').visible(true).apply();
-			Form.fields('FALTA_INFORMACOES').visible(true).apply();	
-			Form.fields('INFO_SISBR').visible(true).apply();	
-			Form.fields('DOC_INVALIDO').readOnly(true).apply();
-			Form.fields('DOC_NAO_ENVIADO').readOnly(true).apply();
-			Form.fields('DOC_INSUFICIENTE').readOnly(true).apply();
-			Form.fields('FALTA_INFORMACOES').readOnly(true).apply();		
-			Form.fields('INFO_SISBR').readOnly(true).apply();		
+			Form.fields('DOC_INVALIDO').visible(true);
+			Form.fields('DOC_NAO_ENVIADO').visible(true);
+			Form.fields('DOC_INSUFICIENTE').visible(true);
+			Form.fields('FALTA_INFORMACOES').visible(true);	
+			Form.fields('INFO_SISBR').visible(true);	
+			Form.fields('PEDIDO_PA').visible(true);	
+			Form.fields('DOC_INVALIDO').readOnly(true);
+			Form.fields('DOC_NAO_ENVIADO').readOnly(true);
+			Form.fields('DOC_INSUFICIENTE').readOnly(true);
+			Form.fields('FALTA_INFORMACOES').readOnly(true);		
+			Form.fields('INFO_SISBR').readOnly(true);		
+			Form.fields('PEDIDO_PA').readOnly(true);		
 			
 			// Comentário obrigatório caso o chamado tenha sido devolvido
-			Form.fields('OBSERVACOES').setRequired('aprovar', true).apply();				
+			Form.fields('OBSERVACOES').setRequired('aprovar', true);				
 
 		}		
 
@@ -232,7 +268,7 @@ function setForm() {
 
 	if(codigoEtapa == ASSUMIR_ATIVIDADE){
 
-		Form.groups("IDENTIFICACAO").visible(false).apply();
+		Form.groups("IDENTIFICACAO").visible(false);
 
 	}
 
@@ -242,28 +278,31 @@ function setForm() {
 
 		if(rota == "Devolver"){			
 
-			Form.fields('DOC_INVALIDO').visible(true).apply();
-			Form.fields('DOC_NAO_ENVIADO').visible(true).apply();
-			Form.fields('DOC_INSUFICIENTE').visible(true).apply();
-			Form.fields('FALTA_INFORMACOES').visible(true).apply();
+			Form.fields('DOC_INVALIDO').visible(true);
+			Form.fields('DOC_NAO_ENVIADO').visible(true);
+			Form.fields('DOC_INSUFICIENTE').visible(true);
+			Form.fields('FALTA_INFORMACOES').visible(true);
+			Form.fields('INFO_SISBR').visible(true);
+			Form.fields('PEDIDO_PA').visible(true);			
 		}			
 
 		Form.grids("GRD_SOCIOS").updatePropsRows(null, {visibleRow: true,visibleEdit:true,visibleDelete: false}).apply();
-		Form.actions('aprovar').disabled(true).apply();
-		Form.actions('rejeitar').disabled(true).apply();
+		Form.actions('aprovar').disabled(true);
+		Form.actions('rejeitar').disabled(true);
 
 	}
 
 	if(codigoEtapa == FINALIZAR_CADASTRO || codigoEtapa == REGULARIZAR_CADASTRO){
 
-		Form.groups("ACOES").visible(false).apply();
+		Form.groups("ACOES").visible(false);
 
 	}
 
-	if(codigoEtapa == COMPLEMENTAR_CADASTRO_SISBR || codigoEtapa == COMPLEM_SISBR_OUTRA_COOP){
+	if(codigoEtapa == CADASTRO_SISBR_OUTRA_COOP || codigoEtapa == COMPLEMENTAR_CADASTRO_SISBR || codigoEtapa == COMPLEM_SISBR_OUTRA_COOP){
 
-		Form.actions('aprovar').disabled(true).apply();
-		Form.actions('rejeitar').disabled(true).apply();
+		Form.fields("DEFINIR_ROTA").value("").apply();
+		Form.actions('aprovar').disabled(true);
+		Form.actions('rejeitar').disabled(true);
 
 	}
 
@@ -290,7 +329,7 @@ function setValidators() {
 			// Validar anexos obrigatórios solicitar cadastro
 			if(codigoEtapa == SOLICITAR_CADASTRO) {
 
-				var sqlcnpj     = Form.fields("SQL_CNPJ").value();
+				var sqlcnpj = Form.fields("SQL_CNPJ").value();
 
 				// Validar anexo documentos contábeis
 				if(faturamento == "Sim" || balanco == "Sim" || balancete == "Sim"){

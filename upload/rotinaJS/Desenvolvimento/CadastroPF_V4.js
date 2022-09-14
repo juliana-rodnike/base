@@ -261,6 +261,7 @@ function setEventos() {
 				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").visible(false);
 				Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false);
 				Form.grids("G_CAD_ADD").fields("CAPITAL_AD").visible(false);
+				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(false);
 
 				// Ajuste de linhas
 				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');
@@ -768,6 +769,31 @@ function setEventos() {
 			Form.apply();
 
 		});		
+
+		// Add titular
+		Form.grids("G_CAD_ADD").fields("SERA_TITULAR").subscribe("CHANGE", function(itemId, data, response) {
+
+			if(response == "Sim"){
+
+				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").checked(true).apply();
+				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").value("Sim").apply();
+
+			}
+			else{
+
+				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").value("").apply();
+				Form.grids("G_CAD_ADD").fields("ADD_TITULAR").checked(false).apply();
+
+			}
+
+		});			
+
+		// Add titular
+		Form.grids("G_CAD_ADD").fields("ADD_TITULAR").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
+
+			console.log("add titular: " + response);
+
+		});			
 
 		// Estado civil cadastro adicional
 		Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
@@ -1305,6 +1331,8 @@ function setForm() {
 			// Campos complementares
 			Form.grids("G_CAD_ADD").fields("SERA_TITULAR").visible(false);
 			Form.grids("G_CAD_ADD").fields("DESC_RELAC").visible(false);
+			Form.grids("G_CAD_ADD").fields("ADD_TITULAR").visible(false);
+			Form.grids("G_CAD_ADD").fields("CAPITAL_AD").visible(false);
 
 			// Ajuste de linhas
 			Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');
