@@ -3914,9 +3914,11 @@ function subcategoriasTecnologia(categoria, lista){
 			{ name: 'Correspondente Bancário', value: 'Correspondente Bancário'},
 			{ name: 'Folha de Pagamento',      value: 'Folha de Pagamento'     },
 			{ name: 'Custódia de Cheques',     value: 'Custódia de Cheques'    },
-			{ name: 'PIX',                     value: 'PIX'                    },
+			{ name: 'PIX - Transações',        value: 'PIX - Transações'       },
+			{ name: 'PIX - API',               value: 'PIX - API'              },
 			{ name: 'Sicoob Pay',              value: 'Sicoob Pay'             },
 			{ name: 'ATMs - Funções',          value: 'ATMs - Funções'         },
+			{ name: 'Depósito de Cheques',     value: 'Depósito de Cheques'    },
 		]).apply();
 
 	}
@@ -3993,8 +3995,9 @@ function subcategoriasCobranca(categoria, lista){
 	if(categoria == "Homologação - Abertura de Processo"){
 
 		lista.addOptions([	
-			{ name: 'Emissão de Títulos',                                   value: 'Emissão de Títulos'                                  },
-			{ name: 'Folha de Pagamento / Contas a Pagar / Transferências', value: 'Folha de Pagamento / Contas a Pagar / Transferências'},
+			{ name: 'Emissão de Títulos',                                   value: 'Emissão de Títulos'                                   },
+			{ name: 'Folha de Pagamento / Contas a Pagar / Transferências', value: 'Folha de Pagamento / Contas a Pagar / Transferências' },
+			{ name: 'API Cobrança Bancária',                                value: 'API Cobrança Bancária'                                },
 		]).apply();
 
 	}	

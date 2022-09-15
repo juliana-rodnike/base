@@ -102,19 +102,21 @@ function setEventos() {
 		Form.fields("PROCURADOR_REP").subscribe("SET_FIELD_VALUE", function (itemId, data, response) {
 			
 			if(response == "Sim"){
-				Form.fields('CPF_PROC_REP').visible(true).apply();
-				Form.fields('NOME_PROC_REP').visible(true).apply();
-				Form.fields('SCORE_PROCURADOR').visible(true).apply();
-				Form.fields('RESTRICOES_PROC_REP').visible(true).apply();
-				Form.fields('CAPITAL_PROC').visible(true).apply();
+				Form.fields('CPF_PROC_REP').visible(true);
+				Form.fields('NOME_PROC_REP').visible(true);
+				Form.fields('SCORE_PROCURADOR').visible(true);
+				Form.fields('RESTRICOES_PROC_REP').visible(true);
+				Form.fields('CAPITAL_PROC').visible(true);
 			}
 			else{
-				Form.fields('CPF_PROC_REP').visible(false).apply();
-				Form.fields('NOME_PROC_REP').visible(false).apply();
-				Form.fields('SCORE_PROCURADOR').visible(false).apply();
-				Form.fields('RESTRICOES_PROC_REP').visible(false).apply();
-				Form.fields('CAPITAL_PROC').visible(false).apply();
+				Form.fields('CPF_PROC_REP').visible(false);
+				Form.fields('NOME_PROC_REP').visible(false);
+				Form.fields('SCORE_PROCURADOR').visible(false);
+				Form.fields('RESTRICOES_PROC_REP').visible(false);
+				Form.fields('CAPITAL_PROC').visible(false);
 			}
+
+			Form.apply();
 
 		});	
 
@@ -122,13 +124,15 @@ function setEventos() {
 		Form.fields("ESTADO_CIVIL").subscribe("SET_FIELD_VALUE", function (itemId, data, response) {
 			
 			if(response == "Casado" || response == "União Estável"){
-				Form.fields('CPF_CONJUGE').visible(true).apply();
-				Form.fields('NOME_CONJUGE').visible(true).apply();
+				Form.fields('CPF_CONJUGE').visible(true);
+				Form.fields('NOME_CONJUGE').visible(true);
 			}
 			else{
-				Form.fields('CPF_CONJUGE').visible(false).apply();
-				Form.fields('NOME_CONJUGE').visible(false).apply();
+				Form.fields('CPF_CONJUGE').visible(false);
+				Form.fields('NOME_CONJUGE').visible(false);
 			}
+
+			Form.apply();
 
 		});			
 
@@ -174,52 +178,54 @@ function setEventos() {
 			if(response == "Pessoa Física"){
 
 				// Objetivo da conta
-				Form.fields('OBJETIVO').visible(true).apply();
-				Form.fields("OBJETIVO").setRequired('aprovar', true).apply();
+				Form.fields('OBJETIVO').visible(true);
+				Form.fields("OBJETIVO").setRequired('aprovar', true);
 
 				// Mostrar campos PJ
-				Form.groups('GR_CNPJ').visible(false).apply();
-				Form.groups('GR_OUTROS_TITU_CNPJ').visible(false).apply();
+				Form.groups('GR_CNPJ').visible(false);
+				Form.groups('GR_OUTROS_TITU_CNPJ').visible(false);
 
 				// Razão social e CNPJ bloqueado e obrigatório
-				Form.fields("RAZAO_SOCIAL").disabled(false).apply();
-				Form.fields("CNPJ").disabled(false).apply();
-				Form.fields("RAZAO_SOCIAL").setRequired('aprovar', false).apply();
-				Form.fields("CNPJ").setRequired('aprovar', false).apply();
+				Form.fields("RAZAO_SOCIAL").disabled(false);
+				Form.fields("CNPJ").disabled(false);
+				Form.fields("RAZAO_SOCIAL").setRequired('aprovar', false);
+				Form.fields("CNPJ").setRequired('aprovar', false);
 
 				// Ocultar campos PJ
-				Form.fields('JUST_RESTRICOES_CNPJ').visible(false).apply();
-				Form.fields('CIDADE_CNOJ').visible(false).apply();				
+				Form.fields('JUST_RESTRICOES_CNPJ').visible(false);
+				Form.fields('CIDADE_CNOJ').visible(false);				
 
 			}
 			else{
 
 				// Ocultar campos PF
-				Form.fields('OBJETIVO').visible(false).apply();
-				Form.fields("OBJETIVO").setRequired('aprovar', false).apply();
-				Form.fields("CPF").setRequired('aprovar', false).apply();
-				Form.fields("NOME").setRequired('aprovar', false).apply();
-				Form.groups('DADOS_PROPNETE_TITULAR').visible(false).apply();
-				Form.groups("CONTA").visible(false).apply();
-				Form.fields("CONTA").setRequired('aprovar', false).apply();
-				Form.fields("ABERTURA").setRequired('aprovar', false).apply();
-				Form.fields("CATEGORIA").setRequired('aprovar', false).apply();
+				Form.fields('OBJETIVO').visible(false);
+				Form.fields("OBJETIVO").setRequired('aprovar', false);
+				Form.fields("CPF").setRequired('aprovar', false);
+				Form.fields("NOME").setRequired('aprovar', false);
+				Form.groups('DADOS_PROPNETE_TITULAR').visible(false);
+				Form.groups("CONTA").visible(false);
+				Form.fields("CONTA").setRequired('aprovar', false);
+				Form.fields("ABERTURA").setRequired('aprovar', false);
+				Form.fields("CATEGORIA").setRequired('aprovar', false);
 
 				// Mostrar campos PJ
-				Form.groups('GR_CNPJ').visible(true).apply();
-				Form.groups('GR_OUTROS_TITU_CNPJ').visible(true).apply();
+				Form.groups('GR_CNPJ').visible(true);
+				Form.groups('GR_OUTROS_TITU_CNPJ').visible(true);
 
 				// Razão social e CNPJ bloqueado e obrigatório
-				Form.fields("RAZAO_SOCIAL").disabled(true).apply();
-				Form.fields("CNPJ").disabled(true).apply();
-				Form.fields("RAZAO_SOCIAL").setRequired('aprovar', true).apply();
-				Form.fields("CNPJ").setRequired('aprovar', true).apply();
+				Form.fields("RAZAO_SOCIAL").disabled(true);
+				Form.fields("CNPJ").disabled(true);
+				Form.fields("RAZAO_SOCIAL").setRequired('aprovar', true);
+				Form.fields("CNPJ").setRequired('aprovar', true);
 
 				// Ocultar campos PJ
-				Form.fields('JUST_RESTRICOES_CNPJ').visible(false).apply();
-				Form.fields('CIDADE_CNOJ').visible(false).apply();
+				Form.fields('JUST_RESTRICOES_CNPJ').visible(false);
+				Form.fields('CIDADE_CNOJ').visible(false);
 
 			}
+
+			Form.apply();
 		
 		});		
 		
@@ -229,28 +235,30 @@ function setEventos() {
 			if(response == "Conjunta"){
 
 				// Mostrar grupo
-				Form.groups('GR_OUTROS_TITULARES').visible(true).apply();
+				Form.groups('GR_OUTROS_TITULARES').visible(true);
 
 				// Nome e CPF bloqueado e  obrigatório
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_NOME").disabled(true).apply();
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_CPF").disabled(true).apply();
-				Form.grids("GRID_OUTROS_T").fields("CAPITAL").disabled(true).apply();
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_NOME").setRequired('aprovar', true).apply();
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_CPF").setRequired('aprovar', true).apply();				
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_NOME").disabled(true);
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_CPF").disabled(true);
+				Form.grids("GRID_OUTROS_T").fields("CAPITAL").disabled(true);
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_NOME").setRequired('aprovar', true);
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_CPF").setRequired('aprovar', true);				
 
 				// Ocultar campos
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_SCORE").visible(false).apply();
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_RESTRICOES").visible(false).apply();
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_JUST_REST").visible(false).apply();
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_SCORE").visible(false);
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_RESTRICOES").visible(false);
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_JUST_REST").visible(false);
 
 			}
 			else{
 
-				Form.groups('GR_OUTROS_TITULARES').visible(false).apply();
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_NOME").setRequired('aprovar', false).apply();
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_CPF").setRequired('aprovar', false).apply();					
+				Form.groups('GR_OUTROS_TITULARES').visible(false);
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_NOME").setRequired('aprovar', false);
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_CPF").setRequired('aprovar', false);					
 
 			}
+
+			Form.apply();
 		
 		});			
 
@@ -260,84 +268,85 @@ function setEventos() {
 			if(response == "Conta Nova"){
 
 				// Ocultar campos da conta
-				Form.groups("CONTA").visible(false).apply();
-				Form.fields("CONTA").setRequired('aprovar', false).apply();
-				Form.fields("ABERTURA").setRequired('aprovar', false).apply();
-				Form.fields("CATEGORIA").setRequired('aprovar', false).apply();
+				Form.groups("CONTA").visible(false);
+				Form.fields("CONTA").setRequired('aprovar', false);
+				Form.fields("ABERTURA").setRequired('aprovar', false);
+				Form.fields("CATEGORIA").setRequired('aprovar', false);
 
 				//Exibir campos do titular
-				Form.groups('DADOS_PROPNETE_TITULAR').visible(true).apply();
-				Form.fields("CPF").disabled(true).apply();
-				Form.fields("NOME").disabled(true).apply();
-				Form.fields("CPF").setRequired('aprovar', true).apply();
-				Form.fields("NOME").setRequired('aprovar', true).apply();
+				Form.groups('DADOS_PROPNETE_TITULAR').visible(true);
+				Form.fields("CPF").disabled(true);
+				Form.fields("NOME").disabled(true);
+				Form.fields("CPF").setRequired('aprovar', true);
+				Form.fields("NOME").setRequired('aprovar', true);
 
 				// Ocultar campos rep. legal e jsutificativas de restrição
-				Form.fields('JUSTIFICATIVA_RESTRICAO').visible(false).apply();
-				Form.fields('CIDADE').visible(false).apply();
-				Form.fields('CPF_CONJUGE').visible(false).apply();
-				Form.fields('NOME_CONJUGE').visible(false).apply();
-				Form.fields('JUST_REST_PROC_REP').visible(false).apply();
-				Form.fields('RESTRICOES_PROC_REP').visible(false).apply();
-				Form.fields('SCORE_PROCURADOR').visible(false).apply();
-				Form.fields('CPF_PROC_REP').visible(false).apply();
-				Form.fields('NOME_PROC_REP').visible(false).apply();
-				Form.fields('CAPITAL_PROC').visible(false).apply();
+				Form.fields('JUSTIFICATIVA_RESTRICAO').visible(false);
+				Form.fields('CIDADE').visible(false);
+				Form.fields('CPF_CONJUGE').visible(false);
+				Form.fields('NOME_CONJUGE').visible(false);
+				Form.fields('JUST_REST_PROC_REP').visible(false);
+				Form.fields('RESTRICOES_PROC_REP').visible(false);
+				Form.fields('SCORE_PROCURADOR').visible(false);
+				Form.fields('CPF_PROC_REP').visible(false);
+				Form.fields('NOME_PROC_REP').visible(false);
+				Form.fields('CAPITAL_TIT').visible(false);
 
 				// Exibir composição da conta
-				Form.fields('COMPOSICAO_CONTA').visible(true).apply();
-				Form.fields("COMPOSICAO_CONTA").setRequired('aprovar', true).apply();
+				Form.fields('COMPOSICAO_CONTA').visible(true);
+				Form.fields("COMPOSICAO_CONTA").setRequired('aprovar', true);
 
 			}
 			else{
 				
 				// Exibir campos da conta
-				Form.groups("CONTA").visible(true).apply();
-				Form.grids("G_CONTA").readOnly(true).apply();
-				Form.fields("CPF_CONTA").visible(false).apply();
-				Form.fields("NOME_CONTA").visible(false).apply();	
-				Form.fields("CONTA").setRequired('aprovar', true).apply();
-				Form.fields("ABERTURA").setRequired('aprovar', true).apply();
-				Form.fields("CATEGORIA").setRequired('aprovar', true).apply();
+				Form.groups("CONTA").visible(true);
+				Form.grids("G_CONTA").readOnly(true);
+				Form.fields("CPF_CONTA").visible(false);
+				Form.fields("NOME_CONTA").visible(false);	
+				Form.fields("CONTA").setRequired('aprovar', true);
+				Form.fields("ABERTURA").setRequired('aprovar', true);
+				Form.fields("CATEGORIA").setRequired('aprovar', true);
 				
 				//Exibir campos do titular
-				Form.groups('DADOS_PROPNETE_TITULAR').visible(true).apply();
-				Form.fields("CPF").disabled(true).apply();
-				Form.fields("NOME").disabled(true).apply();
-				Form.fields("CPF").setRequired('aprovar', true).apply();
-				Form.fields("NOME").setRequired('aprovar', true).apply();
-				Form.fields('CAPITAL_TIT').visible(true).apply();
+				Form.groups('DADOS_PROPNETE_TITULAR').visible(true);
+				Form.fields("CPF").disabled(true);
+				Form.fields("NOME").disabled(true);
+				Form.fields("CPF").setRequired('aprovar', true);
+				Form.fields("NOME").setRequired('aprovar', true);
+				Form.fields('CAPITAL_TIT').visible(true);
 
 				// Ocultar campos rep. legal e jsutificativas de restrição
-				Form.fields('JUSTIFICATIVA_RESTRICAO').visible(false).apply();
-				Form.fields('CIDADE').visible(false).apply();
-				Form.fields('CPF_CONJUGE').visible(false).apply();
-				Form.fields('NOME_CONJUGE').visible(false).apply();
-				Form.fields('JUST_REST_PROC_REP').visible(false).apply();
-				Form.fields('RESTRICOES_PROC_REP').visible(false).apply();
-				Form.fields('SCORE_PROCURADOR').visible(false).apply();
-				Form.fields('CPF_PROC_REP').visible(false).apply();
-				Form.fields('NOME_PROC_REP').visible(false).apply();
-				Form.fields('CAPITAL_PROC').visible(false).apply();
+				Form.fields('JUSTIFICATIVA_RESTRICAO').visible(false);
+				Form.fields('CIDADE').visible(false);
+				Form.fields('CPF_CONJUGE').visible(false);
+				Form.fields('NOME_CONJUGE').visible(false);
+				Form.fields('JUST_REST_PROC_REP').visible(false);
+				Form.fields('RESTRICOES_PROC_REP').visible(false);
+				Form.fields('SCORE_PROCURADOR').visible(false);
+				Form.fields('CPF_PROC_REP').visible(false);
+				Form.fields('NOME_PROC_REP').visible(false);
 				
 				// Ocultar composição da conta
-				Form.fields('COMPOSICAO_CONTA').visible(false).apply();
-				Form.fields("COMPOSICAO_CONTA").setRequired('aprovar', false).apply();	
+				Form.fields('COMPOSICAO_CONTA').visible(false);
+				Form.fields("COMPOSICAO_CONTA").setRequired('aprovar', false);	
 				
 				// Mostrar grupo de titulares adicionais
-				Form.groups('GR_OUTROS_TITULARES').visible(true).apply();
+				Form.groups('GR_OUTROS_TITULARES').visible(true);
 
 				// Nome e CPF bloqueado e  obrigatório
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_NOME").disabled(true).apply();
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_CPF").disabled(true).apply();	
-				Form.grids("GRID_OUTROS_T").fields("CAPITAL").disabled(true).apply();		
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_NOME").disabled(true);
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_CPF").disabled(true);	
+				Form.grids("GRID_OUTROS_T").fields("CAPITAL").disabled(true);		
 
 				// Ocultar campos
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_SCORE").visible(false).apply();
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_RESTRICOES").visible(false).apply();
-				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_JUST_REST").visible(false).apply();		
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_SCORE").visible(false);
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_RESTRICOES").visible(false);
+				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_JUST_REST").visible(false);		
 
 			}
+
+			Form.apply();
 		
 		});			
 
@@ -512,13 +521,13 @@ function setForm() {
 
 		Form.groups('AUX').visible(true).apply();
 		
-		Form.groups('CONTA').visible(false).apply();
-		Form.groups('GR_OUTROS_TITULARES').visible(false).apply();
-		Form.groups('DADOS_PROPNETE_TITULAR').visible(false).apply();
-		Form.groups('JUSTIFICATIVAS').visible(false).apply();
-		Form.groups('GR_CNPJ').visible(false).apply();
-		Form.groups('GR_OUTROS_TITU_CNPJ').visible(false).apply();
-		Form.groups('GROUP6').visible(false).apply();
+		Form.groups('CONTA').visible(false);
+		Form.groups('GR_OUTROS_TITULARES').visible(false);
+		Form.groups('DADOS_PROPNETE_TITULAR').visible(false);
+		Form.groups('JUSTIFICATIVAS').visible(false);
+		Form.groups('GR_CNPJ').visible(false);
+		Form.groups('GR_OUTROS_TITU_CNPJ').visible(false);
+		Form.groups('GROUP6').visible(false);
 
 		// Informações da conta
 		var auxTipoPessoa  = Form.fields("TIPO_PESSOA").value();
@@ -544,96 +553,96 @@ function setForm() {
 		// Formulário conta corrente
 		if(auxTipoPessoa == "Pessoa Física"){
 
-			Form.groups('DADOS_PROPNETE_TITULAR').visible(true).apply();
-			Form.groups('GR_CNPJ').visible(false).apply();
-			Form.groups('GR_OUTROS_TITU_CNPJ').visible(false).apply();
-			Form.fields('OBJETIVO').visible(true).apply();
+			Form.groups('DADOS_PROPNETE_TITULAR').visible(true);
+			Form.groups('GR_CNPJ').visible(false);
+			Form.groups('GR_OUTROS_TITU_CNPJ').visible(false);
+			Form.fields('OBJETIVO').visible(true);
 
 			if(auxObjetivo == "Conta Nova"){
-				Form.fields('COMPOSICAO_CONTA').visible(true).apply();
-				Form.groups("CONTA").visible(false).apply();
+				Form.fields('COMPOSICAO_CONTA').visible(true);
+				Form.groups("CONTA").visible(false);
 			}
 			else{
-				Form.fields('COMPOSICAO_CONTA').visible(false).apply();
-				Form.groups("CONTA").visible(true).apply();
-				Form.grids("G_CONTA").readOnly(true).apply();
-				Form.fields("CPF_CONTA").visible(false).apply();
-				Form.fields("NOME_CONTA").visible(false).apply();				
+				Form.fields('COMPOSICAO_CONTA').visible(false);
+				Form.groups("CONTA").visible(true);
+				Form.grids("G_CONTA").readOnly(true);
+				Form.fields("CPF_CONTA").visible(false);
+				Form.fields("NOME_CONTA").visible(false);				
 			}
 
 			if(auxComposicao == "Individual"){ 
-				Form.groups('GR_OUTROS_TITULARES').visible(false).apply(); 
+				Form.groups('GR_OUTROS_TITULARES').visible(false); 
 			}
 			else{ 
-				Form.groups('GR_OUTROS_TITULARES').visible(true).apply(); 
+				Form.groups('GR_OUTROS_TITULARES').visible(true); 
 			}
 
 			if(auxEstadoCivil == "Casado" || auxEstadoCivil == "União Estável"){
-				Form.fields('CPF_CONJUGE').visible(true).apply();
-				Form.fields('NOME_CONJUGE').visible(true).apply();
+				Form.fields('CPF_CONJUGE').visible(true);
+				Form.fields('NOME_CONJUGE').visible(true);
 			}
 			else{
-				Form.fields('CPF_CONJUGE').visible(false).apply();
-				Form.fields('NOME_CONJUGE').visible(false).apply();
+				Form.fields('CPF_CONJUGE').visible(false);
+				Form.fields('NOME_CONJUGE').visible(false);
 			}
 
 			if(auxProcurador == "Sim"){
-				Form.fields('CPF_PROC_REP').visible(true).apply();
-				Form.fields('NOME_PROC_REP').visible(true).apply();
-				Form.fields('SCORE_PROCURADOR').visible(true).apply();
-				Form.fields('RESTRICOES_PROC_REP').visible(true).apply();
-				Form.fields('CAPITAL_PROC').visible(true).apply();
+				Form.fields('CPF_PROC_REP').visible(true);
+				Form.fields('NOME_PROC_REP').visible(true);
+				Form.fields('SCORE_PROCURADOR').visible(true);
+				Form.fields('RESTRICOES_PROC_REP').visible(true);
+				Form.fields('CAPITAL_PROC').visible(true);
 			}
 			else{
-				Form.fields('CPF_PROC_REP').visible(false).apply();
-				Form.fields('NOME_PROC_REP').visible(false).apply();
-				Form.fields('SCORE_PROCURADOR').visible(false).apply();
-				Form.fields('RESTRICOES_PROC_REP').visible(false).apply();
-				Form.fields('CAPITAL_PROC').visible(false).apply();
+				Form.fields('CPF_PROC_REP').visible(false);
+				Form.fields('NOME_PROC_REP').visible(false);
+				Form.fields('SCORE_PROCURADOR').visible(false);
+				Form.fields('RESTRICOES_PROC_REP').visible(false);
+				Form.fields('CAPITAL_PROC').visible(false);
 			}	
 			
 			if(auxAreaAtuacao == "Não"){
-				Form.fields('CIDADE').visible(true).apply();
+				Form.fields('CIDADE').visible(true);
 			}
 			else{
-				Form.fields('CIDADE').visible(false).apply();
+				Form.fields('CIDADE').visible(false);
 			}	
 			
 			if(auxRestricaoT == "Restrição Impeditiva" || auxRestricaoT == "Restrição Aceitável"){
-				Form.fields('JUSTIFICATIVA_RESTRICAO').visible(true).apply();
+				Form.fields('JUSTIFICATIVA_RESTRICAO').visible(true);
 			}
 			else{
-				Form.fields('JUSTIFICATIVA_RESTRICAO').visible(false).apply();
+				Form.fields('JUSTIFICATIVA_RESTRICAO').visible(false);
 			}	
 			
 			if(auxRestricaoP == "Restrição Impeditiva" || auxRestricaoP == "Restrição Aceitável"){
-				Form.fields('JUST_REST_PROC_REP').visible(true).apply();
+				Form.fields('JUST_REST_PROC_REP').visible(true);
 			}
 			else{
-				Form.fields('JUST_REST_PROC_REP').visible(false).apply();
+				Form.fields('JUST_REST_PROC_REP').visible(false);
 			}		
 
 		}
 		else if(auxTipoPessoa == "Pessoa Jurídica"){
 
-			Form.groups('GR_CNPJ').visible(true).apply();
-			Form.groups('GR_OUTROS_TITU_CNPJ').visible(true).apply();	
-			Form.groups('DADOS_PROPNETE_TITULAR').visible(false).apply();	
-			Form.groups('GR_OUTROS_TITULARES').visible(false).apply();	
-			Form.fields('COMPOSICAO_CONTA').visible(false).apply();
+			Form.groups('GR_CNPJ').visible(true);
+			Form.groups('GR_OUTROS_TITU_CNPJ').visible(true);	
+			Form.groups('DADOS_PROPNETE_TITULAR').visible(false);	
+			Form.groups('GR_OUTROS_TITULARES').visible(false);	
+			Form.fields('COMPOSICAO_CONTA').visible(false);
 
 			if(auxAreaAtuacaoPJ == "Não"){
-				Form.fields('CIDADE_CNOJ').visible(true).apply();
+				Form.fields('CIDADE_CNOJ').visible(true);
 			}
 			else{
-				Form.fields('CIDADE_CNOJ').visible(false).apply();
+				Form.fields('CIDADE_CNOJ').visible(false);
 			}	
 			
 			if(auxRestricaoPJ == "Restrição Impeditiva" || auxRestricaoPJ == "Restrição Aceitável"){
-				Form.fields('JUST_RESTRICOES_CNPJ').visible(true).apply();
+				Form.fields('JUST_RESTRICOES_CNPJ').visible(true);
 			}
 			else{
-				Form.fields('JUST_RESTRICOES_CNPJ').visible(false).apply();
+				Form.fields('JUST_RESTRICOES_CNPJ').visible(false);
 			}			
 
 		}		
@@ -664,97 +673,97 @@ function setForm() {
 		// Formulário conta corrente
 		if(auxTipoPessoa == "Pessoa Física"){
 
-			Form.groups('GR_CNPJ').visible(false).apply();
-			Form.groups('GR_OUTROS_TITU_CNPJ').visible(false).apply();
-			Form.fields('OBJETIVO').visible(true).apply();
-			Form.fields('OBJETIVO').readOnly(true).apply();
+			Form.groups('GR_CNPJ').visible(false);
+			Form.groups('GR_OUTROS_TITU_CNPJ').visible(false);
+			Form.fields('OBJETIVO').visible(true);
+			Form.fields('OBJETIVO').readOnly(true);
 
 			if(auxObjetivo == "Conta Nova"){
-				Form.fields('COMPOSICAO_CONTA').visible(true).apply();
-				Form.groups("CONTA").visible(false).apply();
+				Form.fields('COMPOSICAO_CONTA').visible(true);
+				Form.groups("CONTA").visible(false);
 			}
 			else{
-				Form.fields('COMPOSICAO_CONTA').visible(false).apply();
-				Form.fields('COMPOSICAO_CONTA').readOnly(false).apply();
-				Form.groups("CONTA").visible(true).apply();
-				Form.grids("G_CONTA").readOnly(true).apply();
-				Form.fields("CPF_CONTA").visible(false).apply();
-				Form.fields("NOME_CONTA").visible(false).apply();				
+				Form.fields('COMPOSICAO_CONTA').visible(false);
+				Form.fields('COMPOSICAO_CONTA').readOnly(false);
+				Form.groups("CONTA").visible(true);
+				Form.grids("G_CONTA").readOnly(true);
+				Form.fields("CPF_CONTA").visible(false);
+				Form.fields("NOME_CONTA").visible(false);				
 			}			
 
 			if(auxComposicao == "Individual"){ 
-				Form.groups('GR_OUTROS_TITULARES').visible(false).apply(); 
+				Form.groups('GR_OUTROS_TITULARES').visible(false); 
 			}
 			else{ 
-				Form.groups('GR_OUTROS_TITULARES').visible(true).apply(); 
+				Form.groups('GR_OUTROS_TITULARES').visible(true); 
 			}
 
 			if(auxEstadoCivil == "Casado" || auxEstadoCivil == "União Estável"){
-				Form.fields('CPF_CONJUGE').visible(true).apply();
-				Form.fields('NOME_CONJUGE').visible(true).apply();
+				Form.fields('CPF_CONJUGE').visible(true);
+				Form.fields('NOME_CONJUGE').visible(true);
 			}
 			else{
-				Form.fields('CPF_CONJUGE').visible(false).apply();
-				Form.fields('NOME_CONJUGE').visible(false).apply();
+				Form.fields('CPF_CONJUGE').visible(false);
+				Form.fields('NOME_CONJUGE').visible(false);
 			}
 
 			if(auxProcurador == "Sim"){
-				Form.fields('CPF_PROC_REP').visible(true).apply();
-				Form.fields('NOME_PROC_REP').visible(true).apply();
-				Form.fields('SCORE_PROCURADOR').visible(true).apply();
-				Form.fields('RESTRICOES_PROC_REP').visible(true).apply();
-				Form.fields('CAPITAL_PROC').visible(true).apply();
+				Form.fields('CPF_PROC_REP').visible(true);
+				Form.fields('NOME_PROC_REP').visible(true);
+				Form.fields('SCORE_PROCURADOR').visible(true);
+				Form.fields('RESTRICOES_PROC_REP').visible(true);
+				Form.fields('CAPITAL_PROC').visible(true);
 			}
 			else{
-				Form.fields('CPF_PROC_REP').visible(false).apply();
-				Form.fields('NOME_PROC_REP').visible(false).apply();
-				Form.fields('SCORE_PROCURADOR').visible(false).apply();
-				Form.fields('RESTRICOES_PROC_REP').visible(false).apply();
-				Form.fields('CAPITAL_PROC').visible(false).apply();
+				Form.fields('CPF_PROC_REP').visible(false);
+				Form.fields('NOME_PROC_REP').visible(false);
+				Form.fields('SCORE_PROCURADOR').visible(false);
+				Form.fields('RESTRICOES_PROC_REP').visible(false);
+				Form.fields('CAPITAL_PROC').visible(false);
 			}	
 			
 			if(auxAreaAtuacao == "Não"){
-				Form.fields('CIDADE').visible(true).apply();
+				Form.fields('CIDADE').visible(true);
 			}
 			else{
-				Form.fields('CIDADE').visible(false).apply();
+				Form.fields('CIDADE').visible(false);
 			}	
 			
 			if(auxRestricaoT == "Restrição Impeditiva" || auxRestricaoT == "Restrição Aceitável"){
-				Form.fields('JUSTIFICATIVA_RESTRICAO').visible(true).apply();
+				Form.fields('JUSTIFICATIVA_RESTRICAO').visible(true);
 			}
 			else{
-				Form.fields('JUSTIFICATIVA_RESTRICAO').visible(false).apply();
+				Form.fields('JUSTIFICATIVA_RESTRICAO').visible(false);
 			}	
 			
 			if(auxRestricaoP == "Restrição Impeditiva" || auxRestricaoP == "Restrição Aceitável"){
-				Form.fields('JUST_REST_PROC_REP').visible(true).apply();
+				Form.fields('JUST_REST_PROC_REP').visible(true);
 			}
 			else{
-				Form.fields('JUST_REST_PROC_REP').visible(false).apply();
+				Form.fields('JUST_REST_PROC_REP').visible(false);
 			}		
 
 		}
 		else{
 
-			Form.groups('GR_CNPJ').visible(true).apply();
-			Form.groups('GR_OUTROS_TITU_CNPJ').visible(true).apply();	
-			Form.groups('DADOS_PROPNETE_TITULAR').visible(false).apply();	
-			Form.groups('GR_OUTROS_TITULARES').visible(false).apply();	
-			Form.fields('COMPOSICAO_CONTA').visible(false).apply();
+			Form.groups('GR_CNPJ').visible(true);
+			Form.groups('GR_OUTROS_TITU_CNPJ').visible(true);	
+			Form.groups('DADOS_PROPNETE_TITULAR').visible(false);	
+			Form.groups('GR_OUTROS_TITULARES').visible(false);	
+			Form.fields('COMPOSICAO_CONTA').visible(false);
 
 			if(auxAreaAtuacaoPJ == "Não"){
-				Form.fields('CIDADE_CNOJ').visible(true).apply();
+				Form.fields('CIDADE_CNOJ').visible(true);
 			}
 			else{
-				Form.fields('CIDADE_CNOJ').visible(false).apply();
+				Form.fields('CIDADE_CNOJ').visible(false);
 			}	
 			
 			if(auxRestricaoPJ == "Restrição Impeditiva" || auxRestricaoPJ == "Restrição Aceitável"){
-				Form.fields('JUST_RESTRICOES_CNPJ').visible(true).apply();
+				Form.fields('JUST_RESTRICOES_CNPJ').visible(true);
 			}
 			else{
-				Form.fields('JUST_RESTRICOES_CNPJ').visible(false).apply();
+				Form.fields('JUST_RESTRICOES_CNPJ').visible(false);
 			}			
 
 		}
@@ -763,19 +772,19 @@ function setForm() {
 
 			// Justificativas abertura de conta
 			if(auxRoteamento == "Preencher Parecer"){
-				Form.groups('JUSTIFICATIVAS').visible(true).apply();
-				Form.fields("PARECER").setRequired('aprovar', true).apply();
-				Form.fields('OBS_REFERENCIAS').visible(false).apply();
+				Form.groups('JUSTIFICATIVAS').visible(true);
+				Form.fields("PARECER").setRequired('aprovar', true);
+				Form.fields('OBS_REFERENCIAS').visible(false);
 			}
 			else if(auxRoteamento == "Preencher Parecer e Referências"){
-				Form.groups('JUSTIFICATIVAS').visible(true).apply();
-				Form.fields("OBS_REFERENCIAS").setRequired('aprovar', true).apply();				
-				Form.fields("PARECER").setRequired('aprovar', true).apply();
+				Form.groups('JUSTIFICATIVAS').visible(true);
+				Form.fields("OBS_REFERENCIAS").setRequired('aprovar', true);				
+				Form.fields("PARECER").setRequired('aprovar', true);
 			}
 			else if(auxRoteamento == "Aprovar Abertura de Conta - Gerente"){
-				Form.groups('JUSTIFICATIVAS').visible(false).apply();
-				Form.fields("PARECER").setRequired('aprovar', false).apply();
-				Form.fields("OBS_REFERENCIAS").setRequired('aprovar', false).apply();				
+				Form.groups('JUSTIFICATIVAS').visible(false);
+				Form.fields("PARECER").setRequired('aprovar', false);
+				Form.fields("OBS_REFERENCIAS").setRequired('aprovar', false);				
 			}		
 		
 		}
@@ -784,15 +793,15 @@ function setForm() {
 
 			// Justificativas abertura de conta
 			if(auxRoteamento == "Preencher Parecer"){
-				Form.fields('OBS_REFERENCIAS').visible(false).apply();
-				Form.fields('PARECER').visible(true).apply();
+				Form.fields('OBS_REFERENCIAS').visible(false);
+				Form.fields('PARECER').visible(true);
 			}
 			else if(auxRoteamento == "Preencher Parecer e Referências"){
-				Form.fields('OBS_REFERENCIAS').visible(true).apply();
-				Form.fields('PARECER').visible(true).apply();
+				Form.fields('OBS_REFERENCIAS').visible(true);
+				Form.fields('PARECER').visible(true);
 			}
 			else if(auxRoteamento == "Aprovar Abertura de Conta - Gerente" || auxRoteamento == "Abrir conta"){
-				Form.groups('JUSTIFICATIVAS').visible(false).apply();				
+				Form.groups('JUSTIFICATIVAS').visible(false);				
 			}		
 
 		}
@@ -800,15 +809,15 @@ function setForm() {
 		// Informações talão
 		if(auxTalao == "Sim" && codigoEtapa != APROVAR_GERENTE){
 
-			Form.fields('QTD_FOLHAS').visible(true).apply();
-			Form.fields('TALAO_APROVADO').visible(true).apply();
+			Form.fields('QTD_FOLHAS').visible(true);
+			Form.fields('TALAO_APROVADO').visible(true);
 
 		}
 		else if(auxTalao == "Não" && codigoEtapa != APROVAR_GERENTE){
 
-			Form.fields('QTD_FOLHAS').visible(false).apply();
-			Form.fields('TALAO_APROVADO').visible(false).apply();
-			
+			Form.fields('QTD_FOLHAS').visible(false);
+			Form.fields('TALAO_APROVADO').visible(false);
+
 		}		
 
 	}
@@ -975,7 +984,6 @@ function motorRegrasPF() {
 	var composicaoConta  = Form.fields("COMPOSICAO_CONTA").value();
 	var objetivoAbertura = Form.fields("OBJETIVO").value();
 	var capitalTitular   = Form.fields("CAPITAL_TIT").value();
-	var capitalProcRep   = Form.fields("CAPITAL_PROC").value();
 	var roteamento       = "";
 
 	console.log ("### INICIO MOTOR REGRAS PF ###");
@@ -987,7 +995,6 @@ function motorRegrasPF() {
 	console.log("Area de atuação: "            + areaAtuacao);
 	console.log("Objetivo da abertura: "       + objetivoAbertura);
 	console.log("Titular tem capital?: "       + capitalTitular);
-	console.log("Proc/Rep tem capital?: "      + capitalProcRep);
 
 	// Regras para conta nova
 	if(objetivoAbertura == "Conta Nova"){
@@ -1123,29 +1130,21 @@ function motorRegrasPF() {
 
 			console.log("Não possui procurador");
 
-			// Titular sem restrição dentro da área com capital - abrir conta direto
-			if (restricaoTitular != "Restrição Impeditiva" && areaAtuacao == "Sim" && capitalTitular == "Sim") { 
+			// Titular sem restrição com capital - abrir conta direto
+			if (restricaoTitular != "Restrição Impeditiva" && capitalTitular == "Sim") { 
 				
-				console.log("Titular sem restrição dentro da área com capital");
+				console.log("Titular sem restrição com capital");
 				roteamento = "Abrir conta"; 
 			
 			}
 
-			// Titular sem restrição dentro da área sem capital - aprovação gerente
-			else if (restricaoTitular != "Restrição Impeditiva" && areaAtuacao == "Sim" && capitalTitular != "Sim") { 
+			// Titular sem restrição sem capital - aprovação gerente
+			else if (restricaoTitular != "Restrição Impeditiva" && capitalTitular != "Sim") { 
 				
-				console.log("Titular sem restrição dentro da área sem capital");
+				console.log("Titular sem restrição sem capital");
 				roteamento = "Aprovar Abertura de Conta - Gerente"; 
 			
-			}			
-
-			// Titular sem restrição fora da área - exige parecer e aprovação da UAD
-			else if (restricaoTitular != "Restrição Impeditiva" && areaAtuacao == "Não") { 
-				
-				console.log("Titular sem restrição fora da área");
-				roteamento = "Preencher Parecer"; 
-			
-			}
+			}		
 
 			// Titular com restrição - exige parecer e referências e aprovação do gerente
 			else if (restricaoTitular == "Restrição Impeditiva") { 
