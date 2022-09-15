@@ -519,7 +519,7 @@ function setForm() {
 
 	if(codigoEtapa == SOLICITAR_ABERTURA_CONTA){
 
-		Form.groups('AUX').visible(true).apply();
+		//Form.groups('AUX').visible(true).apply();
 		
 		Form.groups('CONTA').visible(false);
 		Form.groups('GR_OUTROS_TITULARES').visible(false);
@@ -1161,26 +1161,19 @@ function motorRegrasPF() {
 
 			console.log("Possui procurador");
 
-			// Titular e procurador sem restrição, com capital e dentro da área - não exige parecer e referência
-			if ((restricaoTitular != "Restrição Impeditiva" && restricaoProcRep != "Restrição Impeditiva") && (capitalTitular == "Sim" && capitalProcRep == "Sim") && areaAtuacao == "Sim") {
+			// Titular e procurador sem restrição, com capital não exige parecer e referência
+			if ((restricaoTitular != "Restrição Impeditiva" && restricaoProcRep != "Restrição Impeditiva") && (capitalTitular == "Sim" && capitalProcRep == "Sim")) {
 
-				console.log("Procurador e titular sem restrição dentro da área com capital");
+				console.log("Procurador e titular sem restrição área com capital");
 				roteamento = "Abrir conta";
 			}
 
-			// Titular e procurador sem restrição, sem capital e dentro da área - não exige parecer e referência
-			if ((restricaoTitular != "Restrição Impeditiva" && restricaoProcRep != "Restrição Impeditiva") && (capitalTitular != "Sim" || capitalProcRep != "Sim") && areaAtuacao == "Sim") {
+			// Titular e procurador sem restrição, sem capital não exige parecer e referência
+			else if ((restricaoTitular != "Restrição Impeditiva" && restricaoProcRep != "Restrição Impeditiva") && (capitalTitular != "Sim" || capitalProcRep != "Sim")) {
 
-				console.log("Procurador e titular sem restrição dentro da área sem capital");
+				console.log("Procurador e titular sem restrição sem capital");
 				roteamento = "Aprovar Abertura de Conta - Gerente";
 			}			
-
-			// Titular e procurador sem restrição fora da área - exige parecer
-			else if ((restricaoTitular != "Restrição Impeditiva" && restricaoProcRep != "Restrição Impeditiva") && areaAtuacao == "Não") {
-
-				console.log("Procurador e titular sem restrição fora da área");
-				roteamento = "Preencher Parecer";
-			}
 
 			// Titular ou procurador com restrição - exige parecer e referências
 			else if (restricaoTitular == "Restrição Impeditiva" || restricaoProcRep == "Restrição Impeditiva") {

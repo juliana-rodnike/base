@@ -167,52 +167,54 @@ function setEventos() {
 			 
 			 if(response == "Prosseguir"){			
  
-				Form.fields('DOC_INVALIDO').visible(false).apply();
-				Form.fields('DOC_NAO_ENVIADO').visible(false).apply();
-				Form.fields('DOC_INSUFICIENTE').visible(false).apply();
-				Form.fields('FALTA_INFORMACOES').visible(false).apply();
-				Form.fields('INFO_SISBR').visible(false).apply();
-				Form.fields('PEDIDO_PA').visible(false).apply();
+				Form.fields('DOC_INVALIDO').visible(false);
+				Form.fields('DOC_NAO_ENVIADO').visible(false);
+				Form.fields('DOC_INSUFICIENTE').visible(false);
+				Form.fields('FALTA_INFORMACOES').visible(false);
+				Form.fields('INFO_SISBR').visible(false);
+				Form.fields('PEDIDO_PA').visible(false);
 
 				// Não atualizar a variável quando o cadastro for de outra cooperativa para não perder a rota
-				if(codigoEtapa == REALIZAR_CADASTRO_SISBR || codigoEtapa == COMPLEMENTAR_CADASTRO_SISBR) Form.fields("AUX_GRUPO_CRL").value("Não").apply();
+				if(codigoEtapa == REALIZAR_CADASTRO_SISBR || codigoEtapa == COMPLEMENTAR_CADASTRO_SISBR) Form.fields("AUX_GRUPO_CRL").value("Não");
 
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
  
 			 }	
 			 
 			 if(response == "Gerar CRL"){				
  
-				 Form.fields('DOC_INVALIDO').visible(false).apply();
-				 Form.fields('DOC_NAO_ENVIADO').visible(false).apply();
-				 Form.fields('DOC_INSUFICIENTE').visible(false).apply();
-				 Form.fields('FALTA_INFORMACOES').visible(false).apply();
-				 Form.fields('INFO_SISBR').visible(false).apply();		
-				 Form.fields('PEDIDO_PA').visible(false).apply();	
+				 Form.fields('DOC_INVALIDO').visible(false);
+				 Form.fields('DOC_NAO_ENVIADO').visible(false);
+				 Form.fields('DOC_INSUFICIENTE').visible(false);
+				 Form.fields('FALTA_INFORMACOES').visible(false);
+				 Form.fields('INFO_SISBR').visible(false);		
+				 Form.fields('PEDIDO_PA').visible(false);	
  
-				 Form.fields("AUX_GRUPO_CRL").value("Sim").apply();
+				 Form.fields("AUX_GRUPO_CRL").value("Sim");
  
-				 Form.actions('aprovar').disabled(false).apply();
-				 Form.actions('rejeitar').disabled(true).apply();
+				 Form.actions('aprovar').disabled(false);
+				 Form.actions('rejeitar').disabled(true);
  
 			 }
 			 
 			 if(response == "Devolver"){			
  
-				 Form.fields('DOC_INVALIDO').visible(true).apply();
-				 Form.fields('DOC_NAO_ENVIADO').visible(true).apply();
-				 Form.fields('DOC_INSUFICIENTE').visible(true).apply();
-				 Form.fields('FALTA_INFORMACOES').visible(true).apply();
-				 Form.fields('INFO_SISBR').visible(true).apply();
-				 Form.fields('PEDIDO_PA').visible(true).apply();
+				 Form.fields('DOC_INVALIDO').visible(true);
+				 Form.fields('DOC_NAO_ENVIADO').visible(true);
+				 Form.fields('DOC_INSUFICIENTE').visible(true);
+				 Form.fields('FALTA_INFORMACOES').visible(true);
+				 Form.fields('INFO_SISBR').visible(true);
+				 Form.fields('PEDIDO_PA').visible(true);
  
-				 Form.fields("AUX_GRUPO_CRL").value("").apply();
+				 Form.fields("AUX_GRUPO_CRL").value("");
  
-				 Form.actions('aprovar').disabled(true).apply();
-				 Form.actions('rejeitar').disabled(false).apply();
+				 Form.actions('aprovar').disabled(true);
+				 Form.actions('rejeitar').disabled(false);
  
-			 }			 
+			 }	
+			 
+			 Form.apply();
  
 		 });				
  

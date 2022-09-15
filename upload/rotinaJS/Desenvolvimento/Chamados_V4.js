@@ -141,24 +141,24 @@ function setEventos() {
 			auxGrupo   = auxUnidade + auxSetor;
 			auxOriGrp  = auxOriUni + auxSetor;
 
-			Form.fields("AUX_GRUPO").value(auxGrupo).apply();
-			Form.fields("AUX_MODELO").value(modelo).apply();
-			Form.fields("AUX_ORIGEM").value(auxOriGrp).apply();
+			Form.fields("AUX_GRUPO").value(auxGrupo);
+			Form.fields("AUX_MODELO").value(modelo);
+			Form.fields("AUX_ORIGEM").value(auxOriGrp);
 
 			Form.fields("CATEGORIA").removeOptions([]);
 			Form.fields("SUBCATEGORIA").removeOptions([]);
 
-			Form.fields("AUX_ROTA").value("").apply();			
-			Form.fields("PROX_ETAPA").value("").apply();
-			Form.fields("PROX_RESP").value("").apply();	
-			Form.fields("CATEGORIA").value("").apply();	
-			Form.fields("SUBCATEGORIA").value("").apply();				
+			Form.fields("AUX_ROTA").value("");			
+			Form.fields("PROX_ETAPA").value("");
+			Form.fields("PROX_RESP").value("");	
+			Form.fields("CATEGORIA").value("");	
+			Form.fields("SUBCATEGORIA").value("");				
 
 			// Chamado aberto UAD
 			if(auxUniOrig == "99"){ 
 
 				auxOriGrp = chamadoUAD(auxOrigem);
-				Form.fields("AUX_ORIGEM").value(auxOriGrp).apply();
+				Form.fields("AUX_ORIGEM").value(auxOriGrp);
 			
 			}	
 
@@ -172,7 +172,9 @@ function setEventos() {
 			console.log("Grupo de destino: "     + auxGrupo);
 			console.log("Modelo de categorias: " + modelo);
 			console.log("Unidade de origem: "    + auxUniOrig);
-			console.log("Unidade de destino: "   + auxUnidade);					
+			console.log("Unidade de destino: "   + auxUnidade);		
+			
+			Form.apply();
 		
 		});	
 		
@@ -202,9 +204,9 @@ function setEventos() {
 		// Carregar subcategorias referente ao modelo e a categoria selecionada
 		Form.fields("CATEGORIA").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
 			
-			Form.fields("AUX_ROTA").value("").apply();			
-			Form.fields("PROX_ETAPA").value("").apply();
-			Form.fields("PROX_RESP").value("").apply();	
+			Form.fields("AUX_ROTA").value("");			
+			Form.fields("PROX_ETAPA").value("");
+			Form.fields("PROX_RESP").value("");	
 
 			auxCat = Form.fields("CATEGORIA").value();
 
@@ -215,6 +217,8 @@ function setEventos() {
 			} else piloto = "Não";
 
 			listaSubcategorias(modelo, auxCat, listaSub, piloto);
+
+			Form.apply();
 
 		});
 
@@ -236,14 +240,14 @@ function setEventos() {
 		// Alteração de subcategoria, validar aprovação do gerente e resposnável por CRL produtos
 		Form.fields("SUBCATEGORIA").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
 
-			Form.fields("AUX_ROTA").value("").apply();
-			Form.fields("PROX_ETAPA").value("").apply();
-			Form.fields("PROX_RESP").value("").apply();		
+			Form.fields("AUX_ROTA").value("");
+			Form.fields("PROX_ETAPA").value("");
+			Form.fields("PROX_RESP").value("");		
 
-			auxCat    = Form.fields("CATEGORIA").value();
-			auxSub    = Form.fields("SUBCATEGORIA").value();
-			iniciador = Form.fields("AUX_INICIADOR").value();
-			auxLider  = Form.fields("AUX_LIDER").value();
+			auxCat    = Form.fields("CATEGORIA");
+			auxSub    = Form.fields("SUBCATEGORIA");
+			iniciador = Form.fields("AUX_INICIADOR");
+			auxLider  = Form.fields("AUX_LIDER");
 
 			// Carregar texto padrão
 			textoPadrao(modelo, auxCat, auxSub);
@@ -257,8 +261,8 @@ function setEventos() {
 				if(auxCat == "Assinatura Eletrônica" && auxSub == "Solicitações em Geral"){ 
 				
 					novoGrupo = "99_credito_ass_eletronica";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}
@@ -266,8 +270,8 @@ function setEventos() {
 				if(auxCat == "CRL" && auxSub == "Consignado/Consórcio"){ 
 					
 					novoGrupo = "99_cons_consig";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}	
@@ -275,8 +279,8 @@ function setEventos() {
 				if(auxCat == "CRL" && auxSub == "Alteração CRL Cartão"){ 
 					
 					novoGrupo = "99_credito_crl_cartao";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}	
@@ -285,8 +289,8 @@ function setEventos() {
 				   auxCat == "Dúvidas" && auxSub == "Análise de Crédito" || auxCat == "Fábrica de Limites" && auxSub == "Solicitações em Geral"){ 
 					
 					novoGrupo = "99_credito_crl_geral";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}	
@@ -294,8 +298,8 @@ function setEventos() {
 				if(auxCat == "Contrapartes Conectadas (Grupo Econômico)" && auxSub == "Solicitações em Geral"){ 
 					
 					novoGrupo = "99_credito_grupo_economico";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}	
@@ -304,8 +308,8 @@ function setEventos() {
 				   auxSub == "Giro Rotativo" || auxSub == "Consignado Privado" || auxSub == "Renegociação"|| auxSub == "Limite Cartão Acima de R$45.000,00")){ 
 					
 					novoGrupo = "99_credito_liberacao";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}	
@@ -313,8 +317,8 @@ function setEventos() {
 				if(auxCat == "Liquidação" && (auxSub == "Amortização" || auxSub == "Quitação" || auxSub == "Financiamento")){ 
 					
 					novoGrupo = "99_credito_liquidacao";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}	
@@ -323,8 +327,8 @@ function setEventos() {
 				   auxCat == "Dúvidas" && auxSub == "Controles" || auxCat == "Documentos Pendentes" && auxSub == "Solicitações em Geral"){ 
 					
 					novoGrupo = "99_credito_operacoes";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}	
@@ -332,8 +336,8 @@ function setEventos() {
 				if(auxCat == "Operações de Crédito" && auxSub == "Prorrogação"){ 
 					
 					novoGrupo = "99_credito_prorrogacao";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}	
@@ -341,15 +345,15 @@ function setEventos() {
 				if(auxCat == "Liberação Talão de Cheque" && auxSub == "Solicitações em Geral"){ 
 					
 					novoGrupo = "99_credito_talao";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}																									
 				else{
 
 					console.log("grupo padrão: " + auxGrupo);
-					Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+					Form.fields("AUX_GRUPO").value(auxGrupo);
 	
 				}							
 
@@ -360,8 +364,8 @@ function setEventos() {
 				if(auxCat == "Crédito Rural" && auxSub == "Análise Técnica"){ 
 				
 					novoGrupo = "99_rural_analise_tecnica";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}
@@ -369,8 +373,8 @@ function setEventos() {
 				if(auxCat == "Financiamento BNDES" && (auxSub == "Dúvidas" || auxSub == "Quitação" || auxSub == "Outros")){ 
 				
 					novoGrupo = "99_rural_bndes";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}
@@ -378,8 +382,8 @@ function setEventos() {
 				if(auxCat == "Crédito Rural" && auxSub == "CRL" || auxCat == "Financiamento BNDES" && auxSub == "CRL"){ 
 				
 					novoGrupo = "99_rural_crl";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}		
@@ -387,8 +391,8 @@ function setEventos() {
 				if(auxCat == "Crédito Rural" && auxSub == "Fiscalização"){ 
 				
 					novoGrupo = "99_rural_fiscalizacao";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}	
@@ -396,8 +400,8 @@ function setEventos() {
 				if(auxCat == "Crédito Rural" && (auxSub == "Dúvidas" || auxSub == "Outros")){ 
 				
 					novoGrupo = "99_rural_geral";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}	
@@ -405,15 +409,15 @@ function setEventos() {
 				if(auxCat == "Crédito Rural" && auxSub == "Liberação de Crédito"){ 
 				
 					novoGrupo = "99_rural_liberacao";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}													
 				else{
 
 					console.log("grupo padrão: " + auxGrupo);
-					Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+					Form.fields("AUX_GRUPO").value(auxGrupo);
 	
 				}
 
@@ -424,16 +428,16 @@ function setEventos() {
 				if(auxCat == "Conta Capital" && auxSub == "Campanha de Capitalização 2022"){ 
 				
 					novoGrupo = "99_cadastro_capitalizacao";
-					Form.fields("AUX_GRUPO").value(novoGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo).apply();
+					Form.fields("AUX_GRUPO").value(novoGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(novoGrupo);
 					console.log("novo grupo: " + novoGrupo);
 				
 				}	
 				else{
 
 					console.log("grupo padrão: " + auxGrupo);
-					Form.fields("AUX_GRUPO").value(auxGrupo).apply();
-					Form.fields("AUX_GRUPO_DESTINO").value(auxGrupo).apply();
+					Form.fields("AUX_GRUPO").value(auxGrupo);
+					Form.fields("AUX_GRUPO_DESTINO").value(auxGrupo);
 	
 				}							
 
@@ -441,9 +445,11 @@ function setEventos() {
 			else{
 
 				console.log("grupo padrão: " + auxGrupo);
-				Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+				Form.fields("AUX_GRUPO").value(auxGrupo);
 
 			}
+
+			Form.apply();
 
 		});	
 
@@ -455,60 +461,63 @@ function setEventos() {
 			   modelo == "99_contas_pagar"|| modelo == "99_correspondente" || modelo == "99_credito"        || modelo == "99_rural"       || 
 			   modelo == "99_seguros"     || modelo == "99_conectividade"  || modelo == "99_agenciavirtual" ||(modelo == "99_tecnologia" && auxCat == "Suporte Canais de Atendimento")){
 
-				Form.fields('CPF_CNPJ').visible(true).apply();
-				Form.fields('NOME_RAZAO').visible(true).apply();
-				Form.fields('PESSOA_CONTA').visible(true).apply();
+				Form.fields('CPF_CNPJ').visible(true);
+				Form.fields('NOME_RAZAO').visible(true);
+				Form.fields('PESSOA_CONTA').visible(true);
 				
 				if(modelo == "99_cadastro"){
 
-					Form.fields('CPF_CNPJ').setRequired('aprovar', true).apply();
-					Form.fields('NOME_RAZAO').setRequired('aprovar', true).apply();
+					Form.fields('CPF_CNPJ').setRequired('aprovar', true);
+					Form.fields('NOME_RAZAO').setRequired('aprovar', true);
 
 				}
 				else{
 
-					Form.fields('CPF_CNPJ').setRequired('aprovar', false).apply();
-					Form.fields('NOME_RAZAO').setRequired('aprovar', false).apply();
+					Form.fields('CPF_CNPJ').setRequired('aprovar', false);
+					Form.fields('NOME_RAZAO').setRequired('aprovar', false);
 
 				}
 					
 			}
 			else{
 
-				Form.fields('CPF_CNPJ').visible(false).apply();
-				Form.fields('NOME_RAZAO').visible(false).apply();
-				Form.fields('PESSOA_CONTA').visible(false).apply();
+				Form.fields('CPF_CNPJ').visible(false);
+				Form.fields('NOME_RAZAO').visible(false);
+				Form.fields('PESSOA_CONTA').visible(false);
 
-				Form.fields('CPF_CNPJ').setRequired('aprovar', false).apply();
-				Form.fields('NOME_RAZAO').setRequired('aprovar', false).apply();
+				Form.fields('CPF_CNPJ').setRequired('aprovar', false);
+				Form.fields('NOME_RAZAO').setRequired('aprovar', false);
 
 			}
+
+			Form.apply();
 
 		});			
 		
 		// Campo chamado privado, se alterado reiniciar rota e grupo de iniciadores
 		Form.fields("PRIVADO").subscribe("CHANGE", function(itemId, data, response) {
 			
-			Form.fields("AUX_ROTA").value("").apply();
-			Form.fields("PROX_ETAPA").value("").apply();
-			Form.fields("PROX_RESP").value("").apply();	
+			Form.fields("AUX_ROTA").value("");
+			Form.fields("PROX_ETAPA").value("");
+			Form.fields("PROX_RESP").value("");	
 
 			// Não permitir incluir responsáveis adicionais para chamado privado
 			if(response == "Sim"){
 
-				Form.fields("ADD_RESPONSAVEL1").value("").apply();	
-				Form.fields("ADD_RESPONSAVEL2").value("").apply();
-				Form.fields("ADD_RESPONSAVEL1").disabled(true).apply();
-				Form.fields("ADD_RESPONSAVEL2").disabled(true).apply();
+				Form.fields("ADD_RESPONSAVEL1").value("");	
+				Form.fields("ADD_RESPONSAVEL2").value("");
+				Form.fields("ADD_RESPONSAVEL1").disabled(true);
+				Form.fields("ADD_RESPONSAVEL2").disabled(true);
 
 			}
 			else{
 
-				Form.fields("ADD_RESPONSAVEL1").disabled(false).apply();
-				Form.fields("ADD_RESPONSAVEL2").disabled(false).apply();
+				Form.fields("ADD_RESPONSAVEL1").disabled(false);
+				Form.fields("ADD_RESPONSAVEL2").disabled(false);
 
 			}
 	
+			Form.apply();
 		
 		});		
 
@@ -568,8 +577,8 @@ function setEventos() {
 
 					respNomes = auxInicNom;
 					responsaveis = auxInicLog;
-					Form.fields("RESPONSAVEIS").value(responsaveis).apply();
-					Form.fields("RESPONSAVEIS_NOMES").value(respNomes).apply();
+					Form.fields("RESPONSAVEIS").value(responsaveis);
+					Form.fields("RESPONSAVEIS_NOMES").value(respNomes);
 					console.log("Chamado privado");
 					console.log(responsaveis);				
 
@@ -638,8 +647,8 @@ function setEventos() {
 
 					atendNomes = a1Nome;
 					atendentes = atend1;
-					Form.fields("ATENDENTES").value(atendentes).apply();
-					Form.fields("ATENDENTES_NOMES").value(atendNomes).apply();
+					Form.fields("ATENDENTES").value(atendentes);
+					Form.fields("ATENDENTES_NOMES").value(atendNomes);
 					console.log("Atendente 1 definido");
 					console.log(atendentes);
 
@@ -649,8 +658,8 @@ function setEventos() {
 
 					atendNomes = a2Nome;
 					atendentes = atend2;
-					Form.fields("ATENDENTES").value(atendentes).apply();
-					Form.fields("ATENDENTES_NOMES").value(atendNomes).apply();
+					Form.fields("ATENDENTES").value(atendentes);
+					Form.fields("ATENDENTES_NOMES").value(atendNomes);
 					console.log("Atendente 2 definido");
 					console.log(atendentes);
 
@@ -660,8 +669,8 @@ function setEventos() {
 
 					atendNomes = a1Nome + ", " + a2Nome;
 					atendentes = atend1 + ", " + atend2;
-					Form.fields("ATENDENTES").value(atendentes).apply();
-					Form.fields("ATENDENTES_NOMES").value(atendNomes).apply();
+					Form.fields("ATENDENTES").value(atendentes);
+					Form.fields("ATENDENTES_NOMES").value(atendNomes);
 					console.log("Dois atendentes definidos");
 					console.log(atendentes);
 
@@ -670,8 +679,8 @@ function setEventos() {
 					
 					atendNomes = auxMembros;
 					atendentes = auxLogin; 
-					Form.fields("ATENDENTES").value(atendentes).apply();
-					Form.fields("ATENDENTES_NOMES").value(atendNomes).apply();
+					Form.fields("ATENDENTES").value(atendentes);
+					Form.fields("ATENDENTES_NOMES").value(atendNomes);
 					console.log("Nenhum atendente definido");
 					console.log(atendentes);
 				
@@ -686,17 +695,17 @@ function setEventos() {
 				if(auxCiclo == 1){ 
 
 					if(gerenteAp == "Não"){
-						Form.fields("PROX_ETAPA").value("Assumir Novo Chamado").apply();
-						Form.fields("PROX_RESP").value(atendNomes).apply();
+						Form.fields("PROX_ETAPA").value("Assumir Novo Chamado");
+						Form.fields("PROX_RESP").value(atendNomes);
 					}
 					else
 					if(gerenteAp == "Sim"){
-						Form.fields("PROX_ETAPA").value("Aprovar Solicitação de Atendimento").apply();
-						Form.fields("PROX_RESP").value(nomeLider).apply();
+						Form.fields("PROX_ETAPA").value("Aprovar Solicitação de Atendimento");
+						Form.fields("PROX_RESP").value(nomeLider);
 					}	
 
-					Form.actions('aprovar').disabled(false).apply();
-					Form.actions('cancel').disabled(true).apply();
+					Form.actions('aprovar').disabled(false);
+					Form.actions('cancel').disabled(true);
 
 				}
 				
@@ -709,25 +718,25 @@ function setEventos() {
 					atendNomes   = Form.fields("ATENDENTES_NOMES").value();
 
 					// Limpar usuário de atendimento
-					Form.fields("AUX_NOME_SER").value("").apply();
+					Form.fields("AUX_NOME_SER").value("");
 
 					if(auxDevolv == "Devolvido Alçada 1"){
-						Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
-						Form.fields("PROX_RESP").value(atendNomes).apply();
+						Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento");
+						Form.fields("PROX_RESP").value(atendNomes);
 					}
 					else
 					if(auxDevolv == "Devolvido Alçada 2"){
-						Form.fields("PROX_ETAPA").value("Aprovar Solicitação Alçada Nível 2").apply();
-						Form.fields("PROX_RESP").value(auxAlc2).apply();
+						Form.fields("PROX_ETAPA").value("Aprovar Solicitação Alçada Nível 2");
+						Form.fields("PROX_RESP").value(auxAlc2);
 					}
 					else	
 					if(auxDevolv == "Devolvido Alçada 3"){
-						Form.fields("PROX_ETAPA").value("Aprovar Solicitação Alçada Nível 3").apply();
-						Form.fields("PROX_RESP").value(auxAlc3).apply();
+						Form.fields("PROX_ETAPA").value("Aprovar Solicitação Alçada Nível 3");
+						Form.fields("PROX_RESP").value(auxAlc3);
 					}									
 
-					Form.actions('aprovar').disabled(false).apply();
-					Form.actions('rejeitar').disabled(true).apply();
+					Form.actions('aprovar').disabled(false);
+					Form.actions('rejeitar').disabled(true);
 
 				}
 
@@ -736,21 +745,23 @@ function setEventos() {
 			// Chamado cancelado pelo usuário
 			if(auxRota == "Cancelar Chamado"){
 
-				Form.fields("PROX_ETAPA").value("Arquivar Chamado").apply();
-				Form.fields("PROX_RESP").value(auxInicNom).apply();
+				Form.fields("PROX_ETAPA").value("Arquivar Chamado");
+				Form.fields("PROX_RESP").value(auxInicNom);
 
 				// Bloquear ações do form
 				if(auxCiclo == 1){
-					Form.actions('aprovar').disabled(true).apply();
-					Form.actions('cancel').disabled(false).apply();
+					Form.actions('aprovar').disabled(true);
+					Form.actions('cancel').disabled(false);
 				}
 				else 
 				if(auxCiclo > 1){
-					Form.actions('aprovar').disabled(true).apply();
-					Form.actions('rejeitar').disabled(false).apply();
+					Form.actions('aprovar').disabled(true);
+					Form.actions('rejeitar').disabled(false);
 				}
 
 			}
+
+			Form.apply();
 
 		});			
 
@@ -819,9 +830,9 @@ function setEventos() {
 		// Lista Responsáveis 1
 		Form.fields("ADD_RESPONSAVEL1").subscribe("CHANGE", function(itemId, data, response) {
 
-			Form.fields("AUX_ROTA").value("").apply();			
-			Form.fields("PROX_ETAPA").value("").apply();
-			Form.fields("PROX_RESP").value("").apply();	
+			Form.fields("AUX_ROTA").value("");			
+			Form.fields("PROX_ETAPA").value("");
+			Form.fields("PROX_RESP").value("");	
 			
 			// Carregar valores iniciais
 			var valor = Form.fields("ADD_RESPONSAVEL1").rawValue();
@@ -833,15 +844,17 @@ function setEventos() {
 			console.log(props);
 			console.log(get);
 			console.log(valor);
+
+			Form.apply();
 		
 		});	
 		
 		// Lista Responsáveis 2
 		Form.fields("ADD_RESPONSAVEL2").subscribe("CHANGE", function(itemId, data, response) {
 
-			Form.fields("AUX_ROTA").value("").apply();			
-			Form.fields("PROX_ETAPA").value("").apply();
-			Form.fields("PROX_RESP").value("").apply();	
+			Form.fields("AUX_ROTA").value("");			
+			Form.fields("PROX_ETAPA").value("");
+			Form.fields("PROX_RESP").value("");	
 			
 			// Carregar valores iniciais
 			var valor = Form.fields("ADD_RESPONSAVEL2").rawValue();
@@ -853,15 +866,17 @@ function setEventos() {
 			console.log(props);
 			console.log(get);
 			console.log(valor);
+
+			Form.apply();
 		
 		});		
 
 		// Lista Atendentes 1
 		Form.fields("ADD_ATENDENTE1").subscribe("CHANGE", function(itemId, data, response) {
 
-			Form.fields("AUX_ROTA").value("").apply();			
-			Form.fields("PROX_ETAPA").value("").apply();
-			Form.fields("PROX_RESP").value("").apply();	
+			Form.fields("AUX_ROTA").value("");			
+			Form.fields("PROX_ETAPA").value("");
+			Form.fields("PROX_RESP").value("");	
 			
 			// Carregar valores iniciais
 			var valor = Form.fields("ADD_ATENDENTE1").rawValue();
@@ -874,15 +889,17 @@ function setEventos() {
 			console.log(get);
 			console.log(valor);
 			console.log(get.options.length);
+
+			Form.apply();
 		
 		});	
 		
 		// Lista Atendentes 2
 		Form.fields("ADD_ATENDENTE2").subscribe("CHANGE", function(itemId, data, response) {
 
-			Form.fields("AUX_ROTA").value("").apply();			
-			Form.fields("PROX_ETAPA").value("").apply();
-			Form.fields("PROX_RESP").value("").apply();	
+			Form.fields("AUX_ROTA").value("");			
+			Form.fields("PROX_ETAPA").value("");
+			Form.fields("PROX_RESP").value("");	
 			
 			// Carregar valores iniciais
 			var valor = Form.fields("ADD_ATENDENTE2").rawValue();
@@ -895,6 +912,8 @@ function setEventos() {
 			console.log(get);
 			console.log(valor);
 			console.log(get.options.length);
+
+			Form.apply();
 		
 		});				
 
@@ -911,21 +930,23 @@ function setEventos() {
 			
 			if(auxRota == "Aprovar Solicitação"){
 
-				Form.fields("PROX_ETAPA").value("Assumir Novo Chamado").apply();
-				Form.fields("PROX_RESP").value(atendNomes).apply();
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+				Form.fields("PROX_ETAPA").value("Assumir Novo Chamado");
+				Form.fields("PROX_RESP").value(atendNomes);
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}		
 			
 			if(auxRota == "Rejeitar e Cancelar"){			
 
-				Form.fields("PROX_ETAPA").value("Arquivar Chamado").apply();
-				Form.fields("PROX_RESP").value(nomeLider).apply();
-				Form.actions('aprovar').disabled(true).apply();
-				Form.actions('rejeitar').disabled(false).apply();
+				Form.fields("PROX_ETAPA").value("Arquivar Chamado");
+				Form.fields("PROX_RESP").value(nomeLider);
+				Form.actions('aprovar').disabled(true);
+				Form.actions('rejeitar').disabled(false);
 
 			}				
+
+			Form.apply();
 
 		});		
 
@@ -962,9 +983,9 @@ function setEventos() {
 				console.log("responsáveis: " + responsaveis);
 				console.log("atendentes: " + atendentes);
 
-				Form.fields("PROX_ETAPA").value("Avaliar Atendimento").apply();
-				Form.fields("PROX_RESP").value(respNomes).apply();
-				Form.fields("AUX_USER_DEV").value("Aprovado").apply();
+				Form.fields("PROX_ETAPA").value("Avaliar Atendimento");
+				Form.fields("PROX_RESP").value(respNomes);
+				Form.fields("AUX_USER_DEV").value("Aprovado");
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -985,10 +1006,10 @@ function setEventos() {
 
 				}				
 
-				Form.fields("AUX_DEVOLUCAO").value("Devolvido Alçada 1").apply();
+				Form.fields("AUX_DEVOLUCAO").value("Devolvido Alçada 1");
 				Form.fields("AUX_USER_DEV").value("Devolvido").apply();
-				Form.fields("PROX_ETAPA").value("Registrar Solciitação de Atendimento").apply();
-				Form.fields("PROX_RESP").value(respNomes).apply();
+				Form.fields("PROX_ETAPA").value("Registrar Solciitação de Atendimento");
+				Form.fields("PROX_RESP").value(respNomes);
 
 				Form.actions('aprovar').disabled(true);
 				Form.actions('rejeitar').disabled(false);
@@ -1009,9 +1030,9 @@ function setEventos() {
 
 				}
 
-				Form.fields("PROX_ETAPA").value("Aguardando Terceiros").apply();
-				Form.fields("PROX_RESP").value(atendNomes).apply();
-				Form.fields("AUX_USER_DEV").value("Aguardando").apply();
+				Form.fields("PROX_ETAPA").value("Aguardando Terceiros");
+				Form.fields("PROX_RESP").value(atendNomes);
+				Form.fields("AUX_USER_DEV").value("Aguardando");
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -1020,8 +1041,8 @@ function setEventos() {
 			if(auxRota == "Submeter Alçada Nível 2"){
 
 				alcadaNivel2(modelo, auxRota);
-				Form.fields("PROX_ETAPA").value("Aprovar Solicitação Alçada Nível 2").apply();
-				Form.fields("AUX_USER_DEV").value("Submetido").apply();
+				Form.fields("PROX_ETAPA").value("Aprovar Solicitação Alçada Nível 2");
+				Form.fields("AUX_USER_DEV").value("Submetido");
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -1030,9 +1051,9 @@ function setEventos() {
 			if(auxRota == "Encaminhar Chamado"){
 
 				// Limpar campos cada vez que definir a categoria
-				Form.fields("PROX_ETAPA").value("").apply();
-				Form.fields("PROX_RESP").value("").apply();	
-				Form.fields("AUX_NOME_SER").value("").apply();	
+				Form.fields("PROX_ETAPA").value("");
+				Form.fields("PROX_RESP").value("")	
+				Form.fields("AUX_NOME_SER").value("");	
 
 				// Definir campos que vão receber as listas de opções
 				listaCat = Form.fields("CATEGORIA_NOVO");
@@ -1168,7 +1189,7 @@ function setEventos() {
 						if(auxCat == "Assinatura Eletrônica" && auxSub == "Solicitações em Geral"){ 
 						
 							novoGrupo = "99_credito_ass_eletronica";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}
@@ -1176,7 +1197,7 @@ function setEventos() {
 						if(auxCat == "CRL" && auxSub == "Consignado/Consórcio"){ 
 							
 							novoGrupo = "99_cons_consig";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1184,7 +1205,7 @@ function setEventos() {
 						if(auxCat == "CRL" && auxSub == "Alteração CRL Cartão"){ 
 							
 							novoGrupo = "99_credito_crl_cartao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1193,7 +1214,7 @@ function setEventos() {
 						auxCat == "Dúvidas" && auxSub == "Análise de Crédito" || auxCat == "Fábrica de Limites" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_crl_geral";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1201,7 +1222,7 @@ function setEventos() {
 						if(auxCat == "Contrapartes Conectadas (Grupo Econômico)" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_grupo_economico";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1210,7 +1231,7 @@ function setEventos() {
 						auxSub == "Giro Rotativo" || auxSub == "Consignado Privado" || auxSub == "Renegociação"|| auxSub == "Limite Cartão Acima de R$45.000,00")){ 
 							
 							novoGrupo = "99_credito_liberacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1218,7 +1239,7 @@ function setEventos() {
 						if(auxCat == "Liquidação" && (auxSub == "Amortização" || auxSub == "Quitação" || auxSub == "Financiamento")){ 
 							
 							novoGrupo = "99_credito_liquidacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1227,7 +1248,7 @@ function setEventos() {
 						auxCat == "Dúvidas" && auxSub == "Controles" || auxCat == "Documentos Pendentes" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_operacoes";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1235,7 +1256,7 @@ function setEventos() {
 						if(auxCat == "Operações de Crédito" && auxSub == "Prorrogação"){ 
 							
 							novoGrupo = "99_credito_prorrogacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1243,14 +1264,14 @@ function setEventos() {
 						if(auxCat == "Liberação Talão de Cheque" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_talao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}																									
 						else{
 
 							console.log("grupo padrão: " + auxGrupo);
-							Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+							Form.fields("AUX_GRUPO").value(auxGrupo);
 			
 						}							
 
@@ -1261,7 +1282,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "Análise Técnica"){ 
 						
 							novoGrupo = "99_rural_analise_tecnica";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}
@@ -1269,7 +1290,7 @@ function setEventos() {
 						if(auxCat == "Financiamento BNDES" && (auxSub == "Dúvidas" || auxSub == "Quitação" || auxSub == "Outros")){ 
 						
 							novoGrupo = "99_rural_bndes";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}
@@ -1277,7 +1298,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "CRL" || auxCat == "Financiamento BNDES" && auxSub == "CRL"){ 
 						
 							novoGrupo = "99_rural_crl";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}		
@@ -1285,7 +1306,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "Fiscalização"){ 
 						
 							novoGrupo = "99_rural_fiscalizacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1293,7 +1314,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && (auxSub == "Dúvidas" || auxSub == "Outros")){ 
 						
 							novoGrupo = "99_rural_geral";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1301,14 +1322,14 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "Liberação de Crédito"){ 
 						
 							novoGrupo = "99_rural_liberacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}													
 						else{
 
 							console.log("grupo padrão: " + auxGrupo);
-							Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+							Form.fields("AUX_GRUPO").value(auxGrupo);
 			
 						}
 
@@ -1319,14 +1340,14 @@ function setEventos() {
 						if(auxCat == "Conta Capital" && auxSub == "Campanha de Capitalização 2022"){ 
 						
 							novoGrupo = "99_cadastro_capitalizacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}		
 						else{
 
 							console.log("grupo padrão: " + auxGrupo);
-							Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+							Form.fields("AUX_GRUPO").value(auxGrupo);
 			
 						}						
 														
@@ -1334,14 +1355,16 @@ function setEventos() {
 					else{
 
 						console.log("grupo padrão: " + auxGrupo);
-						Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+						Form.fields("AUX_GRUPO").value(auxGrupo);
 
 					}	
+
+					Form.apply();
 		
 				});							
 
-				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
-				Form.fields("AUX_USER_DEV").value("Encaminhado").apply();
+				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento");
+				Form.fields("AUX_USER_DEV").value("Encaminhado");
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -1394,11 +1417,13 @@ function setEventos() {
 		Form.fields("AUX_SQL_GRUPO").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
 			
 			// Atualizar responsáveis pelo atendimento
-			Form.fields("PROX_RESP").value(response).apply();
-			Form.fields("ATENDENTES_NOMES").value(response).apply();
+			Form.fields("PROX_RESP").value(response);
+			Form.fields("ATENDENTES_NOMES").value(response);
 
 			// Bloquear alterações de rota
-			Form.fields("AUX_ROTA").disabled(true).apply();
+			Form.fields("AUX_ROTA").disabled(true);
+
+			Form.apply();
 		
 		});	
 		
@@ -1439,9 +1464,9 @@ function setEventos() {
 			
 			if(auxRota == "Finalizar Atendimento" ){
 
-				Form.fields("PROX_ETAPA").value("Avaliar Atendimento").apply();
-				Form.fields("PROX_RESP").value(respNomes).apply();
-				Form.fields("AUX_USER_DEV").value("Aprovado").apply();
+				Form.fields("PROX_ETAPA").value("Avaliar Atendimento");
+				Form.fields("PROX_RESP").value(respNomes);
+				Form.fields("AUX_USER_DEV").value("Aprovado");
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -1463,10 +1488,10 @@ function setEventos() {
 
 				}				
 
-				Form.fields("AUX_DEVOLUCAO").value("Devolvido Alçada 1").apply();
-				Form.fields("AUX_USER_DEV").value("Devolvido").apply();
-				Form.fields("PROX_ETAPA").value("Registrar Solciitação de Atendimento").apply();
-				Form.fields("PROX_RESP").value(respNomes).apply();
+				Form.fields("AUX_DEVOLUCAO").value("Devolvido Alçada 1");
+				Form.fields("AUX_USER_DEV").value("Devolvido");
+				Form.fields("PROX_ETAPA").value("Registrar Solciitação de Atendimento");
+				Form.fields("PROX_RESP").value(respNomes);
 
 				Form.actions('aprovar').disabled(true);
 				Form.actions('rejeitar').disabled(false);
@@ -1475,9 +1500,9 @@ function setEventos() {
 			if(auxRota == "Encaminhar Chamado"){
 
 				// Limpar campos cada vez que definir a categoria
-				Form.fields("PROX_ETAPA").value("").apply();
-				Form.fields("PROX_RESP").value("").apply();	
-				Form.fields("AUX_NOME_SER").value("").apply();
+				Form.fields("PROX_ETAPA").value("");
+				Form.fields("PROX_RESP").value("");	
+				Form.fields("AUX_NOME_SER").value("");
 
 				// Definir campos que vão receber as listas de opções
 				listaCat = Form.fields("CATEGORIA_NOVO");
@@ -1613,7 +1638,7 @@ function setEventos() {
 						if(auxCat == "Assinatura Eletrônica" && auxSub == "Solicitações em Geral"){ 
 						
 							novoGrupo = "99_credito_ass_eletronica";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}
@@ -1621,7 +1646,7 @@ function setEventos() {
 						if(auxCat == "CRL" && auxSub == "Consignado/Consórcio"){ 
 							
 							novoGrupo = "99_cons_consig";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1629,7 +1654,7 @@ function setEventos() {
 						if(auxCat == "CRL" && auxSub == "Alteração CRL Cartão"){ 
 							
 							novoGrupo = "99_credito_crl_cartao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1638,7 +1663,7 @@ function setEventos() {
 						auxCat == "Dúvidas" && auxSub == "Análise de Crédito" || auxCat == "Fábrica de Limites" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_crl_geral";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1646,7 +1671,7 @@ function setEventos() {
 						if(auxCat == "Contrapartes Conectadas (Grupo Econômico)" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_grupo_economico";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1655,7 +1680,7 @@ function setEventos() {
 						auxSub == "Giro Rotativo" || auxSub == "Consignado Privado" || auxSub == "Renegociação"|| auxSub == "Limite Cartão Acima de R$45.000,00")){ 
 							
 							novoGrupo = "99_credito_liberacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1663,7 +1688,7 @@ function setEventos() {
 						if(auxCat == "Liquidação" && (auxSub == "Amortização" || auxSub == "Quitação" || auxSub == "Financiamento")){ 
 							
 							novoGrupo = "99_credito_liquidacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1672,7 +1697,7 @@ function setEventos() {
 						auxCat == "Dúvidas" && auxSub == "Controles" || auxCat == "Documentos Pendentes" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_operacoes";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1680,7 +1705,7 @@ function setEventos() {
 						if(auxCat == "Operações de Crédito" && auxSub == "Prorrogação"){ 
 							
 							novoGrupo = "99_credito_prorrogacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1688,14 +1713,14 @@ function setEventos() {
 						if(auxCat == "Liberação Talão de Cheque" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_talao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}																									
 						else{
 
 							console.log("grupo padrão: " + auxGrupo);
-							Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+							Form.fields("AUX_GRUPO").value(auxGrupo);
 			
 						}							
 
@@ -1706,7 +1731,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "Análise Técnica"){ 
 						
 							novoGrupo = "99_rural_analise_tecnica";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}
@@ -1714,7 +1739,7 @@ function setEventos() {
 						if(auxCat == "Financiamento BNDES" && (auxSub == "Dúvidas" || auxSub == "Quitação" || auxSub == "Outros")){ 
 						
 							novoGrupo = "99_rural_bndes";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}
@@ -1722,7 +1747,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "CRL" || auxCat == "Financiamento BNDES" && auxSub == "CRL"){ 
 						
 							novoGrupo = "99_rural_crl";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}		
@@ -1730,7 +1755,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "Fiscalização"){ 
 						
 							novoGrupo = "99_rural_fiscalizacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1738,7 +1763,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && (auxSub == "Dúvidas" || auxSub == "Outros")){ 
 						
 							novoGrupo = "99_rural_geral";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -1746,14 +1771,14 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "Liberação de Crédito"){ 
 						
 							novoGrupo = "99_rural_liberacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}													
 						else{
 
 							console.log("grupo padrão: " + auxGrupo);
-							Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+							Form.fields("AUX_GRUPO").value(auxGrupo);
 			
 						}
 
@@ -1764,14 +1789,14 @@ function setEventos() {
 						if(auxCat == "Conta Capital" && auxSub == "Campanha de Capitalização 2022"){ 
 						
 							novoGrupo = "99_cadastro_capitalizacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
 						else{
 		
 							console.log("grupo padrão: " + auxGrupo);
-							Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+							Form.fields("AUX_GRUPO").value(auxGrupo);
 			
 						}							
 		
@@ -1779,14 +1804,16 @@ function setEventos() {
 					else{
 
 						console.log("grupo padrão: " + auxGrupo);
-						Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+						Form.fields("AUX_GRUPO").value(auxGrupo);
 
 					}	
+
+					Form.apply();
 		
 				});							
 
-				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
-				Form.fields("AUX_USER_DEV").value("Encaminhado").apply();
+				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento");
+				Form.fields("AUX_USER_DEV").value("Encaminhado");
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -1832,11 +1859,13 @@ function setEventos() {
 		Form.fields("AUX_SQL_GRUPO").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
 			
 			// Atualizar responsáveis pelo atendimento
-			Form.fields("PROX_RESP").value(response).apply();
-			Form.fields("ATENDENTES_NOMES").value(response).apply();
+			Form.fields("PROX_RESP").value(response);
+			Form.fields("ATENDENTES_NOMES").value(response);
 
 			// Bloquear alterações de rota
-			Form.fields("AUX_ROTA").disabled(true).apply();
+			Form.fields("AUX_ROTA").disabled(true);
+
+			Form.apply();
 		
 		});	
 		
@@ -1868,9 +1897,9 @@ function setEventos() {
 			
 			if(auxRota == "Encerrar Chamado" ){
 
-				Form.fields("PROX_ETAPA").value("Avaliar Atendimento").apply();
-				Form.fields("PROX_RESP").value(respNomes).apply();
-				Form.fields("AUX_USER_DEV").value("Rejeitado").apply();
+				Form.fields("PROX_ETAPA").value("Avaliar Atendimento");
+				Form.fields("PROX_RESP").value(respNomes);
+				Form.fields("AUX_USER_DEV").value("Rejeitado");
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -1878,10 +1907,10 @@ function setEventos() {
 			}
 			if(auxRota == "Devolver ao Solicitante"){
 
-				Form.fields("AUX_DEVOLUCAO").value("Devolvido Alçada 2").apply();
-				Form.fields("AUX_USER_DEV").value("Devolvido").apply();
-				Form.fields("PROX_ETAPA").value("Registrar Solciitação de Atendimento").apply();
-				Form.fields("PROX_RESP").value(respNomes).apply();
+				Form.fields("AUX_DEVOLUCAO").value("Devolvido Alçada 2");
+				Form.fields("AUX_USER_DEV").value("Devolvido");
+				Form.fields("PROX_ETAPA").value("Registrar Solciitação de Atendimento");
+				Form.fields("PROX_RESP").value(respNomes);
 
 				Form.actions('aprovar').disabled(true);
 				Form.actions('rejeitar').disabled(false);
@@ -1889,10 +1918,10 @@ function setEventos() {
 			}
 			if(auxRota == "Aprovar e Prosseguir"){
 
-				Form.fields("AUX_NOME_SER").value("").apply();
-				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
-				Form.fields("AUX_USER_DEV").value("Aprovado").apply();
-				Form.fields("PROX_RESP").value(atendNomes).apply();
+				Form.fields("AUX_NOME_SER").value("");
+				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento");
+				Form.fields("AUX_USER_DEV").value("Aprovado");
+				Form.fields("PROX_RESP").value(atendNomes);
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -1901,8 +1930,8 @@ function setEventos() {
 			if(auxRota == "Submeter Alçada Nível 3"){
 
 				alcadaNivel3(modelo, auxRota);
-				Form.fields("PROX_ETAPA").value("Aprovar Solicitação Alçada Nível 3").apply();
-				Form.fields("AUX_USER_DEV").value("Submetido").apply();
+				Form.fields("PROX_ETAPA").value("Aprovar Solicitação Alçada Nível 3");
+				Form.fields("AUX_USER_DEV").value("Submetido");
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -1911,9 +1940,9 @@ function setEventos() {
 			if(auxRota == "Aprovar e Encaminhar"){
 
 				// Limpar campos cada vez que definir a categoria
-				Form.fields("PROX_ETAPA").value("").apply();
-				Form.fields("PROX_RESP").value("").apply();	
-				Form.fields("AUX_NOME_SER").value("").apply();
+				Form.fields("PROX_ETAPA").value("");
+				Form.fields("PROX_RESP").value("")	
+				Form.fields("AUX_NOME_SER").value("");
 
 				// Definir campos que vão receber as listas de opções
 				listaCat   = Form.fields("CATEGORIA_NOVO");
@@ -2048,7 +2077,7 @@ function setEventos() {
 						if(auxCat == "Assinatura Eletrônica" && auxSub == "Solicitações em Geral"){ 
 						
 							novoGrupo = "99_credito_ass_eletronica";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}
@@ -2056,7 +2085,7 @@ function setEventos() {
 						if(auxCat == "CRL" && auxSub == "Consignado/Consórcio"){ 
 							
 							novoGrupo = "99_cons_consig";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2064,7 +2093,7 @@ function setEventos() {
 						if(auxCat == "CRL" && auxSub == "Alteração CRL Cartão"){ 
 							
 							novoGrupo = "99_credito_crl_cartao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2073,7 +2102,7 @@ function setEventos() {
 						auxCat == "Dúvidas" && auxSub == "Análise de Crédito" || auxCat == "Fábrica de Limites" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_crl_geral";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2081,7 +2110,7 @@ function setEventos() {
 						if(auxCat == "Contrapartes Conectadas (Grupo Econômico)" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_grupo_economico";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2090,7 +2119,7 @@ function setEventos() {
 						auxSub == "Giro Rotativo" || auxSub == "Consignado Privado" || auxSub == "Renegociação"|| auxSub == "Limite Cartão Acima de R$45.000,00")){ 
 							
 							novoGrupo = "99_credito_liberacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2098,7 +2127,7 @@ function setEventos() {
 						if(auxCat == "Liquidação" && (auxSub == "Amortização" || auxSub == "Quitação" || auxSub == "Financiamento")){ 
 							
 							novoGrupo = "99_credito_liquidacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2107,7 +2136,7 @@ function setEventos() {
 						auxCat == "Dúvidas" && auxSub == "Controles" || auxCat == "Documentos Pendentes" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_operacoes";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2115,7 +2144,7 @@ function setEventos() {
 						if(auxCat == "Operações de Crédito" && auxSub == "Prorrogação"){ 
 							
 							novoGrupo = "99_credito_prorrogacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2123,14 +2152,14 @@ function setEventos() {
 						if(auxCat == "Liberação Talão de Cheque" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_talao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}																									
 						else{
 
 							console.log("grupo padrão: " + auxGrupo);
-							Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+							Form.fields("AUX_GRUPO").value(auxGrupo);
 			
 						}							
 
@@ -2141,7 +2170,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "Análise Técnica"){ 
 						
 							novoGrupo = "99_rural_analise_tecnica";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}
@@ -2149,7 +2178,7 @@ function setEventos() {
 						if(auxCat == "Financiamento BNDES" && (auxSub == "Dúvidas" || auxSub == "Quitação" || auxSub == "Outros")){ 
 						
 							novoGrupo = "99_rural_bndes";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}
@@ -2157,7 +2186,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "CRL" || auxCat == "Financiamento BNDES" && auxSub == "CRL"){ 
 						
 							novoGrupo = "99_rural_crl";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}		
@@ -2165,7 +2194,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "Fiscalização"){ 
 						
 							novoGrupo = "99_rural_fiscalizacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2173,7 +2202,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && (auxSub == "Dúvidas" || auxSub == "Outros")){ 
 						
 							novoGrupo = "99_rural_geral";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2181,14 +2210,14 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "Liberação de Crédito"){ 
 						
 							novoGrupo = "99_rural_liberacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}													
 						else{
 
 							console.log("grupo padrão: " + auxGrupo);
-							Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+							Form.fields("AUX_GRUPO").value(auxGrupo);
 			
 						}
 
@@ -2199,14 +2228,14 @@ function setEventos() {
 						if(auxCat == "Conta Capital" && auxSub == "Campanha de Capitalização 2022"){ 
 						
 							novoGrupo = "99_cadastro_capitalizacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
 						else{
 		
 							console.log("grupo padrão: " + auxGrupo);
-							Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+							Form.fields("AUX_GRUPO").value(auxGrupo);
 			
 						}							
 		
@@ -2214,14 +2243,16 @@ function setEventos() {
 					else{
 
 						console.log("grupo padrão: " + auxGrupo);
-						Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+						Form.fields("AUX_GRUPO").value(auxGrupo);
 
 					}	
+
+					Fomr.apply();
 		
 				});							
 
-				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
-				Form.fields("AUX_USER_DEV").value("Encaminhado").apply();
+				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento");
+				Form.fields("AUX_USER_DEV").value("Encaminhado");
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -2274,11 +2305,13 @@ function setEventos() {
 		Form.fields("AUX_SQL_GRUPO").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
 			
 			// Atualizar responsáveis pelo atendimento
-			Form.fields("PROX_RESP").value(response).apply();
-			Form.fields("ATENDENTES_NOMES").value(response).apply();
+			Form.fields("PROX_RESP").value(response);
+			Form.fields("ATENDENTES_NOMES").value(response);
 
 			// Bloquear alterações de rota
-			Form.fields("AUX_ROTA").disabled(true).apply();
+			Form.fields("AUX_ROTA").disabled(true);
+			
+			Form.apply();
 		
 		});	
 		
@@ -2310,9 +2343,9 @@ function setEventos() {
 			
 			if(auxRota == "Encerrar Chamado" ){
 
-				Form.fields("PROX_ETAPA").value("Avaliar Atendimento").apply();
-				Form.fields("PROX_RESP").value(respNomes).apply();
-				Form.fields("AUX_USER_DEV").value("Rejeitado").apply();
+				Form.fields("PROX_ETAPA").value("Avaliar Atendimento");
+				Form.fields("PROX_RESP").value(respNomes);
+				Form.fields("AUX_USER_DEV").value("Rejeitado");
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -2320,10 +2353,10 @@ function setEventos() {
 			}
 			if(auxRota == "Devolver ao Solicitante"){
 
-				Form.fields("AUX_DEVOLUCAO").value("Devolvido Alçada 3").apply();
-				Form.fields("AUX_USER_DEV").value("Devolvido").apply();
-				Form.fields("PROX_ETAPA").value("Registrar Solciitação de Atendimento").apply();
-				Form.fields("PROX_RESP").value(respNomes).apply();
+				Form.fields("AUX_DEVOLUCAO").value("Devolvido Alçada 3");
+				Form.fields("AUX_USER_DEV").value("Devolvido");
+				Form.fields("PROX_ETAPA").value("Registrar Solciitação de Atendimento");
+				Form.fields("PROX_RESP").value(respNomes);
 
 				Form.actions('aprovar').disabled(true);
 				Form.actions('rejeitar').disabled(false);
@@ -2331,10 +2364,10 @@ function setEventos() {
 			}
 			if(auxRota == "Aprovar e Prosseguir"){
 
-				Form.fields("AUX_NOME_SER").value("").apply();
-				Form.fields("AUX_USER_DEV").value("Aprovado").apply();
-				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
-				Form.fields("PROX_RESP").value(atendNomes).apply();
+				Form.fields("AUX_NOME_SER").value("");
+				Form.fields("AUX_USER_DEV").value("Aprovado");
+				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento");
+				Form.fields("PROX_RESP").value(atendNomes);
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -2343,9 +2376,9 @@ function setEventos() {
 			if(auxRota == "Aprovar e Encaminhar"){
 
 				// Limpar campos cada vez que definir a categoria
-				Form.fields("PROX_ETAPA").value("").apply();
-				Form.fields("PROX_RESP").value("").apply();	
-				Form.fields("AUX_NOME_SER").value("").apply();
+				Form.fields("PROX_ETAPA").value("");
+				Form.fields("PROX_RESP").value("")	
+				Form.fields("AUX_NOME_SER").value("");
 
 				// Definir campos que vão receber as listas de opções
 				listaCat = Form.fields("CATEGORIA_NOVO");
@@ -2480,7 +2513,7 @@ function setEventos() {
 						if(auxCat == "Assinatura Eletrônica" && auxSub == "Solicitações em Geral"){ 
 						
 							novoGrupo = "99_credito_ass_eletronica";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}
@@ -2488,7 +2521,7 @@ function setEventos() {
 						if(auxCat == "CRL" && auxSub == "Consignado/Consórcio"){ 
 							
 							novoGrupo = "99_cons_consig";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2496,7 +2529,7 @@ function setEventos() {
 						if(auxCat == "CRL" && auxSub == "Alteração CRL Cartão"){ 
 							
 							novoGrupo = "99_credito_crl_cartao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2505,7 +2538,7 @@ function setEventos() {
 						auxCat == "Dúvidas" && auxSub == "Análise de Crédito" || auxCat == "Fábrica de Limites" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_crl_geral";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2513,7 +2546,7 @@ function setEventos() {
 						if(auxCat == "Contrapartes Conectadas (Grupo Econômico)" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_grupo_economico";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2522,7 +2555,7 @@ function setEventos() {
 						auxSub == "Giro Rotativo" || auxSub == "Consignado Privado" || auxSub == "Renegociação"|| auxSub == "Limite Cartão Acima de R$45.000,00")){ 
 							
 							novoGrupo = "99_credito_liberacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2530,7 +2563,7 @@ function setEventos() {
 						if(auxCat == "Liquidação" && (auxSub == "Amortização" || auxSub == "Quitação" || auxSub == "Financiamento")){ 
 							
 							novoGrupo = "99_credito_liquidacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2539,7 +2572,7 @@ function setEventos() {
 						auxCat == "Dúvidas" && auxSub == "Controles" || auxCat == "Documentos Pendentes" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_operacoes";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2547,7 +2580,7 @@ function setEventos() {
 						if(auxCat == "Operações de Crédito" && auxSub == "Prorrogação"){ 
 							
 							novoGrupo = "99_credito_prorrogacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2555,14 +2588,14 @@ function setEventos() {
 						if(auxCat == "Liberação Talão de Cheque" && auxSub == "Solicitações em Geral"){ 
 							
 							novoGrupo = "99_credito_talao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}																									
 						else{
 
 							console.log("grupo padrão: " + auxGrupo);
-							Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+							Form.fields("AUX_GRUPO").value(auxGrupo);
 			
 						}							
 
@@ -2573,7 +2606,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "Análise Técnica"){ 
 						
 							novoGrupo = "99_rural_analise_tecnica";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}
@@ -2581,7 +2614,7 @@ function setEventos() {
 						if(auxCat == "Financiamento BNDES" && (auxSub == "Dúvidas" || auxSub == "Quitação" || auxSub == "Outros")){ 
 						
 							novoGrupo = "99_rural_bndes";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}
@@ -2589,7 +2622,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "CRL" || auxCat == "Financiamento BNDES" && auxSub == "CRL"){ 
 						
 							novoGrupo = "99_rural_crl";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}		
@@ -2597,7 +2630,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "Fiscalização"){ 
 						
 							novoGrupo = "99_rural_fiscalizacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2605,7 +2638,7 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && (auxSub == "Dúvidas" || auxSub == "Outros")){ 
 						
 							novoGrupo = "99_rural_geral";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
@@ -2613,14 +2646,14 @@ function setEventos() {
 						if(auxCat == "Crédito Rural" && auxSub == "Liberação de Crédito"){ 
 						
 							novoGrupo = "99_rural_liberacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}													
 						else{
 
 							console.log("grupo padrão: " + auxGrupo);
-							Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+							Form.fields("AUX_GRUPO").value(auxGrupo);
 			
 						}
 
@@ -2631,14 +2664,14 @@ function setEventos() {
 						if(auxCat == "Conta Capital" && auxSub == "Campanha de Capitalização 2022"){ 
 						
 							novoGrupo = "99_cadastro_capitalizacao";
-							Form.fields("AUX_GRUPO").value(novoGrupo).apply();
+							Form.fields("AUX_GRUPO").value(novoGrupo);
 							console.log("novo grupo: " + novoGrupo);
 						
 						}	
 						else{
 		
 							console.log("grupo padrão: " + auxGrupo);
-							Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+							Form.fields("AUX_GRUPO").value(auxGrupo);
 			
 						}							
 		
@@ -2646,14 +2679,16 @@ function setEventos() {
 					else{
 
 						console.log("grupo padrão: " + auxGrupo);
-						Form.fields("AUX_GRUPO").value(auxGrupo).apply();
+						Form.fields("AUX_GRUPO").value(auxGrupo);
 
 					}	
+
+					Form.apply();
 		
 				});							
 
-				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento").apply();
-				Form.fields("AUX_USER_DEV").value("Encaminhado").apply();
+				Form.fields("PROX_ETAPA").value("Assumir Chamado em Andamento");
+				Form.fields("AUX_USER_DEV").value("Encaminhado");
 
 				Form.actions('aprovar').disabled(false);
 				Form.actions('rejeitar').disabled(true);
@@ -2698,11 +2733,13 @@ function setEventos() {
 		Form.fields("AUX_SQL_GRUPO").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
 			
 			// Atualizar responsáveis pelo atendimento
-			Form.fields("PROX_RESP").value(response).apply();
-			Form.fields("ATENDENTES_NOMES").value(response).apply();
+			Form.fields("PROX_RESP").value(response);
+			Form.fields("ATENDENTES_NOMES").value(response);
 
 			// Bloquear alterações de rota
-			Form.fields("AUX_ROTA").disabled(true).apply();
+			Form.fields("AUX_ROTA").disabled(true);
+
+			Form.apply();
 		
 		});	
 		

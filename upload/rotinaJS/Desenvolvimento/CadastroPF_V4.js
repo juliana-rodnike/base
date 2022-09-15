@@ -321,6 +321,8 @@ function setEventos() {
 
 			}
 
+			Form.apply();
+
 		});	
 		
 		// Formuário atualização endereço
@@ -342,6 +344,8 @@ function setEventos() {
 				Form.groups('ENDERECO').visible(false);
 
 			}
+
+			Form.apply();
 
 		});	
 		
@@ -379,6 +383,8 @@ function setEventos() {
 				Form.fields('EMAIL').visible(false);			
 
 			}
+
+			Form.apply();
 
 		});		
 		
@@ -505,6 +511,7 @@ function setEventos() {
 			// Ajuste de linhas
 			Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');
 
+			Form.apply();
 
 		});		
 
@@ -522,7 +529,9 @@ function setEventos() {
 			Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").visible(true);
 			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").visible(true);
 			Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").visible(true);
-			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(true);			
+			Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").visible(true);		
+			
+			Form.apply();
 
 		});		
 		
@@ -597,17 +606,17 @@ function setEventos() {
 				Form.grids("G_CAD_ADD").fields("SERA_TITULAR").lineBreak('SIMPLES');				
 				
 				// Carregar valores
-				Form.grids("G_CAD_ADD").fields("CPF_ADD").value(cpfConjT).apply();
-				Form.grids("G_CAD_ADD").fields("NOME_ADD").value(nomConjT).apply();
-				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").value(cpfTit).apply();
-				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").value(nomTit).apply();
-				Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").value(civilT).apply();
+				Form.grids("G_CAD_ADD").fields("CPF_ADD").value(cpfConjT);
+				Form.grids("G_CAD_ADD").fields("NOME_ADD").value(nomConjT);
+				Form.grids("G_CAD_ADD").fields("CPF_CONJUGE_ADD").value(cpfTit);
+				Form.grids("G_CAD_ADD").fields("NOME_CONJUGE_ADD").value(nomTit);
+				Form.grids("G_CAD_ADD").fields("ESTADO_CIVIL_ADD").value(civilT);
 
 
 				// Campo regime de casamento
 				if(civilT == "Casado"){
 					
-					Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").value(regimeT).apply();
+					Form.grids("G_CAD_ADD").fields("REGIME_CASAMENTO_ADD").value(regimeT);
 				
 				}
 
@@ -622,8 +631,8 @@ function setEventos() {
 				Form.grids("G_CAD_ADD").fields("RELACIONAMENTO").lineBreak('SIMPLES');		
 
 				// Carregar valores
-				Form.grids("G_CAD_ADD").fields("CPF_ADD").value(cpfRepT).apply();
-				Form.grids("G_CAD_ADD").fields("NOME_ADD").value(nomeRepT).apply();
+				Form.grids("G_CAD_ADD").fields("CPF_ADD").value(cpfRepT);
+				Form.grids("G_CAD_ADD").fields("NOME_ADD").value(nomeRepT);
 
 			}
 			else
@@ -850,20 +859,22 @@ function setEventos() {
 				telRef1T = Form.fields("CEL_TEL_REF_UM").value();
 				telRef2T = Form.fields("CEL_TEL_REF_DOIS").value();
 
-				Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").value(ref1T).apply();
-				Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").value(ref2T).apply();
-				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").value(telRef1T).apply();
-				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").value(telRef2T).apply();
+				Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").value(ref1T);
+				Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").value(ref2T);
+				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").value(telRef1T);
+				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").value(telRef2T);
 
 			}
 			else{
 
-				Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").value("").apply();
-				Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").value("").apply();
-				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").value("").apply();
-				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").value("").apply();
+				Form.grids("G_CAD_ADD").fields("REFERENCIA_UM_ADD").value("");
+				Form.grids("G_CAD_ADD").fields("REFERENCIA_DOIS_ADD").value("");
+				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_UM_ADD").value("");
+				Form.grids("G_CAD_ADD").fields("CEL_TEL_REF_DOIS_ADD").value("");
 
 			}
+
+			Form.apply();
 
 		});		
 
@@ -917,52 +928,54 @@ function setEventos() {
 			
 			if(response == "Prosseguir"){				
 
-				Form.fields('DOC_INVALIDO').visible(false).apply();
-				Form.fields('DOC_NAO_ENVIADO').visible(false).apply();
-				Form.fields('DOC_INSUFICIENTE').visible(false).apply();
-				Form.fields('FALTA_INFORMACOES').visible(false).apply();
-				Form.fields('INFO_SISBR').visible(false).apply();
-				Form.fields('PEDIDO_PA').visible(false).apply();
+				Form.fields('DOC_INVALIDO').visible(false);
+				Form.fields('DOC_NAO_ENVIADO').visible(false);
+				Form.fields('DOC_INSUFICIENTE').visible(false);
+				Form.fields('FALTA_INFORMACOES').visible(false);
+				Form.fields('INFO_SISBR').visible(false);
+				Form.fields('PEDIDO_PA').visible(false);
 
 				// Não atualizar a variável quando o cadastro for de outra cooperativa para não perder a rota
-				if(codigoEtapa == REALIZAR_CADASTRO_SISBR || codigoEtapa == COMPLEMENTAR_CADASTRO_SISBR) Form.fields("AUX_GRUPO_CRL").value("Não").apply();
+				if(codigoEtapa == REALIZAR_CADASTRO_SISBR || codigoEtapa == COMPLEMENTAR_CADASTRO_SISBR) Form.fields("AUX_GRUPO_CRL").value("Não");
 
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}	
 			
 			if(response == "Gerar CRL"){				
 
-				Form.fields('DOC_INVALIDO').visible(false).apply();
-				Form.fields('DOC_NAO_ENVIADO').visible(false).apply();
-				Form.fields('DOC_INSUFICIENTE').visible(false).apply();
-				Form.fields('FALTA_INFORMACOES').visible(false).apply();				
-				Form.fields('INFO_SISBR').visible(false).apply();	
-				Form.fields('PEDIDO_PA').visible(false).apply();			
+				Form.fields('DOC_INVALIDO').visible(false);
+				Form.fields('DOC_NAO_ENVIADO').visible(false);
+				Form.fields('DOC_INSUFICIENTE').visible(false);
+				Form.fields('FALTA_INFORMACOES').visible(false);				
+				Form.fields('INFO_SISBR').visible(false);	
+				Form.fields('PEDIDO_PA').visible(false);			
 
-				Form.fields("AUX_GRUPO_CRL").value("Sim").apply();
+				Form.fields("AUX_GRUPO_CRL").value("Sim");
 
-				Form.actions('aprovar').disabled(false).apply();
-				Form.actions('rejeitar').disabled(true).apply();
+				Form.actions('aprovar').disabled(false);
+				Form.actions('rejeitar').disabled(true);
 
 			}
 			
 			if(response == "Devolver"){
 
-				Form.fields('DOC_INVALIDO').visible(true).apply();
-				Form.fields('DOC_NAO_ENVIADO').visible(true).apply();
-				Form.fields('DOC_INSUFICIENTE').visible(true).apply();
-				Form.fields('FALTA_INFORMACOES').visible(true).apply();
-				Form.fields('INFO_SISBR').visible(true).apply();
-				Form.fields('PEDIDO_PA').visible(true).apply();
+				Form.fields('DOC_INVALIDO').visible(true);
+				Form.fields('DOC_NAO_ENVIADO').visible(true);
+				Form.fields('DOC_INSUFICIENTE').visible(true);
+				Form.fields('FALTA_INFORMACOES').visible(true);
+				Form.fields('INFO_SISBR').visible(true);
+				Form.fields('PEDIDO_PA').visible(true);
 
-				Form.fields("AUX_GRUPO_CRL").value("").apply();
+				Form.fields("AUX_GRUPO_CRL").value("");
 
-				Form.actions('aprovar').disabled(true).apply();
-				Form.actions('rejeitar').disabled(false).apply();
+				Form.actions('aprovar').disabled(true);
+				Form.actions('rejeitar').disabled(false);
 
-			}				
+			}	
+			
+			Form.apply();
 
 		});			
 
@@ -989,18 +1002,18 @@ function setEventos() {
 					
 					if(relax == "Cônjuge"){
 
-						Form.grids("G_EXTERNAS_ADD").fields("PONTUACAO_SCORE_ADD").value(scoreConjT).apply();
-						Form.grids("G_EXTERNAS_ADD").fields("RESTRICOES_ADD").value(restConjT).apply();
-						Form.grids("G_EXTERNAS_ADD").fields("SCORE_CONJUGE_ADD").value(scoreT).apply();
-						Form.grids("G_EXTERNAS_ADD").fields("RESTRICOES_CONJUGE_ADD").value(restT).apply();
+						Form.grids("G_EXTERNAS_ADD").fields("PONTUACAO_SCORE_ADD").value(scoreConjT);
+						Form.grids("G_EXTERNAS_ADD").fields("RESTRICOES_ADD").value(restConjT);
+						Form.grids("G_EXTERNAS_ADD").fields("SCORE_CONJUGE_ADD").value(scoreT);
+						Form.grids("G_EXTERNAS_ADD").fields("RESTRICOES_CONJUGE_ADD").value(restT);
 
 						// Mostrar campo de justificação restrição cadastro adicional
 						Form.grids("G_EXTERNAS_ADD").fields("RESTRICOES_ADD").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
 
 							if(response == "Restrição Impeditiva" || response == "Restrição Aceitável"){
 								
-								Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(true).apply();
-								Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTRICAO_ADD").value(justRestConjT).apply();
+								Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(true);
+								Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTRICAO_ADD").value(justRestConjT);
 
 							}
 				
@@ -1011,8 +1024,8 @@ function setEventos() {
 
 							if(response == "Restrição Impeditiva" || response == "Restrição Aceitável"){
 								
-								Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').visible(true).apply();
-								Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTR_CON_ADD").value(jusRestT).apply();
+								Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').visible(true);
+								Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTR_CON_ADD").value(jusRestT);
 
 							}
 				
@@ -1022,16 +1035,16 @@ function setEventos() {
 
 					if(relax == "Procurador/Rep. Legal"){
 
-						Form.grids("G_EXTERNAS_ADD").fields("PONTUACAO_SCORE_ADD").value(scoreProcT).apply();
-						Form.grids("G_EXTERNAS_ADD").fields("RESTRICOES_ADD").value(restProcT).apply();
+						Form.grids("G_EXTERNAS_ADD").fields("PONTUACAO_SCORE_ADD").value(scoreProcT);
+						Form.grids("G_EXTERNAS_ADD").fields("RESTRICOES_ADD").value(restProcT);
 
 						// Mostrar campo de justificação restrição cadastro adicional
 						Form.grids("G_EXTERNAS_ADD").fields("RESTRICOES_ADD").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
 
 							if(response == "Restrição Impeditiva" || response == "Restrição Aceitável"){
 								
-								Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(true).apply();
-								Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTRICAO_ADD").value(justRestProcT).apply();
+								Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(true);
+								Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTRICAO_ADD").value(justRestProcT);
 
 							}
 				
@@ -1042,14 +1055,16 @@ function setEventos() {
 				}
 				else{
 
-					Form.grids("G_EXTERNAS_ADD").fields("PONTUACAO_SCORE_ADD").value("").apply();
-					Form.grids("G_EXTERNAS_ADD").fields("RESTRICOES_ADD").value("").apply();
-					Form.grids("G_EXTERNAS_ADD").fields("SCORE_CONJUGE_ADD").value("").apply();
-					Form.grids("G_EXTERNAS_ADD").fields("RESTRICOES_CONJUGE_ADD").value("").apply();		
-					Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTRICAO_ADD").value("").apply();	
-					Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTR_CON_ADD").value("").apply();		
+					Form.grids("G_EXTERNAS_ADD").fields("PONTUACAO_SCORE_ADD").value("");
+					Form.grids("G_EXTERNAS_ADD").fields("RESTRICOES_ADD").value("");
+					Form.grids("G_EXTERNAS_ADD").fields("SCORE_CONJUGE_ADD").value("");
+					Form.grids("G_EXTERNAS_ADD").fields("RESTRICOES_CONJUGE_ADD").value("");		
+					Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTRICAO_ADD").value("");	
+					Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTR_CON_ADD").value("");		
 
 				}
+
+				Form.apply();
 
 			});	
 
@@ -1058,16 +1073,18 @@ function setEventos() {
 
 				if(response == "Restrição Impeditiva" || response == "Restrição Aceitável"){
 					
-					Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(true).apply();
-					Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTRICAO_ADD").setRequired('aprovar', true).apply();
+					Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(true);
+					Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTRICAO_ADD").setRequired('aprovar', true);
 
 				}
 				else{
 
-					Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(false).apply();
-					Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTRICAO_ADD").setRequired('aprovar', false).apply();
+					Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(false);
+					Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTRICAO_ADD").setRequired('aprovar', false);
 
 				}
+
+				Form.apply();
 	
 			});	
 
@@ -1076,16 +1093,18 @@ function setEventos() {
 
 				if(response == "Restrição Impeditiva" || response == "Restrição Aceitável"){
 					
-					Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').visible(true).apply();
-					Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTR_CON_ADD").setRequired('aprovar', true).apply();
+					Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').visible(true);
+					Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTR_CON_ADD").setRequired('aprovar', true);
 
 				}
 				else{
 
-					Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').visible(false).apply();
-					Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTR_CON_ADD").setRequired('aprovar', false).apply();
+					Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').visible(false);
+					Form.grids("G_EXTERNAS_ADD").fields("JUST_RESTR_CON_ADD").setRequired('aprovar', false);
 
 				}
+
+				Form.apply();
 	
 			});			
 			
@@ -1094,16 +1113,18 @@ function setEventos() {
 			
 				if(response == "Restrição Impeditiva" || response == "Restrição Aceitável"){
 					
-					Form.fields('JUST_REST_PROC_REP').visible(true).apply();
-					Form.fields('JUST_REST_PROC_REP').setRequired('aprovar', true).apply();
+					Form.fields('JUST_REST_PROC_REP').visible(true);
+					Form.fields('JUST_REST_PROC_REP').setRequired('aprovar', true);
 
 				}
 				else{
 
-					Form.fields('JUST_REST_PROC_REP').visible(false).apply();
-					Form.fields('JUST_REST_PROC_REP').setRequired('aprovar', false).apply();
+					Form.fields('JUST_REST_PROC_REP').visible(false);
+					Form.fields('JUST_REST_PROC_REP').setRequired('aprovar', false);
 
 				}
+
+				Form.apply();
 	
 			});		
 			
@@ -1112,57 +1133,63 @@ function setEventos() {
 
 				if(response == "Restrição Impeditiva" || response == "Restrição Aceitável"){
 					
-					Form.fields('JUSTIFICATIVA_RESTR_CON').visible(true).apply();
-					Form.fields('JUSTIFICATIVA_RESTR_CON').setRequired('aprovar', true).apply();
+					Form.fields('JUSTIFICATIVA_RESTR_CON').visible(true);
+					Form.fields('JUSTIFICATIVA_RESTR_CON').setRequired('aprovar', true);
 
 				}
 				else{
 
-					Form.fields('JUSTIFICATIVA_RESTR_CON').visible(false).apply();
-					Form.fields('JUSTIFICATIVA_RESTR_CON').setRequired('aprovar', false).apply();
+					Form.fields('JUSTIFICATIVA_RESTR_CON').visible(false);
+					Form.fields('JUSTIFICATIVA_RESTR_CON').setRequired('aprovar', false);
 
 				}
+
+				Form.apply();
 	
 			});				
 			
 			// Linha da grid selecionada para edição
 			Form.grids("G_EXTERNAS_ADD").subscribe("GRID_EDIT", function (itemId, data, response) {
 
-				Form.grids("G_EXTERNAS_ADD").fields('IMPORTAR_EXT_TITULAR').visible(true).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('PONTUACAO_SCORE_ADD').visible(true).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_ADD').visible(true).apply();
+				Form.grids("G_EXTERNAS_ADD").fields('IMPORTAR_EXT_TITULAR').visible(true);
+				Form.grids("G_EXTERNAS_ADD").fields('PONTUACAO_SCORE_ADD').visible(true);
+				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_ADD').visible(true);
 
-				Form.grids("G_EXTERNAS_ADD").fields('PONTUACAO_SCORE_ADD').setRequired('aprovar', true).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_ADD').setRequired('aprovar', true).apply();
+				Form.grids("G_EXTERNAS_ADD").fields('PONTUACAO_SCORE_ADD').setRequired('aprovar', true);
+				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_ADD').setRequired('aprovar', true);
+
+				Form.apply();
 
 			});	
 			
 			// Linha da grid atualizada
 			Form.grids("G_EXTERNAS_ADD").subscribe("GRID_EDIT_SUBMIT", function (itemId, data, response) {
 
-				Form.fields("UPD_EXT_ADD").value("Sim").apply();
-				Form.grids("G_EXTERNAS_ADD").fields('PONTUACAO_SCORE_ADD').visible(false).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_ADD').visible(false).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(false).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('SCORE_CONJUGE_ADD').visible(false).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_CONJUGE_ADD').visible(false).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').visible(false).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('IMPORTAR_EXT_TITULAR').visible(false).apply();
+				Form.fields("UPD_EXT_ADD").value("Sim");
+				Form.grids("G_EXTERNAS_ADD").fields('PONTUACAO_SCORE_ADD').visible(false);
+				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_ADD').visible(false);
+				Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(false);
+				Form.grids("G_EXTERNAS_ADD").fields('SCORE_CONJUGE_ADD').visible(false);
+				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_CONJUGE_ADD').visible(false);
+				Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').visible(false);
+				Form.grids("G_EXTERNAS_ADD").fields('IMPORTAR_EXT_TITULAR').visible(false);
 
+				Form.apply();
 
 			});			
 
 			// Cancelar edição
 			Form.grids("G_EXTERNAS_ADD").subscribe("GRID_RESET", function (itemId, data, response) {
 
-				Form.grids("G_EXTERNAS_ADD").fields('PONTUACAO_SCORE_ADD').visible(false).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_ADD').visible(false).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(false).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('SCORE_CONJUGE_ADD').visible(false).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_CONJUGE_ADD').visible(false).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').visible(false).apply();
-				Form.grids("G_EXTERNAS_ADD").fields('IMPORTAR_EXT_TITULAR').visible(false).apply();
+				Form.grids("G_EXTERNAS_ADD").fields('PONTUACAO_SCORE_ADD').visible(false);
+				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_ADD').visible(false);
+				Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTRICAO_ADD').visible(false);
+				Form.grids("G_EXTERNAS_ADD").fields('SCORE_CONJUGE_ADD').visible(false);
+				Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_CONJUGE_ADD').visible(false);
+				Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').visible(false);
+				Form.grids("G_EXTERNAS_ADD").fields('IMPORTAR_EXT_TITULAR').visible(false);
 
+				Form.apply();
 
 			});					
 			
@@ -1171,19 +1198,21 @@ function setEventos() {
 
 				if(response == "Casado" || response == "União Estável"){
 
-					Form.grids("G_EXTERNAS_ADD").fields('SCORE_CONJUGE_ADD').visible(true).apply();
-					Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_CONJUGE_ADD').visible(true).apply();
-					Form.grids("G_EXTERNAS_ADD").fields('SCORE_CONJUGE_ADD').setRequired('aprovar', true).apply();
-					Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_CONJUGE_ADD').setRequired('aprovar', true).apply();
+					Form.grids("G_EXTERNAS_ADD").fields('SCORE_CONJUGE_ADD').visible(true);
+					Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_CONJUGE_ADD').visible(true);
+					Form.grids("G_EXTERNAS_ADD").fields('SCORE_CONJUGE_ADD').setRequired('aprovar', true);
+					Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_CONJUGE_ADD').setRequired('aprovar', true);
 
 				}
 				else{
 
-					Form.grids("G_EXTERNAS_ADD").fields('SCORE_CONJUGE_ADD').setRequired('aprovar', false).apply();
-					Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_CONJUGE_ADD').setRequired('aprovar', false).apply();
-					Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').setRequired('aprovar', false).apply();
+					Form.grids("G_EXTERNAS_ADD").fields('SCORE_CONJUGE_ADD').setRequired('aprovar', false);
+					Form.grids("G_EXTERNAS_ADD").fields('RESTRICOES_CONJUGE_ADD').setRequired('aprovar', false);
+					Form.grids("G_EXTERNAS_ADD").fields('JUST_RESTR_CON_ADD').setRequired('aprovar', false);
 
 				}
+
+				Form.apply();
 
 			});		
 
@@ -1213,12 +1242,14 @@ function setEventos() {
 
 				if((response == "Sim" && civilT == "Casado") || ((response == "Sim" && civilT == "União Estável"))){
 
-					Form.fields('PONTUACAO_SCORE_CONJUGE').visible(true).apply();
-					Form.fields('RESTRICOES_CONJUGE').visible(true).apply();
-					Form.fields('PONTUACAO_SCORE_CONJUGE').setRequired('aprovar', true).apply();
-					Form.fields('RESTRICOES_CONJUGE').setRequired('aprovar', true).apply();
+					Form.fields('PONTUACAO_SCORE_CONJUGE').visible(true);
+					Form.fields('RESTRICOES_CONJUGE').visible(true);
+					Form.fields('PONTUACAO_SCORE_CONJUGE').setRequired('aprovar', true);
+					Form.fields('RESTRICOES_CONJUGE').setRequired('aprovar', true);
 
 				}
+
+				Form.apply();
 	
 			});							
 
