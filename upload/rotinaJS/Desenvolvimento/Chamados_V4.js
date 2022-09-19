@@ -239,21 +239,25 @@ function setEventos() {
 
 		// Alteração de subcategoria, validar aprovação do gerente e resposnável por CRL produtos
 		Form.fields("SUBCATEGORIA").subscribe("SET_FIELD_VALUE", function(itemId, data, response) {
-
+			
 			Form.fields("AUX_ROTA").value("");
 			Form.fields("PROX_ETAPA").value("");
 			Form.fields("PROX_RESP").value("");		
 
-			auxCat    = Form.fields("CATEGORIA");
-			auxSub    = Form.fields("SUBCATEGORIA");
-			iniciador = Form.fields("AUX_INICIADOR");
-			auxLider  = Form.fields("AUX_LIDER");
+			auxCat    = Form.fields("CATEGORIA").value();
+			auxSub    = Form.fields("SUBCATEGORIA").value();
+			iniciador = Form.fields("AUX_INICIADOR").value();
+			auxLider  = Form.fields("AUX_LIDER").value();
 
 			// Carregar texto padrão
 			textoPadrao(modelo, auxCat, auxSub);
 
 			// Validar categorias aprovação gerente
-			if(iniciador != auxLider){ categoriaAprovaGerente(modelo, auxCat, auxSub); }
+			if(iniciador != auxLider){ 
+				
+				categoriaAprovaGerente(modelo, auxCat, auxSub); 
+
+			}
 
 			// Direcionar grupos crédito e rural
 			if(auxUnidade == "99" && modelo == "99_credito"){
@@ -3098,6 +3102,10 @@ function setForm(){
 		// Chamados cadastro aguardando terceiros
 		if(codigoEtapa == AGUARDANDO_TERCEIROS && grupoAtend == "99_cadastro"){
 
+			Form.fields('CADASTRO_COMPLETO').visible(true);
+			Form.fields('CADASTRO_COMPLETO').lineBreak('SIMPLES');
+			Form.fields('CADASTRO_COMPLETO').setRequired('aprovar', true);
+
 			Form.fields('DOC_INVALIDO').visible(true);
 			Form.fields('DOC_NAO_ENVIADO').visible(true);
 			Form.fields('DOC_INSUFICIENTE').visible(true);
@@ -3111,6 +3119,10 @@ function setForm(){
 
 		// Chamados cadastro devolvidos
 		if(codigoEtapa == REALIZAR_ATENDIMENTO && grupoAtend == "99_cadastro"){
+
+			Form.fields('CADASTRO_COMPLETO').visible(true);
+			Form.fields('CADASTRO_COMPLETO').lineBreak('SIMPLES');
+			Form.fields('CADASTRO_COMPLETO').setRequired('aprovar', true);
 
 			if(auxRota == "Devolver ao Solicitante" || auxRota == "Aguardando Terceiros"){
 
@@ -3915,6 +3927,11 @@ function categoriaAprovaGerente(modelo, categoria, subcategoria){
 		else { Form.fields("AUX_APROV_LIDER").value("Não").apply(); }
 
 	}		
+	else{ 
+	
+		Form.fields("AUX_APROV_LIDER").value("Não").apply(); 
+	
+	}
 
 }
 
