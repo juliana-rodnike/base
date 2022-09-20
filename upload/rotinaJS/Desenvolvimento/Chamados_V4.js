@@ -4098,6 +4098,7 @@ function subcategoriasConsorcio(categoria, lista){
 			{ name: 'Portabilidade / Proposta Incrição',                       value: 'Portabilidade / Proposta Incrição'                      },
 			{ name: 'Aporte / Termo de Opção / Resgate / Pedido de Benefício', value: 'Aporte / Termo de Opção / Resgate / Pedido de Benefício'},
 			{ name: 'Alterações/Atualizações de Contruibuição / Cobrança',     value: 'Alterações/Atualizações de Contruibuição / Cobrança'    },
+			{ name: 'Previdência Colaboradores',                               value: 'Previdência Colaboradores'                              },
 		]).apply();
 
 	}
@@ -6044,7 +6045,27 @@ function textoPadrao(modelo, categoria, subcategoria){
 			+"\n e) Assinatura do beneficiário ou procurador (assinatura conforme documento pessoal do cliente."
 			+"\n Lembrando que o procurador somente poderá solicitar a mudança de domicílio para o beneficiário se o mesmo estiver cadastrado no INSS, mediante autorização judicial e demais formalidades.").apply();
 
-		}		
+		}
+		else		
+		if(subcategoria == "Previdência Colaboradores"){
+
+			Form.fields("DESCRICAO").value
+			("ORIENTAÇÕES PARA PREENCHIMENTO DO CHAMADO \n"
+			+"\n a) N° conta corrente para cadastro na proposta: \n"
+			+"\n b) Idade atual: \n"
+			+"\n c) Com quantos anos você pretende começar a receber a sua renda, ou por quantos anos deseja contribuir com seu plano de previdência? \n"
+			+"\n d) Deseja informar beneficiários: Se sim, detalhar nome, idade, sexo, CPF, o % que será direcionado a cada beneficiário e o grau de parentesco (filho, cônjuge e etc.); \n"
+			+"\n e) Valor da contribuição (mínimo 1% do salário base para ter direito ao benefício da cooperativa): \n"
+			+"\n f) Possui valores acumulados para iniciar seu plano, além da contribuição mensal? Se sim, detalhar o valor; \n"
+			+"\n g) Valor da contribuição (mínimo 1% do salário base para ter direito ao benefício da cooperativa): \n"
+			+"\n h) Deseja coberturas de risco (risco por morte mínimo de contribuição R$26,00 reais e/ou invalidez mínimo de R$ 16,00 reais -- contratando cobertura de risco, a taxa de carregamento será isenta; os valores de contribuição de risco, são somadas ao valor da contribuição mensal - Contribuição mensal + contribuição risco = desconto total -- os valores de contribuição mensal e consequente cobertura podem ser alterados, respeitando os mínimos informados;)? \n"
+			+"\n i) Na simulação a renda por prazo determinado com no mínimo 10 anos, deseja simular o recebimento em quantos anos? \n"
+			+"\n j) Deseja receber um % do saldo em parcela única, limitado a  20%? Se sim, qual % ? \n"
+			+"\n k) Perfil de investimento (Conservador, Moderado ou Arrojado): \n"
+			+"\n l) Tabela de tributação (Progressiva ou Regressiva): \n"
+			+"\n OBSERVAÇÃO - Necessário API preenchido e atualizado no APP Sicoob, bem como cadastro atualizado").apply();
+
+		}				
 
 	}	
 
