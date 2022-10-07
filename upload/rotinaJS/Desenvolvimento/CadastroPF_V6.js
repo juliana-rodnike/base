@@ -146,6 +146,14 @@ function setEventos() {
 				Form.groups('ENDERECO').visible(true);
 				Form.groups('RENDA').visible(true);
 
+				// Ocultar campos de referencia para retirada do cadastro multiplo
+				Form.grids("GRD_DOCUMENTOS").fields("REFERENCIA_ID").visible(false);
+				Form.grids("GRD_RESIDENCIA").fields("REFERENCIA_RESID").visible(false);
+				Form.grids("GRD_COMP_RENDA").fields("REFERENCIA_RENDA").visible(false);
+				Form.grids("GRD_DOCUMENTOS").columns("REFERENCIA_ID").visible(false);
+				Form.grids("GRD_RESIDENCIA").columns("REFERENCIA_RESID").visible(false);
+				Form.grids("GRD_COMP_RENDA").columns("REFERENCIA_RENDA").visible(false);
+
 				// Dados do cliente obrigatórios para cadastro novo
 				Form.fields('ESCOLARIDADE').visible(true);
 				Form.fields('ESTADO_CIVIL').visible(true);
