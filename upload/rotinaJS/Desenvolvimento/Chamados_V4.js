@@ -5095,6 +5095,7 @@ function categoriasRH(lista){
 		{ name: 'Vale Alimentação / Refeição', value: 'Vale Alimentação / Refeição'},
 		{ name: 'Coopcerto',                   value: 'Coopcerto'                  },
 		{ name: 'Exame',                       value: 'Exame'                      },
+		{ name: 'Gestão do Ponto',             value: 'Gestão do Ponto'            },
 	]).apply();
 
 }
@@ -5222,7 +5223,15 @@ function subcategoriasRH(categoria, lista){
 			{ name: 'Periódico',         value: 'Periódico'        },
 		]).apply();
 
-	}											
+	}
+	else
+	if(categoria == "Gestão do Ponto"){
+
+		lista.addOptions([	
+			{ name: 'Reativar Marcação', value: 'Reativar Marcação'},
+		]).apply();
+
+	}												
 
 }	
 
