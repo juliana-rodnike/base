@@ -201,6 +201,8 @@ function setEventos() {
 				// Ocultar campos PF
 				Form.fields('OBJETIVO').visible(false);
 				Form.fields("OBJETIVO").setRequired('aprovar', false);
+				Form.fields('COMPOSICAO_CONTA').visible(false);
+				Form.fields("COMPOSICAO_CONTA").setRequired('aprovar', false);				
 				Form.fields("CPF").setRequired('aprovar', false);
 				Form.fields("NOME").setRequired('aprovar', false);
 				Form.groups('DADOS_PROPNETE_TITULAR').visible(false);
@@ -240,7 +242,6 @@ function setEventos() {
 				// Nome e CPF bloqueado e  obrigatório
 				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_NOME").disabled(true);
 				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_CPF").disabled(true);
-				Form.grids("GRID_OUTROS_T").fields("CAPITAL").disabled(true);
 				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_NOME").setRequired('aprovar', true);
 				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_CPF").setRequired('aprovar', true);				
 
@@ -248,6 +249,8 @@ function setEventos() {
 				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_SCORE").visible(false);
 				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_RESTRICOES").visible(false);
 				Form.grids("GRID_OUTROS_T").fields("OUTRO_TITU_JUST_REST").visible(false);
+				Form.grids("GRID_OUTROS_T").fields("CAPITAL").visible(false);
+				Form.grids("GRID_OUTROS_T").columns("CAPITAL").visible(false);
 
 			}
 			else{
