@@ -1406,9 +1406,9 @@ function setForm() {
 			Form.fields('ESTADO_CIVIL').setRequired('aprovar', true);
 			Form.fields('PROCURADOR_REPRE_LEGAL').setRequired('aprovar', true);		
 			
-			updtRenda = Form.fields('UPDATE_RENDA');
-			updtResid = Form.fields('UPDATE_RESIDENCIA');
-			updtClint = Form.fields('UPDATE_CLIENTE');					
+			updtRenda = Form.fields('UPDATE_RENDA').value();
+			updtResid = Form.fields('UPDATE_RESIDENCIA').value();
+			updtClint = Form.fields('UPDATE_CLIENTE').value();					
 
 			if(updtRenda == "Sim"){
 
@@ -1823,6 +1823,7 @@ function setForm() {
 			}	
 			if(updtResid == "Sim"){
 
+				Form.grids('GRD_RESIDENCIA').visible(true);
 				Form.groups('ENDERECO').grids('GRD_RESIDENCIA').readOnly(true);
 
 			}		
@@ -1862,6 +1863,7 @@ function setForm() {
 			// Mostrar grupos para cadastro novo
 			Form.groups('IDENTIFICACAO').visible(true);
 			Form.groups('RENDA').visible(true);
+			Form.grids('GRD_RESIDENCIA').visible(true);
 
 			// Bloquear alterações nas GRIDS
 			Form.groups('IDENTIFICACAO').grids('GRD_DOCUMENTOS').readOnly(true);
