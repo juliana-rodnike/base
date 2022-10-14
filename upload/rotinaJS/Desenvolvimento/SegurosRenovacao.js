@@ -16,8 +16,9 @@ var codigoEtapa    = ProcessData.activityInstanceId;
 var codigoCiclo    = ProcessData.cycle;
 
 //Atividades do processo
-var GERAR_COTACAO    = 4;
-var ANALISAR_COTACAO = 3;
+var GERAR_COTACAO       = 4;
+var ANALISAR_COTACAO    = 3;
+var FINALIZAR_RENOVACAO = 2;
 
 /*
  * Inicializa layout geral
@@ -72,7 +73,6 @@ function setEventos() {
 		});
 
 	}	
-
 	
 	Form.apply();
 }
@@ -90,6 +90,13 @@ function setForm(){
 		// Não permitir devolver para seguro auto
 		var response = Form.fields("TIPO_SEGURO").value();
 		if(response == "Auto"){ Form.actions('rejeitar').hidden(true).apply(); }
+
+	}
+
+	if(codigoEtapa == FINALIZAR_RENOVACAO){
+
+		// Mostrar ID dos botoes
+		console.log(Form.actions().map(function(a){ return a.id}));		
 
 	}
 	
@@ -116,5 +123,32 @@ function setValidators(){
 			debugger;
 
 		});	
+
 	}
+
+
+	if(codigoEtapa == FINALIZAR_RENOVACAO){
+
+		Form.actions("finish").subscribe("SUBMIT", function (itemId, action, reject) {
+			
+			debugger;
+
+			var motivo   = Form.fields("JUSTIFICATIVA").value();
+			var detalhes = Form.fields("DETALHES").value();
+
+			if(motivo == "Outros" && detalhes == "" || motivo == "Outros" && detalhes == undefined){
+
+				console.log("Justificativa não preenchida.");
+				Form.fields('DETALHES').errors(['Justificativa não preenchida.']).apply();
+				reject();
+				Form.apply();
+
+			}			
+
+			debugger;
+
+		});	
+
+	}
+
 }
